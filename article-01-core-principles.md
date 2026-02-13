@@ -214,14 +214,20 @@ This article establishes the foundation. Every subsequent article in this series
 - Scoring checkpoints and correctness verification relevant to the phase
 - Expandable sections for deeper dives
 
-The next article covers **Building Your Toolkit** — the prompts, skills, instruction sets, MCP servers, and custom AIs that form the building blocks of the AI-centric workflow. It also introduces a foundational concept: the AI-Centric Toolkit is not a replacement for your existing body of knowledge — it is an addendum to it. Every team already has accumulated resources: documents, technical references, articles, videos, books, internal wikis, architecture decision records, past postmortems, and industry standards. In the AI-centric workflow, these traditional resources are consolidated and made available for processing by AI, becoming part of the working context that informs every phase.
+The next article covers **Building Your Toolkit** — the building blocks, tool sets, and methodology that make principle-driven development operational. It introduces three essential concepts:
 
-The toolkit is how the principles become operational. The principles tell you *what to care about*. The toolkit gives you the means to *act on it* — at every phase, at every decision point, at a pace that matches the speed of AI-assisted development.
+First, the **Consolidated Knowledge Base** — the AI-Centric Toolkit is not a replacement for your existing body of knowledge but an addendum to it. Every team already has accumulated resources: documents, technical references, articles, videos, books, internal wikis, architecture decision records, past postmortems, and industry standards. In the AI-centric workflow, these traditional resources are consolidated and made available for processing by AI, becoming part of the working context that informs every phase.
 
-Without the principles, the toolkit has no direction. Without the toolkit, the principles remain theory. Together, they become the daily practice of building software.
+Second, **tool sets** — curated combinations of building blocks (prompts, skills, MCP servers, instructions, and resources) assembled for specific purposes. Individual building blocks are components. Tool sets are how those components come together for real work.
+
+Third, **Specification Driven Development (SDD)** — the iterative, specification-first methodology that drives every phase of the framework. At each phase, the team follows a cycle: specify needs through interview prompts, develop a plan broken into sections, detail each section into a Project Requirement Document, generate a task list from the PRD, and implement the results. This cycle — powered by tool sets — is the engine of the entire framework.
+
+The principles tell you *what to care about*. The toolkit gives you the means to *act on it*. SDD tells you *how to act on it* — at every phase, at every decision point, at a pace that matches the speed of AI-assisted development.
+
+Without the principles, the toolkit has no direction. Without the toolkit, the principles remain theory. Without SDD, the toolkit is a collection of parts without a process. Together, they become the daily practice of building software.
 
 ---
 
 *This is a living document. The principles, subcategories, and examples will be expanded and refined as the series develops. Every part of this framework is open to iteration.*
 
-*Next in the series: [Article 2 — Building Your Toolkit: Prompts, Skills, MCP Servers, and Custom AIs]*
+*Next in the series: [Article 2 — Building Your Toolkit: Tool Sets, SDD, and the Building Blocks]*

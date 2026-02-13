@@ -15,6 +15,8 @@
 
 **Core Philosophy:** This is not about replacing engineers. It is about multiplying the leverage of skilled practitioners by giving them orchestration tools — prompts, skills, instruction sets, MCP servers, custom AIs — that compress what large teams once did into small, highly capable units. The fundamentals of computer science, architecture, and design thinking remain essential. What changes is the *interface* through which that knowledge is applied.
 
+**Core Methodology — Specification Driven Development (SDD):** At every phase, the team follows an iterative, specification-first workflow: (1) interview prompts gather needs and context, (2) a plan document is produced and broken into sections or epics, (3) each section is specified through a detailed Project Requirement Document (PRD), (4) the PRD drives a well-defined task list, and (5) implementation prompts produce results. This SDD cycle is the engine of the framework. Building blocks are organized into **tool sets** — curated combinations of prompts, skills, MCP servers, instructions, and resources assembled for specific purposes within the SDD cycle.
+
 **Key Structural Principle:** The phases are not waterfall stages. They are concurrent streams of thinking with natural checkpoints. Core Principles are evaluated at *every* phase, not bolted on at the end.
 
 ---
@@ -74,7 +76,7 @@ Scoring tells you *how well* something performs. Correctness verification tells 
 
 ---
 
-## The Toolkit: Building Blocks
+## The Toolkit: Building Blocks, Tool Sets, and Specification Driven Development
 
 The Core Principles come first because they drive every decision about what we include in the toolkit. When we evaluate a prompt, a skill, an MCP integration, or any other building block, the question is always: *does this help us apply and enforce our Core Principles?* A tool that accelerates development but undermines Correctness Verification does not belong. A prompt that generates code without considering Security is incomplete. The principles are the filter.
 
@@ -96,6 +98,26 @@ This consolidation is itself a toolkit-building activity. It requires organizing
 - **MCP Servers** — Connections between AI and real tools (git, databases, CI/CD, testing frameworks, monitoring)
 - **Custom / Domain-Specific AIs** — Purpose-built AI configurations tuned for specific roles or phases
 - **[Other types TBD]** — The taxonomy of building blocks will evolve as the field matures
+
+### Tool Sets
+
+Building blocks are individual components. **Tool sets** are curated combinations of building blocks assembled for a specific purpose. A tool set brings together the prompts, skills, MCP servers, instructions, and resources needed for a particular kind of work within a particular phase.
+
+For example, a "Requirements Specification" tool set might include: an interview prompt designed to elicit requirements, a skill that provides domain-specific context, an MCP connection to the project's existing documentation, an instruction set for structuring the output, and references from the consolidated knowledge base. The tool set is the unit of work — the practitioner selects the right tool set for the task at hand and follows its embedded workflow.
+
+### Specification Driven Development (SDD)
+
+SDD is the core methodology of the AI-Centric framework. It defines *how* tool sets are used at every phase through an iterative, specification-first cycle:
+
+1. **Specify** — Use interview prompt(s) from a tool set designed for this purpose to gather needs, context, and constraints. The AI interviews the practitioner; the output is a structured specification of what is needed.
+2. **Plan** — The specification is developed into a plan document, which may range from a brief design brief to a comprehensive project plan depending on the phase. The plan is broken into sections or epics (borrowing the Agile term).
+3. **Detail** — Each section is taken through another interactive or interview prompt that produces a Project Requirement Document (PRD) with a well-defined layout specific to the phase and the type of work.
+4. **Task** — The PRD is included as a resource for a task-generation prompt that breaks the requirements into a well-defined, actionable task list.
+5. **Implement** — An implementation prompt (or set of prompts) produces the results — code, documentation, configurations, test suites, architectural artifacts, or whatever the phase requires.
+
+This cycle is iterative. The output of implementation feeds back into specification for the next section, the next phase, or refinement of the current work. Each step in the cycle has its own tool set, and the tool sets themselves are refined over time based on what produces the best results.
+
+SDD is what gives the framework its structure. Without it, the toolkit is a collection of parts. With it, the parts become a process.
 
 > **Note:** This series is deliberately tool-agnostic. We describe *what* each building block does and *why* you need it — not which specific product to use. The tools will shift. The process and thinking endure.
 
@@ -132,31 +154,36 @@ This consolidation is itself a toolkit-building activity. It requires organizing
 
 ---
 
-### Article 2: Building Your Toolkit — Prompts, Skills, MCP Servers, and Custom AIs
+### Article 2: Building Your Toolkit — Tool Sets, SDD, and the Building Blocks
 
-**Purpose:** Before diving into phases, establish what the toolkit *is* and how it's assembled. This is the meta-layer: how do you build the tools that will power every phase? Critically, establish that the Core Principles from Article 1 drive what goes into the toolkit — every building block must serve the principles.
+**Purpose:** Before diving into phases, establish what the toolkit *is*, how it's assembled, and how it's used. Introduces three essential concepts: building blocks (the individual components), tool sets (curated combinations of building blocks for specific purposes), and Specification Driven Development (the iterative methodology that drives every phase). Critically, establish that the Core Principles from Article 1 drive what goes into the toolkit — every building block must serve the principles.
 
 **Key Ideas:**
 - **The Consolidated Knowledge Base:** The AI-Centric Toolkit is an addendum to — not a replacement for — the team's existing body of knowledge. Documents, articles, technical references, videos, books, internal wikis, architecture decision records, past postmortems, vendor documentation, and industry standards are consolidated and made available for AI processing. This traditional knowledge becomes the foundation the entire toolkit draws from.
 - Core Principles as the filter: every building block is evaluated against the six principles before inclusion — does it help us apply and enforce what we care about?
 - The taxonomy of building blocks (consolidated knowledge base, prompts, skills, instruction sets, MCP servers, custom AIs)
-- Interview prompts vs. action prompts — different tools for different moments
-- How to think about building a prompt library: organized by phase, by principle, or both?
+- Interview prompts vs. action prompts vs. evaluation prompts — different tools for different moments
 - Skills as reusable context packages — what makes a good one
 - MCP servers as the bridge between AI reasoning and real-world tooling
+- **Tool Sets:** Building blocks are individual components; tool sets are curated combinations assembled for a specific purpose. A tool set brings together the prompts, skills, MCP servers, instructions, and resources needed for a particular kind of work. The practitioner selects the right tool set for the task and follows its embedded workflow.
+- **Specification Driven Development (SDD):** The core methodology of the framework. At every phase, the team follows an iterative, specification-first cycle: (1) Specify — interview prompts gather needs and context, (2) Plan — output becomes a plan document broken into sections/epics, (3) Detail — each section is specified via a PRD prompt, (4) Task — the PRD drives a well-defined task list, (5) Implement — implementation prompts produce results. This cycle is iterative — output feeds back into specification for refinement. Each step has its own tool set.
 - The living nature of the toolkit: it evolves as the project evolves, as the tools evolve, as the team learns
 - Starting small: you don't need a complete toolkit on day one — you build it as you go through the phases
 
 **Expandable Sections:**
 - Consolidating traditional resources: formats, indexing, and making knowledge AI-parseable
 - Starter prompt patterns (interview-style, action-oriented, evaluation-style)
+- Tool set composition patterns — how to assemble effective tool sets
+- The SDD cycle in detail — worked examples at different phases
 - How to evaluate and select MCP integrations
 - Organizing your toolkit for team access
-- Version control and iteration on prompts/skills
+- Version control and iteration on prompts/skills/tool sets
 
 ---
 
 ### Article 3: Phase 1 — Information Gathering
+
+> **Note on SDD in Phase Articles:** Each phase article (Articles 3–9) follows the SDD methodology defined in Article 2. The SDD cycle — Specify, Plan, Detail, Task, Implement — is applied within each phase using phase-appropriate tool sets. The articles will demonstrate how the cycle works in the context of each phase, with the tool sets and building blocks that are most relevant.
 
 **Purpose:** How to use AI to scan, summarize, triage, and synthesize the information landscape before any design decisions are made.
 
@@ -360,11 +387,14 @@ This consolidation is itself a toolkit-building activity. It requires organizing
 - This isn't about juniors replacing seniors — it's about seniors gaining leverage they've never had, and juniors needing new skills (toolkit fluency) alongside traditional CS foundations
 - The counterargument: "people will always want to code" — yes, and people still ride horses. Professional software delivery is about outcomes, not typing speed
 - The toolkit-first approach: before you build software, build the toolkit that lets AI help you build software
+- **Specification Driven Development (SDD):** the methodology that makes the toolkit operational — an iterative, specification-first cycle (Specify → Plan → Detail → Task → Implement) applied at every phase, powered by curated tool sets
+- Tool sets as the organizational unit: building blocks combined for purpose, not scattered prompts used ad hoc
 
 **Expandable Sections:**
 - The economics of small teams vs. large teams
 - What "capable in every aspect" actually means
 - The skill set evolution: what engineers need to learn, what becomes less relevant
+- SDD as the new development paradigm — how it compares to Agile, TDD, and other methodologies
 - Industry signals that this is already happening
 
 ---
