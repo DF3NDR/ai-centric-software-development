@@ -6,7 +6,7 @@ A practitioner's guide to building software in the age of AI — designed for sm
 
 This repository contains a comprehensive series of articles that establish a methodology for modern software development in which small teams (1–5 people) orchestrate AI tools to perform specialist-level work across every discipline. These are **living documents** — continuously refined and updated as the field evolves and new practices emerge.
 
-**Timeline Thesis:** 18–24 months before this approach is fully operational for teams on the leading edge.
+**Timeline Thesis:** 12–24 months before this approach is the accepted approach for teams on the leading edge.
 
 **Core Philosophy:** This is not about replacing engineers. It's about multiplying the leverage of skilled practitioners by giving them orchestration tools — prompts, skills, instruction sets, MCP servers, custom AIs — that compress what large teams once did into small, highly capable units. The fundamentals of computer science, architecture, and design thinking remain essential. What changes is the *interface* through which that knowledge is applied.
 
