@@ -371,9 +371,9 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 
 ---
 
-### Article 10 (Written Last): The Manifesto — Small Teams, Big AI, New Paradigm
+### Article 10 (Written Last): The Introduction / Manifesto — Small Teams, Big AI, New Paradigm
 
-**Purpose:** The bold, visionary introduction to the series. Explains *why* this matters, *why now*, and *who this is for*. Frames the entire series.
+**Purpose:** The bold, visionary introduction to the series. Written last because it could only be written with the full weight of the framework behind it. Explains *why* this matters, *why now*, and *who this is for*. This is the front door — the article a reader encounters first and the one that frames everything that follows.
 
 **Tone:** Manifesto. Confident. Forward-looking.
 
