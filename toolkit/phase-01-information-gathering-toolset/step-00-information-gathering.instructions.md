@@ -151,19 +151,48 @@ Flag tensions and trade-offs; do not resolve them.
 
 ## Phase 1 Artifacts
 
-Each artifact has its own prompt file. All artifacts feed into the
-final Information Report.
+Five research artifacts are produced through conversational interview
+prompts. A sixth prompt synthesizes all five into the final Information
+Report. The synthesis prompt operates differently — it is an action prompt,
+not an interview. The practitioner pastes all completed artifacts in and
+the AI synthesizes and self-evaluates in a single pass.
 
-| Artifact | SDD Step | Prompt File |
-|----------|----------|-------------|
-| Research Specification | Specify | *(produced via interview — no standalone prompt)* |
-| Research Plan | Plan | *(produced from Research Specification)* |
-| Technology Landscape Assessment | Implement | `technology-landscape-assessment.prompt.md` |
-| Competitive & Market Scan | Implement | `competitive-market-scan.prompt.md` |
-| Requirements Sketch | Implement | `requirements-sketch.prompt.md` |
-| Risk & Constraint Inventory | Implement | `risk-constraint-inventory.prompt.md` |
-| Reusable Components Catalog | Implement | `reusable-components-catalog.prompt.md` |
-| Information Report | Implement | `information-report-synthesis.prompt.md` |
+| Artifact | Type | SDD Step | Prompt File |
+|----------|------|----------|-------------|
+| Research Specification | *(no standalone prompt)* | Specify | Produced via initial interview |
+| Research Plan | *(no standalone prompt)* | Plan | Produced from Research Specification |
+| Technology Landscape Assessment | Interview → Action | Implement | `technology-landscape-assessment.prompt.md` |
+| Competitive & Market Scan | Interview → Action | Implement | `competitive-market-scan.prompt.md` |
+| Requirements Sketch | Interview → Action | Implement | `requirements-sketch.prompt.md` |
+| Risk & Constraint Inventory | Interview → Action | Implement | `risk-constraint-inventory.prompt.md` |
+| Reusable Components Catalog | Interview → Action | Implement | `reusable-components-catalog.prompt.md` |
+| Information Report | **Action + Evaluation** | Implement | `information-report-synthesis.prompt.md` |
+
+---
+
+## Phase Gate: The Self-Evaluation Scorecard
+
+The synthesis prompt (`information-report-synthesis.prompt.md`) contains a
+built-in self-evaluation that the AI runs immediately after producing the
+Information Report. This is the phase gate that determines whether Phase 1
+is complete and Phase 2 can proceed.
+
+The scorecard evaluates the Information Report against all six Core Principles
+and produces a gate status for each:
+
+| Gate Status | Meaning | Phase 2 Action |
+|-------------|---------|---------------|
+| **PASS** | Sufficient for Phase 2 to proceed on this dimension | Proceed |
+| **CONDITIONAL** | Sufficient with documented caveats; specific gaps must be addressed within Phase 2 before relevant decisions are made | Proceed with remediation plan |
+| **FAIL** | Insufficient; Phase 2 cannot responsibly proceed on this dimension | Cycle back to Phase 1 |
+
+**A FAIL gate is not a failure of the process — it is the process working.**
+It means a gap was caught here, in Phase 1, where it costs an hour to fix,
+rather than in Phase 3 or Phase 4, where it costs weeks.
+
+Do not skip the scorecard review. Do not treat a CONDITIONAL as a PASS.
+Every CONDITIONAL must have a named remediation action, a responsible owner,
+and a target date before Phase 2 begins.
 
 ---
 
@@ -179,6 +208,8 @@ All Phase 1 outputs must meet the following before being considered complete:
   (consistent headers, labeled sections, tables, metadata)
 - [ ] No principle dimension has been silently omitted —
   gaps are documented, not ignored
+- [ ] The self-evaluation scorecard has been reviewed and all gate
+  statuses are documented before Phase 2 begins
 
 ---
 
@@ -209,6 +240,12 @@ Narrative prose buried in unstructured sections is insufficient for downstream
 AI consumption. Structure, label, and format for machine parseability alongside
 human readability.
 
+**Dismissing a CONDITIONAL gate as close enough.**
+A CONDITIONAL gate on the self-evaluation scorecard means Phase 2 has a
+documented dependency — a gap that must be filled before a specific class
+of decisions can be made. Ignoring it does not make it go away. It surfaces
+later, when it is more expensive to address.
+
 ---
 
 ## Connecting to Phase 2
@@ -218,8 +255,19 @@ The Information Report is the primary handoff artifact from Phase 1 to Phase
 Information Report becomes a resource in that tool set — the AI starts from
 the structured findings here, not from zero.
 
+Phase 2 tool sets draw directly from specific sections of the Information
+Report:
+
+| Phase 2 Tool Set | Draws From |
+|-----------------|-----------|
+| Business Analysis | Competitive findings, requirements sketch, market context |
+| Cost Modeling | Technology landscape cost data, components catalog build scope reduction, hard constraints |
+| Stack Evaluation | Technology landscape assessments, competitive technology patterns, compliance map |
+| Threat Modeling | Risk inventory, threat actor profiles, compliance requirements |
+| Benchmark Definition | Competitive SLA and performance benchmarks, requirements sketch performance targets |
+
 The quality of Phase 1 directly determines the quality of Phase 2. A shallow
-Information Report produces a shallow analysis. A principle-filtered,
+Information Report produces shallow analysis. A principle-filtered,
 well-verified, AI-parseable Information Report gives Phase 2 a strong
 foundation for weighted evaluation matrices, threat modeling, and cost
 analysis.
@@ -228,3 +276,4 @@ analysis.
 
 *Part of the AI-Centric Software Development Playbook — Phase 1: Information Gathering*
 *Framework reference: article-03-information-gathering.md*
+*See also: README.md in this directory for full tool set documentation*
