@@ -1,0 +1,539 @@
+<h1 id="phase-1-information-gathering">Phase 1 — Information
+Gathering</h1>
+<p><em>Part 3 of The AI-Centric Software Development Playbook</em></p>
+<hr />
+<h2 id="the-starting-point">The Starting Point</h2>
+<p>Every software project begins with a question: <em>What are we
+building, and what do we need to know before we start?</em></p>
+<p>In traditional development, information gathering is often informal
+and unevenly distributed. A senior engineer reads some docs, scans a few
+GitHub repos, asks around about what frameworks the industry is using,
+maybe writes up a summary in a wiki page. The results depend heavily on
+who does the work, what they happen to know already, and how much time
+they’re given. Important questions go unasked because nobody thought to
+ask them. Blind spots survive because no one had time to scan broadly
+enough.</p>
+<p>In AI-centric development, information gathering becomes the first
+structured application of the SDD cycle. The goal is the same —
+understand the landscape before committing to decisions — but the
+process is disciplined, the coverage is broader, and the output is a
+structured artifact that feeds directly into the next phase.</p>
+<p>This is where the toolkit earns its first return. Every interview
+prompt, every evaluation skill, every MCP connection to existing
+documentation starts producing value here. And this is where the Core
+Principles begin their work — not as a review gate at the end, but as
+the lens through which every piece of gathered information is
+evaluated.</p>
+<hr />
+<h2 id="what-information-gathering-accomplishes">What Information
+Gathering Accomplishes</h2>
+<p>Phase 1 answers the questions that every subsequent phase depends on.
+Skip it or do it poorly, and every later decision sits on an unstable
+foundation. Do it well, and the team enters design and analysis with a
+shared understanding grounded in evidence rather than assumption.</p>
+<p>The outputs of this phase include:</p>
+<p><strong>A technology landscape assessment</strong> — What exists?
+What frameworks, languages, platforms, services, and tools are available
+for the kind of system being built? What are their strengths,
+weaknesses, maturity levels, and community health? Where is the
+ecosystem heading?</p>
+<p><strong>A competitive and market scan</strong> — Who else has built
+something similar? What stacks did they choose? Where did those choices
+succeed and where did they break? What can be learned from their
+documentation, their architectures, their public failures and
+successes?</p>
+<p><strong>A requirements sketch</strong> — What does the system need to
+do? This is not the final requirements document — that comes later
+through the SDD Detail step — but an initial capture of user needs,
+business goals, constraints, and non-negotiable requirements that will
+shape every subsequent decision.</p>
+<p><strong>A risk and constraint inventory</strong> — What compliance
+requirements apply? What security concerns are inherent to the domain?
+What are the known hard constraints (budget, timeline, team size,
+existing infrastructure)? What are the things that could go wrong if
+ignored?</p>
+<p><strong>A reusable components catalog</strong> — What can be reused?
+Open-source libraries, existing internal modules, API services, standard
+patterns. What has already been solved, and what genuinely needs to be
+built from scratch?</p>
+<p>All of this is captured in a structured <strong>Information
+Report</strong> — the primary artifact of Phase 1 — designed to be both
+human-readable and AI-parseable so that it can serve as input context
+for every tool set used in subsequent phases.</p>
+<hr />
+<h2 id="the-sdd-cycle-in-phase-1">The SDD Cycle in Phase 1</h2>
+<p>This is the first time the SDD cycle runs in a new project. The cycle
+applies to information gathering just as it applies to code
+implementation — the only difference is what is being specified,
+planned, detailed, tasked, and implemented.</p>
+<h3 id="step-1-specify-what-do-we-need-to-know">Step 1: Specify — What
+Do We Need to Know?</h3>
+<p>Before gathering information, specify what information is needed and
+why. This seems obvious, but without this step, information gathering
+drifts into unfocused browsing. The practitioner uses an interview
+prompt from the Information Gathering tool set to define the scope.</p>
+<p>The interview prompt asks structured questions:</p>
+<ul>
+<li>What is the high-level purpose of the system being built?</li>
+<li>What domain does it operate in? What are the domain-specific
+constraints?</li>
+<li>What are the known technical requirements (performance, scale,
+reliability)?</li>
+<li>What compliance or regulatory requirements apply?</li>
+<li>What is the team’s existing expertise? Where are the knowledge
+gaps?</li>
+<li>What is the timeline and budget envelope?</li>
+<li>Are there existing systems this needs to integrate with?</li>
+<li>Who are the users? What are their primary workflows?</li>
+</ul>
+<p>The output of this step is a <strong>research specification</strong>
+— a structured document that defines the scope, priorities, and
+boundaries of the information-gathering effort. It prevents the common
+failure mode of gathering everything about everything and producing a
+report that is comprehensive but useless.</p>
+<h3 id="step-2-plan-organize-the-research">Step 2: Plan — Organize the
+Research</h3>
+<p>The research specification is developed into a research plan. The
+plan breaks the information-gathering effort into distinct research
+areas — sections or epics, each focused on a coherent domain of
+inquiry.</p>
+<p>A typical plan might include:</p>
+<ul>
+<li><strong>Technology landscape</strong> — Survey available frameworks,
+languages, and platforms relevant to the project type</li>
+<li><strong>Competitive analysis</strong> — Identify similar systems,
+analyze their technology choices and outcomes</li>
+<li><strong>Regulatory and compliance</strong> — Identify all applicable
+compliance requirements and their technical implications</li>
+<li><strong>Infrastructure options</strong> — Survey hosting,
+deployment, and operational platform options</li>
+<li><strong>Security landscape</strong> — Identify domain-specific
+threats, common vulnerability patterns, and security tooling</li>
+<li><strong>Existing assets</strong> — Catalog reusable components,
+internal libraries, and third-party services</li>
+<li><strong>User and market research</strong> — Understand user needs,
+workflows, and expectations</li>
+</ul>
+<p>Each research area becomes a section that will be detailed and tasked
+independently. The practitioner reviews the plan and adjusts — adding
+areas that were missed, removing areas that are out of scope,
+reprioritizing based on what matters most for this project.</p>
+<h3 id="step-3-detail-define-the-research-questions">Step 3: Detail —
+Define the Research Questions</h3>
+<p>Each section from the plan is taken through a detail prompt that
+produces a structured set of research questions and evaluation criteria.
+This is the PRD equivalent for information gathering — not a product
+requirements document, but a <strong>Research Requirements
+Document</strong> that specifies exactly what needs to be found, how it
+will be evaluated, and what format the findings should take.</p>
+<p>For example, the Technology Landscape section might be detailed
+into:</p>
+<ul>
+<li>What programming languages are viable for this project type?
+Evaluate each against: performance characteristics, security features,
+ecosystem maturity, team expertise, hiring market, AI tooling
+support.</li>
+<li>What frameworks exist for the core functionality? Evaluate each
+against: documentation quality, community activity (commits, issues,
+releases in last 12 months), license compatibility, integration with
+target deployment environment.</li>
+<li>What are the known failure modes of each candidate technology?
+Source from: postmortems, CVE databases, community forums, production
+experience reports.</li>
+</ul>
+<p>The detail step transforms a vague research area (“survey available
+frameworks”) into a specific, evaluable set of questions. This
+specificity is what makes AI-assisted research productive rather than
+meandering.</p>
+<h3 id="step-4-task-assign-the-specific-searches-and-analyses">Step 4:
+Task — Assign the Specific Searches and Analyses</h3>
+<p>The research questions from Step 3 are broken into concrete,
+actionable tasks. Each task is a single, well-defined research action
+with clear output expectations.</p>
+<p>Examples:</p>
+<ul>
+<li>Search public repositories for Rust web frameworks with more than
+1,000 GitHub stars. For each, capture: name, star count, last commit
+date, open issues count, license, stated performance benchmarks.</li>
+<li>Retrieve and summarize the OWASP Top 10 for the current year. Map
+each vulnerability category to the project’s likely attack surface.</li>
+<li>Identify three to five systems similar to the proposed project. For
+each, determine: technology stack (if publicly known), scale of
+operation, known technical challenges, documentation quality.</li>
+<li>Query the consolidated knowledge base for any internal postmortems
+or architecture decision records related to the domain or candidate
+technologies.</li>
+<li>Survey container orchestration options (Docker Compose, Kubernetes,
+Wasm-based alternatives). For each, capture: learning curve, operational
+complexity, cost at target scale, community support.</li>
+</ul>
+<p>The task list is specific enough that AI can execute many of these
+tasks directly — through web search, repository analysis, documentation
+retrieval, and knowledge base queries. The practitioner reviews the task
+list for completeness and prioritizes the order of execution.</p>
+<h3 id="step-5-implement-execute-the-research">Step 5: Implement —
+Execute the Research</h3>
+<p>With the tasks defined, the Information Gathering tool set goes to
+work. This is where AI provides its most immediate productivity gain in
+the entire development process.</p>
+<p>AI can execute many research tasks faster and more comprehensively
+than a human working alone:</p>
+<ul>
+<li>Scanning and summarizing documentation across dozens of frameworks
+in minutes</li>
+<li>Pulling repository statistics, commit history, and community health
+indicators</li>
+<li>Cross-referencing compliance requirements against technology
+capabilities</li>
+<li>Synthesizing information from multiple sources into structured
+comparisons</li>
+<li>Identifying patterns, gaps, and contradictions across the gathered
+data</li>
+</ul>
+<p>The practitioner’s role during implementation is not passive. It
+includes:</p>
+<ul>
+<li>Reviewing AI-gathered information for accuracy and completeness</li>
+<li>Applying domain expertise to evaluate claims AI cannot verify</li>
+<li>Identifying gaps in the research — questions that the task list
+missed</li>
+<li>Iterating: when findings in one area reveal new questions, cycling
+back to the Detail or Task step to expand the research</li>
+</ul>
+<p>The output of the implementation step is the raw research findings —
+organized by section, structured according to the research requirements,
+and ready to be synthesized into the Information Report.</p>
+<hr />
+<h2 id="the-information-report">The Information Report</h2>
+<p>The primary artifact of Phase 1 is the <strong>Information
+Report</strong> — a structured document that synthesizes all research
+findings into a format that is both useful for human decision-making and
+consumable by AI in subsequent phases.</p>
+<h3 id="structure">Structure</h3>
+<p>The Information Report is not a dump of everything found. It is a
+curated synthesis, organized to support the decisions that will be made
+in Phase 2 (Analysis &amp; Stack Selection) and Phase 3 (Design &amp;
+Technical Analysis).</p>
+<p>A well-structured Information Report typically includes:</p>
+<p><strong>Executive Summary</strong> — A concise overview of the key
+findings, major options, significant risks, and recommended areas for
+deeper analysis. This section exists for human readers who need the
+headlines without reading every detail.</p>
+<p><strong>Technology Landscape</strong> — The candidate technologies,
+frameworks, and platforms, with structured evaluations against the
+criteria defined in the Detail step. Not just a feature comparison — an
+assessment of maturity, community health, known failure modes, and fit
+for the project’s specific needs.</p>
+<p><strong>Competitive Analysis</strong> — What similar systems exist,
+what technology choices they made, and what can be learned from their
+approaches. Successes, failures, and patterns worth emulating or
+avoiding.</p>
+<p><strong>Regulatory and Compliance Map</strong> — The compliance
+requirements that apply to this project, mapped to their technical
+implications. Which requirements affect architecture decisions? Which
+constrain technology choices? Which will require ongoing operational
+processes?</p>
+<p><strong>Risk and Constraint Inventory</strong> — The known risks,
+hard constraints, and potential pitfalls identified during research.
+Each risk should include: likelihood, impact, which Core Principles it
+affects, and any mitigation options identified.</p>
+<p><strong>Reusable Components Catalog</strong> — The libraries,
+services, patterns, and internal assets that can be leveraged. For each,
+an assessment of fitness for purpose, maintenance status, and
+integration complexity.</p>
+<p><strong>Research Gaps and Open Questions</strong> — What the research
+could not answer. What requires deeper investigation. What depends on
+decisions not yet made. These gaps become inputs to Phase 2.</p>
+<h3 id="designed-for-ai-consumption">Designed for AI Consumption</h3>
+<p>The Information Report serves double duty. Human stakeholders read it
+to build shared understanding. AI consumes it as context for every tool
+set used in subsequent phases.</p>
+<p>This dual purpose has practical implications for how the report is
+structured:</p>
+<ul>
+<li>Use consistent, machine-parseable formatting — structured headers,
+tables, labeled sections</li>
+<li>Include metadata — what sources were consulted, when the research
+was conducted, confidence levels for key findings</li>
+<li>Avoid burying critical information in narrative prose — surface key
+facts, evaluations, and risks in structured formats that AI can extract
+and reason about</li>
+<li>Cross-reference sections — the compliance map should reference
+specific technologies from the landscape assessment; the risk inventory
+should reference specific compliance requirements</li>
+</ul>
+<p>When the team moves to Phase 2 and uses a Stack Selection tool set,
+the Information Report becomes a resource in that tool set. The AI does
+not start from zero — it starts from the structured findings of Phase
+1.</p>
+<hr />
+<h2 id="core-principles-in-phase-1">Core Principles in Phase 1</h2>
+<p>Phase 1 is not a principle-free zone where the team simply gathers
+data. The Core Principles shape <em>what</em> is gathered, <em>how</em>
+it is evaluated, and <em>what questions</em> are asked. This is the
+first opportunity to embed principle-driven thinking into the project,
+and it is the cheapest place to catch problems that would be expensive
+to fix later.</p>
+<h3 id="security">Security</h3>
+<p>Security-relevant information gathering starts here, not during
+implementation or testing.</p>
+<ul>
+<li>What are the known vulnerabilities in candidate technologies? Check
+CVE databases, security advisories, and community-reported issues.</li>
+<li>What compliance requirements apply? Identify them now, not when
+someone asks for a SOC 2 report six months before launch.</li>
+<li>What is the threat landscape for this domain? Healthcare, finance,
+e-commerce, government — each has different adversaries and attack
+patterns.</li>
+<li>What security tooling is available for candidate technology stacks?
+Static analysis, dependency scanning, runtime protection — if a stack
+has poor security tooling, that is a significant risk factor.</li>
+</ul>
+<p>The information gathered here feeds directly into the threat modeling
+that happens in Phase 2. If the security landscape is not understood
+during information gathering, threat modeling operates on incomplete
+data.</p>
+<h3 id="maintainability">Maintainability</h3>
+<p>Maintainability-relevant information gathering assesses the long-term
+viability of candidate technologies and approaches.</p>
+<ul>
+<li>How well-documented are the candidate technologies? Good
+documentation correlates with maintainability. If a framework’s
+documentation is sparse, incomplete, or outdated, maintaining a system
+built on it will be harder.</li>
+<li>What is the community health? A framework with active contributors,
+regular releases, and responsive issue triage is a safer long-term bet
+than one with a declining contributor base.</li>
+<li>What is the testing ecosystem? Does the technology have mature
+testing frameworks, property-based testing support, and integration
+testing patterns?</li>
+<li>What is the talent pool? If the team grows, can qualified engineers
+be hired? If the original team members leave, can the system be
+maintained by successors?</li>
+</ul>
+<h3 id="economics">Economics</h3>
+<p>Economics-relevant information gathering captures the cost dimensions
+that will drive decisions in Phase 2.</p>
+<ul>
+<li>What are the licensing costs for candidate technologies and
+services? Open-source is not free — it has support, integration, and
+maintenance costs. Commercial licenses have direct costs that scale with
+usage.</li>
+<li>What are the infrastructure costs at target scale? Cloud provider
+pricing, container orchestration costs, database hosting, monitoring
+services. Gather actual pricing data, not estimates.</li>
+<li>What is the development velocity for candidate stacks? Some
+technologies enable faster initial development but slower iteration.
+Others have higher upfront learning costs but faster long-term velocity.
+Both patterns have economic implications.</li>
+<li>What are the AI tooling costs? In an AI-centric workflow, the AI
+tools themselves represent a cost line. Model API costs, MCP server
+hosting, custom AI configuration and maintenance — these should be
+estimated early.</li>
+</ul>
+<h3 id="operations">Operations</h3>
+<p>Operations-relevant information gathering identifies the runtime and
+governance considerations that constrain architecture decisions.</p>
+<ul>
+<li>What deployment and orchestration options exist for candidate
+stacks? What is the operational complexity of each?</li>
+<li>What monitoring and observability tooling is available? If a
+technology stack has poor observability support, diagnosing production
+issues will be harder and slower.</li>
+<li>What are the scaling characteristics? How do candidate technologies
+behave under load? What are their known scaling limits?</li>
+<li>What integration patterns are standard in the candidate ecosystem?
+API conventions, data formats, authentication protocols — how well does
+each option play with the broader ecosystem?</li>
+</ul>
+<h3 id="scoring-metrics">Scoring &amp; Metrics</h3>
+<p>Scoring begins here by defining what will be measured and
+establishing baselines.</p>
+<ul>
+<li>What benchmarks exist for candidate technologies? Published
+performance benchmarks, community-reported throughput numbers, latency
+measurements under load.</li>
+<li>What scoring criteria will be used in Phase 2? The information
+gathered here should directly support the evaluation framework that
+Phase 2 will use.</li>
+<li>What metrics are available from existing systems? If there are
+predecessors or comparable systems, their performance data establishes
+realistic baselines.</li>
+</ul>
+<p>The Information Report should include quantitative data wherever
+possible. “Framework X is fast” is not useful. “Framework X achieves
+50,000 requests per second on a single-core benchmark, compared to
+35,000 for Framework Y” is useful. AI is effective at gathering and
+structuring these comparisons, but the team must specify what to
+measure.</p>
+<h3 id="correctness-verification">Correctness Verification</h3>
+<p>Correctness Verification in Phase 1 is about verifying the accuracy
+of the gathered information itself. AI-gathered data is not inherently
+reliable. Sources may be outdated, benchmarks may be misleading,
+community sentiment may not reflect technical reality.</p>
+<ul>
+<li>Cross-reference claims across multiple sources. If one article
+claims a framework handles 100,000 concurrent connections and no other
+source confirms this, flag it.</li>
+<li>Distinguish between marketing material and independent evaluation.
+Vendor documentation describes what a technology is designed to do.
+Community experience reports describe what it actually does.</li>
+<li>Check dates. A performance benchmark from 2021 may not reflect the
+current state of a framework that has had three major releases
+since.</li>
+<li>Validate compliance interpretations. AI’s understanding of
+regulatory requirements should be checked against the actual regulatory
+text and, when stakes are high, against legal or compliance
+expertise.</li>
+</ul>
+<p>The Information Report should include confidence levels for key
+findings. “High confidence: Framework X is actively maintained (verified
+via commit history, release schedule, and issue response times).”
+“Medium confidence: Framework X outperforms Framework Y at scale (based
+on two independent benchmarks but not verified with project-specific
+workloads).” “Low confidence: Framework X is SOC 2 compliant (claimed by
+vendor but not independently verified).”</p>
+<hr />
+<h2 id="tool-sets-for-phase-1">Tool Sets for Phase 1</h2>
+<p>Phase 1 uses several tool sets, each supporting a different part of
+the SDD cycle. These are the first tool sets the team builds or selects,
+and they will be refined through use.</p>
+<h3 id="research-specification-tool-set">Research Specification Tool
+Set</h3>
+<p><strong>Purpose:</strong> Support SDD Step 1 (Specify) — define what
+information needs to be gathered.</p>
+<p><strong>Building blocks:</strong> - An interview prompt that walks
+the practitioner through scoping the research effort — domain,
+constraints, team expertise, timeline, known requirements - A skill that
+frames the AI as a research strategist, helping identify areas of
+inquiry the practitioner might overlook - References from the
+consolidated knowledge base: past project research specifications,
+domain-specific research checklists - An output template for the
+research specification document</p>
+<h3 id="research-planning-tool-set">Research Planning Tool Set</h3>
+<p><strong>Purpose:</strong> Support SDD Step 2 (Plan) — break the
+research into organized sections.</p>
+<p><strong>Building blocks:</strong> - An action prompt that takes the
+research specification and generates a proposed research plan with
+sections, priorities, and estimated effort - An evaluation prompt that
+reviews the plan against the six Core Principles — “Is there a section
+for each principle-relevant area? Are any principle dimensions missing
+from the research plan?” - References from the consolidated knowledge
+base: past research plans, phase 1 checklists from previous projects</p>
+<h3 id="research-execution-tool-set">Research Execution Tool Set</h3>
+<p><strong>Purpose:</strong> Support SDD Steps 3–5 (Detail, Task,
+Implement) — define research questions, generate tasks, and execute the
+research.</p>
+<p><strong>Building blocks:</strong> - A detail prompt that takes each
+research section and generates specific, evaluable research questions
+with evaluation criteria - A task-generation prompt that breaks research
+questions into concrete, actionable tasks - MCP connections to: web
+search and documentation retrieval, code repository analysis tools, the
+team’s consolidated knowledge base, vulnerability and CVE databases - A
+skill that provides the AI with domain context for evaluating research
+findings - An evaluation prompt that assesses research quality —
+coverage, accuracy, confidence levels, gaps</p>
+<h3 id="report-synthesis-tool-set">Report Synthesis Tool Set</h3>
+<p><strong>Purpose:</strong> Compile research findings into the
+structured Information Report.</p>
+<p><strong>Building blocks:</strong> - An action prompt that takes raw
+research findings and synthesizes them into the Information Report
+format — executive summary, technology landscape, competitive analysis,
+compliance map, risk inventory, reusable components catalog, gaps and
+open questions - A skill that provides report structure guidelines and
+formatting standards - An evaluation prompt that reviews the report
+against the Core Principles — “Does the report include sufficient
+information to evaluate candidate technologies against all six
+principles?” - A correctness verification instruction set that
+cross-references key claims, checks source dates, and flags
+low-confidence findings</p>
+<hr />
+<h2 id="common-pitfalls">Common Pitfalls</h2>
+<p>Phase 1 has characteristic failure modes. Recognizing them helps the
+team avoid them.</p>
+<h3 id="gathering-without-specifying">Gathering Without Specifying</h3>
+<p>The most common failure is starting research without defining what
+needs to be found. This produces a sprawling collection of information
+with no clear connection to the decisions it should support. The SDD
+Specify step exists to prevent this. Time spent defining the research
+scope is never wasted.</p>
+<h3 id="breadth-without-depth">Breadth Without Depth</h3>
+<p>AI makes it easy to scan broadly. The risk is producing a report that
+mentions fifty frameworks but deeply evaluates none. Breadth is valuable
+for initial awareness, but the research plan should explicitly identify
+which areas need deep investigation and which need only a surface
+scan.</p>
+<h3 id="trusting-ai-output-without-verification">Trusting AI Output
+Without Verification</h3>
+<p>AI can summarize documentation, extract metrics, and synthesize
+comparisons with impressive speed. It can also confidently present
+outdated information, misinterpret benchmarks, and generate
+plausible-sounding assessments that do not hold up to scrutiny. The
+Correctness Verification principle applies here: cross-reference, check
+dates, distinguish marketing from evidence, and flag confidence
+levels.</p>
+<h3 id="ignoring-core-principles-during-research">Ignoring Core
+Principles During Research</h3>
+<p>If the team gathers extensive information about performance and
+features but neglects to research compliance requirements, security
+tooling maturity, or operational complexity, Phase 2 will be working
+with an incomplete picture. The Core Principles should shape the
+research plan from the start — each principle generates questions that
+the research must address.</p>
+<h3 id="producing-a-report-nobody-can-use">Producing a Report Nobody Can
+Use</h3>
+<p>A report that is comprehensive but unstructured is nearly as bad as
+no report at all. The Information Report must be organized for both
+human decision-making and AI consumption in later phases. If a report
+cannot be given to an AI tool set in Phase 2 as input context and
+produce useful results, the structure needs work.</p>
+<hr />
+<h2 id="validation-checkpoint">Validation Checkpoint</h2>
+<p>Before moving to Phase 2, the team validates that the Information
+Report is sufficient. This is a principle-driven review:</p>
+<ul>
+<li><strong>Security:</strong> Does the report include enough
+information to begin threat modeling? Are compliance requirements
+identified? Are vulnerability patterns for candidate technologies
+documented?</li>
+<li><strong>Maintainability:</strong> Does the report assess
+documentation quality, community health, testing ecosystems, and talent
+availability for candidate technologies?</li>
+<li><strong>Economics:</strong> Does the report include actual cost data
+— licensing, infrastructure at scale, development velocity indicators?
+Are AI tooling costs estimated?</li>
+<li><strong>Operations:</strong> Does the report cover deployment
+options, monitoring tooling, scaling characteristics, and integration
+patterns?</li>
+<li><strong>Scoring &amp; Metrics:</strong> Does the report include
+quantitative data that can support structured evaluation in Phase 2? Are
+benchmarks sourced and dated?</li>
+<li><strong>Correctness Verification:</strong> Are confidence levels
+assigned to key findings? Are claims cross-referenced? Are research gaps
+explicitly identified?</li>
+</ul>
+<p>If significant gaps exist, the team cycles back to the appropriate
+SDD step — adding research questions (Detail), generating new tasks
+(Task), or executing additional research (Implement). The SDD cycle is
+iterative. The validation checkpoint is where iteration is triggered,
+not where shortcuts are approved.</p>
+<hr />
+<h2 id="what-comes-next">What Comes Next</h2>
+<p>Phase 1 produces a structured Information Report that captures the
+technology landscape, competitive analysis, compliance requirements,
+risks, reusable components, and open questions. It is comprehensive but
+not conclusive — it presents options and evidence, not decisions.</p>
+<p>Phase 2 transforms that evidence into decisions. The next article
+covers <strong>Analysis &amp; Stack Selection</strong> — where the team
+uses the Information Report as input context for business analysis, cost
+modeling, stack evaluation, initial threat modeling, and benchmark
+definition. The SDD cycle runs again, but now the Specify step draws
+from the Information Report rather than from scratch. The decisions made
+in Phase 2 will constrain everything that follows.</p>
+<hr />
+<p><em>This is a living document. The tool sets, research patterns, and
+examples will be expanded and refined as the series develops. Every part
+of this framework is open to iteration.</em></p>
+<p><em>Previous: [Article 2 — Building Your Toolkit: Tool Sets, SDD, and
+the Building Blocks]</em> <em>Next in the series: [Article 4 — Phase 2:
+Analysis &amp; Stack Selection]</em></p>

@@ -1,0 +1,519 @@
+<h1 id="phase-2-analysis-stack-selection">Phase 2 — Analysis &amp; Stack
+Selection</h1>
+<p><em>Part 4 of The AI-Centric Software Development Playbook</em></p>
+<hr />
+<h2 id="from-information-to-decisions">From Information to
+Decisions</h2>
+<p>Phase 1 produced an Information Report — a structured synthesis of
+the technology landscape, competitive analysis, compliance requirements,
+risks, reusable components, and open questions. That report presents
+evidence. It does not make decisions.</p>
+<p>Phase 2 is where evidence becomes commitment. The team takes the
+Information Report and runs it through a disciplined analytical process
+to answer the questions that every subsequent phase depends on: What is
+the business case? What will it cost? What technology stack do we commit
+to? What threats must we design against? What benchmarks define
+success?</p>
+<p>These are consequential decisions. A stack chosen poorly in Phase 2
+creates compounding costs through every later phase — rework in
+architecture, friction in implementation, pain in operations. A threat
+model that misses a critical attack surface in Phase 2 becomes a
+security incident in production. A cost model that underestimates
+infrastructure at scale becomes a budget crisis at growth.</p>
+<p>The role of AI in Phase 2 is not to make these decisions. It is to
+make them <em>informed</em> — to model the costs, simulate the
+trade-offs, score the options against the Core Principles, and surface
+the consequences of each choice so that the practitioner can commit with
+clear-eyed understanding of what is being gained and what is being
+traded away.</p>
+<hr />
+<h2 id="what-analysis-stack-selection-accomplishes">What Analysis &amp;
+Stack Selection Accomplishes</h2>
+<p>Phase 2 produces four primary artifacts, each feeding into Phase 3
+(Design &amp; Technical Analysis) and beyond.</p>
+<p><strong>A Business Analysis</strong> — Validation that the project
+solves a real problem for real users within real constraints. User
+needs, market fit, problem validation, and a clear articulation of the
+value the system is expected to deliver. This grounds every technical
+decision in business reality.</p>
+<p><strong>A Cost Model</strong> — A structured forecast of total
+lifecycle costs: development time, infrastructure, licensing, AI
+tooling, ongoing maintenance, team scaling, and operational overhead.
+Not a single number but a model — one that can be adjusted as
+assumptions change and validated against actuals as the project
+progresses.</p>
+<p><strong>A Stack Decision with Rationale</strong> — The committed
+technology choices: languages, frameworks, runtime environments,
+deployment platforms, data stores, and key third-party services. Each
+choice is documented with the rationale behind it, the alternatives
+considered, the trade-offs accepted, and the Core Principle scores that
+supported the decision. This becomes the project’s foundational decision
+record.</p>
+<p><strong>An Initial Threat Model</strong> — The first structured
+analysis of what can go wrong: data flows, trust boundaries, attack
+surfaces, and the threat actors relevant to the domain. Not a complete
+security architecture (that comes in Phase 4) but the analytical
+foundation that architecture decisions will build on.</p>
+<p>Additionally, Phase 2 establishes the <strong>benchmark
+framework</strong> — the quantitative targets against which the system
+will be measured throughout development and into production.
+Speed-to-market targets, runtime performance goals, cost ceilings,
+reliability targets, and security posture thresholds.</p>
+<hr />
+<h2 id="the-sdd-cycle-in-phase-2">The SDD Cycle in Phase 2</h2>
+<p>The SDD cycle runs again, but now the Specify step draws from the
+Information Report rather than from scratch. The practitioner is not
+starting with a blank page — they are starting with structured evidence
+and applying analytical tool sets to transform it into decisions.</p>
+<h3 id="step-1-specify-what-decisions-need-to-be-made">Step 1: Specify —
+What Decisions Need to Be Made?</h3>
+<p>The first step is to specify the decisions this phase must produce.
+This sounds redundant — “we need to pick a stack” — but the Specify step
+forces the team to articulate the full scope of decisions and their
+dependencies.</p>
+<p>An interview prompt from the Analysis tool set structures this:</p>
+<ul>
+<li>What are the primary user personas and their core workflows?</li>
+<li>What is the business model? How does the system generate or protect
+value?</li>
+<li>What are the non-negotiable constraints (regulatory, budgetary,
+timeline, team size)?</li>
+<li>What decisions from Phase 1 are already effectively made (e.g., “we
+must integrate with existing System X”)?</li>
+<li>What are the highest-risk unknowns that analysis must resolve?</li>
+<li>What benchmarks will define success? Who defines “good enough” for
+performance, security, cost?</li>
+</ul>
+<p>The output is an <strong>analysis specification</strong> — a document
+that defines the scope and priorities of the analytical effort,
+preventing the team from spending two weeks modeling costs for a stack
+option that was already eliminated by a compliance constraint identified
+in the first hour.</p>
+<h3 id="step-2-plan-structure-the-analysis">Step 2: Plan — Structure the
+Analysis</h3>
+<p>The analysis specification is broken into sections, each representing
+a coherent analytical domain:</p>
+<ul>
+<li><strong>Business analysis</strong> — User needs validation, market
+fit, value proposition clarity</li>
+<li><strong>Cost modeling</strong> — Development costs, infrastructure
+at target scale, licensing, AI tooling, maintenance</li>
+<li><strong>Technology evaluation</strong> — Structured comparison of
+candidate stacks against Core Principles</li>
+<li><strong>Threat modeling</strong> — Data flows, trust boundaries,
+attack surfaces, threat actors</li>
+<li><strong>Benchmark definition</strong> — Quantitative targets for
+performance, security, cost, reliability</li>
+</ul>
+<p>Each section will be detailed into specific analytical tasks. The
+practitioner reviews the plan for completeness and adjusts priorities
+based on which decisions carry the most risk.</p>
+<h3 id="step-3-detail-define-analytical-frameworks">Step 3: Detail —
+Define Analytical Frameworks</h3>
+<p>Each section from the plan is taken through a detail prompt that
+produces a structured analytical framework — the PRD equivalent for
+analysis work.</p>
+<p>For example, the Technology Evaluation section might be detailed
+into:</p>
+<p><strong>Evaluation criteria matrix</strong> — For each candidate
+stack option, define the specific criteria that will be scored. These
+criteria map directly to the six Core Principles:</p>
+<ul>
+<li>Security: vulnerability history, security tooling maturity, memory
+safety characteristics, encryption support, audit logging
+capabilities</li>
+<li>Maintainability: documentation quality, testing ecosystem,
+refactoring tooling, community health, talent availability</li>
+<li>Economics: licensing cost, infrastructure cost at scale, development
+velocity, AI tooling compatibility, team ramp-up time</li>
+<li>Operations: deployment complexity, scaling characteristics,
+monitoring integration, container support, interoperability</li>
+<li>Scoring &amp; Metrics: benchmarking tooling, performance profiling,
+automated quality metrics, CI/CD integration</li>
+<li>Correctness Verification: type system strength, formal verification
+support, property-based testing, static analysis depth</li>
+</ul>
+<p>The detail step produces the evaluation framework <em>before</em> the
+evaluation is conducted. This prevents the common failure of choosing
+criteria after seeing results — a form of confirmation bias that
+AI-assisted analysis can inadvertently amplify.</p>
+<h3 id="step-4-task-assign-specific-analyses">Step 4: Task — Assign
+Specific Analyses</h3>
+<p>The analytical frameworks from Step 3 are broken into concrete
+tasks:</p>
+<ul>
+<li>Score each candidate language (e.g., Rust, Go, TypeScript) against
+the Security evaluation criteria using data from the Information Report.
+Produce a structured scorecard with 1–5 ratings and justification for
+each criterion.</li>
+<li>Model infrastructure costs for each candidate deployment platform
+(e.g., Kubernetes, Docker Compose, serverless) at three scale points:
+MVP (100 users), growth (10,000 users), and target (100,000 users).
+Include compute, storage, networking, and managed service costs.</li>
+<li>Generate a preliminary data flow diagram for the system’s primary
+user workflows. Identify trust boundaries, data classification (public,
+internal, confidential, restricted), and external integration
+points.</li>
+<li>Map compliance requirements from the Information Report to specific
+technical constraints. For each requirement, identify which stack
+options satisfy it natively, which require additional tooling, and which
+are incompatible.</li>
+<li>Define benchmark targets for: API response latency (p50, p95, p99),
+throughput under load, cold start time, build and deployment time, test
+suite execution time, and memory consumption at steady state.</li>
+</ul>
+<p>Each task produces a structured output that feeds into the phase
+artifacts.</p>
+<h3 id="step-5-implement-execute-the-analysis">Step 5: Implement —
+Execute the Analysis</h3>
+<p>The Analysis tool sets go to work. This is where AI’s analytical
+capabilities provide the most leverage:</p>
+<p><strong>Business analysis</strong> — AI synthesizes user research,
+market data, and competitive findings from the Information Report into a
+structured business case. It can model user workflows, identify feature
+priorities using the MoSCoW method or similar frameworks, and validate
+that the proposed system addresses identified needs. The practitioner
+validates against domain knowledge and stakeholder input.</p>
+<p><strong>Cost modeling</strong> — AI excels at structured cost
+estimation when given the right inputs. Cloud provider pricing
+calculators, licensing terms, development velocity benchmarks from
+similar projects, and infrastructure scaling curves can be modeled and
+compared across stack options. The output is not a single estimate but a
+model with assumptions that can be adjusted.</p>
+<p><strong>Technology scoring</strong> — AI evaluates each candidate
+stack against the evaluation criteria matrix, producing scorecards with
+structured ratings and justification. This is one of the most effective
+applications of evaluation prompts — the AI considers multiple
+dimensions simultaneously and can identify trade-off tensions that
+humans might miss when evaluating one criterion at a time.</p>
+<p><strong>Threat modeling</strong> — AI generates initial threat models
+from the data flow diagrams, applying frameworks like STRIDE (Spoofing,
+Tampering, Repudiation, Information Disclosure, Denial of Service,
+Elevation of Privilege) to each component and trust boundary. The
+practitioner reviews for completeness, adds domain-specific threats, and
+validates that the model captures real-world attack patterns.</p>
+<p><strong>Benchmark definition</strong> — AI proposes benchmark targets
+based on industry standards, competitive benchmarks from the Information
+Report, and the specific performance requirements identified in the
+analysis specification. The practitioner adjusts based on business
+priorities and realistic expectations.</p>
+<hr />
+<h2 id="the-stack-decision">The Stack Decision</h2>
+<p>The stack decision is the most consequential output of Phase 2. It
+commits the team to a technology foundation that will be expensive to
+change and will influence every subsequent phase. It deserves a
+structured decision process.</p>
+<h3 id="structured-scoring">Structured Scoring</h3>
+<p>Each candidate stack is scored against the six Core Principles using
+the evaluation criteria defined in the Detail step. The scores are not
+intuitive impressions — they are structured assessments backed by
+evidence from the Information Report and the analysis conducted in this
+phase.</p>
+<p>A stack scorecard might look like:</p>
+<p>For each candidate (e.g., Rust + Axum + PostgreSQL vs. Go + Echo +
+PostgreSQL vs. TypeScript + Nest.js + PostgreSQL), score:</p>
+<ul>
+<li>Security: 1–5 with justification citing specific evidence</li>
+<li>Maintainability: 1–5 with justification</li>
+<li>Economics: 1–5 with justification</li>
+<li>Operations: 1–5 with justification</li>
+<li>Scoring &amp; Metrics: 1–5 with justification</li>
+<li>Correctness Verification: 1–5 with justification</li>
+<li><strong>Weighted total</strong> based on the project’s principle
+weighting (established during this phase)</li>
+</ul>
+<p>The weighting is critical. A healthcare application might weight
+Security at 2x and Correctness Verification at 1.5x, while weighting
+Economics at 0.75x. A proof-of-concept for market validation might
+weight Economics and Operations highest. The weighting reflects the
+project’s specific priorities, and it should be established
+<em>before</em> scoring — not adjusted after seeing which stack
+wins.</p>
+<h3 id="trade-off-documentation">Trade-Off Documentation</h3>
+<p>No stack will score highest on every principle. The stack decision is
+inherently a trade-off decision, and those trade-offs must be documented
+explicitly.</p>
+<p>For each significant trade-off, the decision record should
+capture:</p>
+<ul>
+<li>What is being traded (e.g., “accepting higher initial development
+cost for stronger long-term security posture”)</li>
+<li>Why this trade-off is acceptable in the context of this project</li>
+<li>What mitigation exists for the weaker dimension (e.g., “higher
+development cost is mitigated by smaller team size and AI-assisted code
+generation”)</li>
+<li>What would trigger revisiting this decision (e.g., “if development
+velocity falls below X, re-evaluate stack choice”)</li>
+</ul>
+<p>This documentation is not bureaucratic overhead. It is the foundation
+of the project’s decision record — and it becomes input context for AI
+in later phases. When a question arises during implementation about why
+a particular technology was chosen, the decision record provides the
+answer. When the team considers a mid-project technology change, the
+decision record surfaces what was already analyzed and what trade-offs
+were already accepted.</p>
+<h3 id="the-decision-is-a-commitment-not-a-preference">The Decision Is a
+Commitment, Not a Preference</h3>
+<p>Phase 2 ends with a committed stack decision. “Committed” means the
+team has agreed to proceed with this technology foundation and will not
+revisit the decision without a significant change in circumstances. This
+is important in an AI-centric workflow where it is easy to endlessly
+explore alternatives — AI will happily evaluate another five stack
+options if asked. The discipline is in deciding when the analysis is
+sufficient and committing.</p>
+<p>The commitment is documented as an <strong>Architecture Decision
+Record (ADR)</strong> — a structured document that captures the
+decision, the context, the alternatives considered, the rationale, and
+the consequences. This ADR becomes a permanent artifact in the
+consolidated knowledge base and an input resource for every tool set
+used in subsequent phases.</p>
+<hr />
+<h2 id="the-initial-threat-model">The Initial Threat Model</h2>
+<p>The threat model produced in Phase 2 is preliminary — a foundation
+for the detailed security architecture that will be developed in Phase
+4. Its purpose is to identify the major threat categories and attack
+surfaces early enough to influence architecture and design
+decisions.</p>
+<h3 id="what-the-initial-threat-model-covers">What the Initial Threat
+Model Covers</h3>
+<p><strong>Data flow analysis</strong> — How does data move through the
+system? Where does it enter, where is it stored, where is it processed,
+where does it leave? What classification does each data type carry?</p>
+<p><strong>Trust boundaries</strong> — Where do trust levels change?
+Between the user and the system, between system components, between the
+system and external services, between the system and data stores. Each
+trust boundary is a potential attack surface.</p>
+<p><strong>Threat identification</strong> — Using a framework like
+STRIDE, identify the threats relevant to each component and trust
+boundary. Not every theoretical threat is relevant — the model should
+focus on threats that are realistic given the domain, the data
+sensitivity, and the deployment environment.</p>
+<p><strong>Risk ranking</strong> — Each identified threat is ranked by
+likelihood and impact. This ranking drives which threats must be
+addressed in architecture (Phase 4) versus which can be addressed in
+implementation (Phase 5) versus which are accepted risks with monitoring
+(Phase 7).</p>
+<h3 id="ais-role-in-threat-modeling">AI’s Role in Threat Modeling</h3>
+<p>AI is effective at generating initial threat models from data flow
+descriptions. It can apply STRIDE or similar frameworks systematically,
+identify common attack patterns for the technologies in the stack
+decision, and cross-reference against known vulnerability databases.</p>
+<p>The practitioner’s role is validation. AI may miss domain-specific
+threats that are not well-represented in its training data. It may
+overweight theoretical threats and underweight practical ones. It may
+not understand the organization’s specific risk tolerance. The initial
+threat model is AI-generated and human-validated — a pattern that recurs
+throughout the framework.</p>
+<hr />
+<h2 id="core-principles-in-phase-2">Core Principles in Phase 2</h2>
+<p>Phase 2 is where the Core Principles transition from research lens
+(Phase 1) to decision-making framework. Every analysis output is
+structured around the principles, and every decision is scored against
+them.</p>
+<h3 id="security">Security</h3>
+<p>Security in Phase 2 means threat modeling, compliance constraint
+mapping, and evaluating the security characteristics of candidate
+stacks. The initial threat model is the primary security artifact, but
+security also influences stack selection (memory-safe languages score
+higher), cost modeling (security tooling has costs), and benchmark
+definition (security scanning must be included in CI/CD time
+budgets).</p>
+<h3 id="maintainability">Maintainability</h3>
+<p>Maintainability in Phase 2 means evaluating the long-term viability
+of candidate stacks — documentation quality, testing ecosystem maturity,
+talent availability, and community health. It also means assessing the
+maintainability of the analysis artifacts themselves. The cost model,
+threat model, and decision records should be structured for future
+reference, not written as one-time memos.</p>
+<h3 id="economics">Economics</h3>
+<p>Economics is at the center of Phase 2. The cost model captures
+development costs, infrastructure at scale, licensing, AI tooling, and
+maintenance. But economics is not just about minimizing cost — it is
+about understanding the cost structure and making trade-offs with full
+visibility. A stack that costs more to develop but less to operate may
+be the right choice for a long-lived system. A stack that is cheap to
+prototype but expensive to scale may be the right choice for market
+validation. The cost model makes these dynamics visible.</p>
+<h3 id="operations">Operations</h3>
+<p>Operations in Phase 2 means evaluating how each candidate stack runs
+in production. Deployment complexity, scaling behavior, monitoring and
+observability tooling, container support, and interoperability with
+existing systems. Stack decisions made without operational analysis
+create surprises during deployment — surprises that are expensive to
+resolve.</p>
+<h3 id="scoring-metrics">Scoring &amp; Metrics</h3>
+<p>This is the phase where the scoring framework is established. The
+evaluation criteria matrix, the principle-based weightings, and the
+benchmark targets are all defined here. These become the measuring
+sticks for every subsequent phase. If the scoring framework is vague or
+incomplete, later phases will struggle to evaluate their own output. If
+the benchmark targets are unrealistic, implementation will chase goals
+that cannot be achieved.</p>
+<h3 id="correctness-verification">Correctness Verification</h3>
+<p>Correctness Verification in Phase 2 has two dimensions. First,
+verifying the correctness of the analysis itself — are the cost models
+based on accurate pricing data? Are the threat models complete? Are the
+stack scores justified by evidence? Second, evaluating the correctness
+verification <em>capabilities</em> of candidate stacks — does the
+language support formal verification? How strong is the type system?
+What static analysis tooling is available? A stack with strong
+correctness verification support will make Phases 5 and 6 significantly
+more effective.</p>
+<hr />
+<h2 id="tool-sets-for-phase-2">Tool Sets for Phase 2</h2>
+<h3 id="business-analysis-tool-set">Business Analysis Tool Set</h3>
+<p><strong>Purpose:</strong> Validate the business case and define user
+needs, market fit, and value proposition.</p>
+<p><strong>Building blocks:</strong> - An interview prompt that walks
+the practitioner through business case articulation — problem
+definition, user personas, value proposition, competitive
+differentiation - The Information Report as an input resource
+(competitive analysis section, market research) - A skill that frames
+the AI as a business analyst with access to the project’s domain context
+- An action prompt that generates a structured business analysis
+document - An evaluation prompt that reviews the business case for
+completeness and internal consistency</p>
+<h3 id="cost-modeling-tool-set">Cost Modeling Tool Set</h3>
+<p><strong>Purpose:</strong> Produce a structured, adjustable cost
+forecast across the system lifecycle.</p>
+<p><strong>Building blocks:</strong> - An action prompt that takes stack
+options and scale targets and generates cost comparisons across cloud
+providers, licensing models, and operational scenarios - MCP connections
+to cloud provider pricing APIs (where available) or reference pricing
+documentation - References from the consolidated knowledge base: past
+project cost analyses, industry benchmark data - A skill that provides
+cost modeling frameworks and common cost categories that teams overlook
+(AI tooling costs, security tooling, compliance certification costs,
+team ramp-up) - An evaluation prompt that stress-tests the model — “What
+happens to costs if user growth is 3x the projection? What if a key
+vendor doubles pricing?”</p>
+<h3 id="stack-evaluation-tool-set">Stack Evaluation Tool Set</h3>
+<p><strong>Purpose:</strong> Score candidate technology stacks against
+the six Core Principles and produce a committed decision with
+rationale.</p>
+<p><strong>Building blocks:</strong> - The evaluation criteria matrix
+(produced during the Detail step) - The Information Report as an input
+resource (technology landscape, security findings, operational
+assessments) - An evaluation prompt that scores each candidate stack
+against every criterion, producing structured scorecards with
+evidence-backed justification - An action prompt that generates “what
+if” simulations — “If we choose Rust, what are the implications for
+development velocity, hiring, and AI tooling support?” - A skill that
+frames the AI as a technology evaluator, conservative about claims and
+explicit about trade-offs - An action prompt that generates the
+Architecture Decision Record documenting the final stack choice - A
+correctness verification instruction set that cross-references scores
+against Information Report evidence and flags unsupported claims</p>
+<h3 id="threat-modeling-tool-set">Threat Modeling Tool Set</h3>
+<p><strong>Purpose:</strong> Produce the initial threat model from
+system data flows and trust boundaries.</p>
+<p><strong>Building blocks:</strong> - An interview prompt that guides
+the practitioner through describing data flows, components, external
+integrations, and trust boundaries - A skill that provides the STRIDE
+framework (or alternative) and domain-specific threat context - An
+action prompt that generates the threat model from the data flow
+description, applying the framework systematically - References from the
+consolidated knowledge base: compliance requirements, industry-specific
+threat intelligence, past project threat models - An evaluation prompt
+that reviews the threat model for completeness — “Are all trust
+boundaries covered? Are domain-specific threats included? Are risk
+rankings justified?”</p>
+<h3 id="benchmark-definition-tool-set">Benchmark Definition Tool
+Set</h3>
+<p><strong>Purpose:</strong> Establish the quantitative targets that
+will measure the system throughout development and production.</p>
+<p><strong>Building blocks:</strong> - The business analysis and cost
+model as input resources - An action prompt that proposes benchmark
+targets based on industry standards, competitive benchmarks, and
+project-specific requirements - An evaluation prompt that assesses
+whether targets are measurable, realistic, and aligned with the Core
+Principles - References from the consolidated knowledge base: industry
+performance benchmarks, past project targets and actuals - An
+instruction set for structuring benchmarks in a format that automated
+scoring can consume in later phases</p>
+<hr />
+<h2 id="common-pitfalls">Common Pitfalls</h2>
+<h3 id="analysis-paralysis">Analysis Paralysis</h3>
+<p>AI makes it easy to run one more comparison, model one more scenario,
+evaluate one more alternative. Phase 2 requires discipline about when
+the analysis is sufficient. The goal is an informed decision, not a
+perfect one. Set a time boundary for analysis and commit when it is
+reached. The decision record captures the analysis done and the unknowns
+remaining — it does not require omniscience.</p>
+<h3 id="optimizing-for-one-principle">Optimizing for One Principle</h3>
+<p>A team that selects a stack purely on performance (Operations) while
+neglecting security tooling maturity (Security) or talent availability
+(Maintainability) will pay for that imbalance later. The Core Principles
+exist to force multi-dimensional evaluation. If a stack scores 5 on one
+principle and 2 on another, the trade-off must be explicit and accepted
+— not ignored.</p>
+<h3 id="cost-models-without-scale-assumptions">Cost Models Without Scale
+Assumptions</h3>
+<p>A cost model that captures only the MVP is not a cost model — it is a
+launch budget. Phase 2 cost models must include projections at multiple
+scale points, with clear assumptions about growth. AI can model these
+scenarios readily, but only if the team specifies the scale assumptions
+as part of the analysis.</p>
+<h3 id="threat-models-deferred-to-later">Threat Models Deferred to
+“Later”</h3>
+<p>The initial threat model is not optional. Without it, architecture
+decisions in Phase 3 and Phase 4 are made without understanding the
+security constraints they must satisfy. A threat model produced after
+the architecture is designed is a compliance exercise. A threat model
+produced before is a design input. The difference is significant.</p>
+<h3 id="undocumented-decisions">Undocumented Decisions</h3>
+<p>Every stack decision, every major trade-off, every rejected
+alternative should be documented in the decision record. In an
+AI-centric workflow, this documentation is not just for human
+institutional memory — it becomes input context for AI in every
+subsequent phase. An undocumented decision is a decision that AI cannot
+reason about later.</p>
+<hr />
+<h2 id="validation-checkpoint">Validation Checkpoint</h2>
+<p>Before moving to Phase 3, the team validates that the Phase 2
+artifacts are complete and consistent.</p>
+<ul>
+<li><strong>Business analysis:</strong> Is the business case clearly
+articulated? Are user needs validated? Is the value proposition specific
+enough to guide design decisions?</li>
+<li><strong>Cost model:</strong> Does the model cover the full lifecycle
+— development, infrastructure, licensing, AI tooling, maintenance? Are
+scale assumptions defined? Are AI tooling costs included?</li>
+<li><strong>Stack decision:</strong> Is the decision documented as an
+ADR with rationale, alternatives considered, trade-offs accepted, and
+Core Principle scores? Is the principle weighting established?</li>
+<li><strong>Threat model:</strong> Are data flows documented? Are trust
+boundaries identified? Are threats ranked by likelihood and impact? Is
+the model complete enough to inform architecture decisions?</li>
+<li><strong>Benchmarks:</strong> Are targets quantitative and
+measurable? Do they cover all six Core Principles? Are they realistic
+given the stack decision and cost constraints?</li>
+<li><strong>Consistency:</strong> Do the artifacts align with each
+other? Does the cost model reflect the chosen stack? Does the threat
+model cover the data flows implied by the business analysis? Do the
+benchmarks match the ambitions of the business case?</li>
+</ul>
+<p>If gaps exist, the SDD cycle iterates. The analysis specification may
+need expansion (back to Specify), additional research sections may be
+needed (back to Plan), or specific analyses may need to be rerun (back
+to Task and Implement).</p>
+<hr />
+<h2 id="what-comes-next">What Comes Next</h2>
+<p>Phase 2 produces the analytical foundation: a validated business
+case, a cost model, a committed stack decision with rationale, an
+initial threat model, and a benchmark framework. These artifacts are
+consequential — they constrain and enable everything that follows.</p>
+<p>Phase 3 takes these artifacts and begins the work of design. The next
+article covers <strong>Design &amp; Technical Analysis</strong> — where
+the stack decision is stress-tested against the Core Principles through
+structured scoring and simulation, monitoring and observability hooks
+are identified, compliance implications are mapped to design
+constraints, and the team locks in the technical direction that
+architecture will formalize in Phase 4.</p>
+<hr />
+<p><em>This is a living document. The tool sets, analytical frameworks,
+and examples will be expanded and refined as the series develops. Every
+part of this framework is open to iteration.</em></p>
+<p><em>Previous: [Article 3 — Phase 1: Information Gathering]</em>
+<em>Next in the series: [Article 5 — Phase 3: Design &amp; Technical
+Analysis]</em></p>

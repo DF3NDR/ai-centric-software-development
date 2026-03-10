@@ -8,7 +8,7 @@ Software is about to change. Not the principles underneath it — those endure. 
 
 It is my belief that within the next 12 to 24 month the leading edge of professional software development will look like this: a team of one to five people, capable across the entire process from conception through deployment, orchestrating AI tools that perform specialist-level work across every discipline. These teams will deliver what fifty-person organizations once required — not by working harder, but by working through a fundamentally different interface.
 
-This is both a manifesto on what I belive is the inevitable paradigm shift that is already underway and the introduction to a series of article that will act as my own practitioner's guide to building that capability. This is the base on which I will continue to build all my software development projects, including the creation of my own libraries, tools and resources.  This collection stands as  the specification for that process. 
+This is both a manifesto on what I believe is the inevitable paradigm shift that is already underway and the introduction to a series of article that will act as my own practitioner's guide to building that capability. This is the base on which I will continue to build all my software development projects, including the creation of my own libraries, tools and resources.  This collection stands as  the specification for that process. 
 
 >> Note: This series is made up of living documents hosted in a public repository and so is open to revision.
 
