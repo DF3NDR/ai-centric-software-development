@@ -307,11 +307,11 @@ If gaps exist, the SDD cycle iterates. The analysis specification may need expan
 
 Phase 2 produces the analytical foundation: a validated business case, a cost model, a committed stack decision with rationale, an initial threat model, and a benchmark framework. These artifacts are consequential — they constrain and enable everything that follows.
 
-Phase 3 takes these artifacts and begins the work of design. The next article covers **Design & Technical Analysis** — where the stack decision is stress-tested against the Core Principles through structured scoring and simulation, monitoring and observability hooks are identified, compliance implications are mapped to design constraints, and the team locks in the technical direction that architecture will formalize in Phase 4.
+Phase 3 takes these artifacts and begins the work of design. The next part covers **Design & Technical Analysis** — where the stack decision is stress-tested against the Core Principles through structured scoring and simulation, monitoring and observability hooks are identified, compliance implications are mapped to design constraints, and the team locks in the technical direction that architecture will formalize in Phase 4.
 
 ---
 
 *This is a living document. The tool sets, analytical frameworks, and examples will be expanded and refined as the series develops. Every part of this framework is open to iteration.*
 
-*Previous: [Article 3 — Phase 1: Information Gathering]*
-*Next in the series: [Article 5 — Phase 3: Design & Technical Analysis]*
+*Previous: [Part 3 — Phase 1: Information Gathering]*
+*Next in the series: [Part 5 — Phase 3: Design & Technical Analysis]*

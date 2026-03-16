@@ -329,13 +329,13 @@ The phases are a framework for organizing thinking and work, not a linear proces
 
 ## What Comes Next
 
-This article completes the phase-by-phase walkthrough of the AI-Centric Software Development framework. From Information Gathering through Deployment & Evolution, the framework provides a structured, principle-driven, specification-first approach to building software with AI as the primary interface.
+This part completes the phase-by-phase walkthrough of the AI-Centric Software Development framework. From Information Gathering through Deployment & Evolution, the framework provides a structured, principle-driven, specification-first approach to building software with AI as the primary interface.
 
-With the full framework now articulated, the series gains its **Introduction** — **The Manifesto**. Written last because it could only be written with the full weight of the framework behind it, the Introduction steps back from the practitioner's detail and makes the case: why small teams orchestrating AI tools will build the software that matters over the next eighteen to twenty-four months, why the fundamentals of computer science remain essential even as the interface changes, and why the time to build this capability is now. It is the front door to the series — the article a reader encounters first and the one that frames everything that follows.
+With the full framework now articulated, the series gains its **Introduction** — **The Manifesto**. Written last because it could only be written with the full weight of the framework behind it, the Introduction steps back from the practitioner's detail and makes the case: why small teams orchestrating AI tools will build the software that matters over the next eighteen to twenty-four months, why the fundamentals of computer science remain essential even as the interface changes, and why the time to build this capability is now. It is the front door to the series — the part a reader encounters first and the one that frames everything that follows.
 
 ---
 
 *This is a living document. The tool sets, operational patterns, runbook structures, and examples will be expanded and refined as the series develops. Every part of this framework is open to iteration.*
 
-*Previous: [Article 8 — Phase 6: Testing & Audit]*
+*Previous: [Part 8 — Phase 6: Testing & Audit]*
 *Introduction to the series: [The Manifesto — Small Teams, Big AI, New Paradigm]*

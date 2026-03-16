@@ -2,14 +2,14 @@
 
 ## A Practitioner's Guide to Building Software in the Age of AI
 
-**Series Format:** 8–10 standalone articles, cross-linked, each self-contained but building on a shared framework.
+**Series Format:** 8–10 standalone sections, cross-linked, each self-contained but building on a shared framework.
 
 **Tone:** Calm, methodical, example-driven. Practitioner-to-practitioner. The intro/manifesto (written last) will be bolder and more visionary.
 
 **Audience:**
 - Primary: Senior engineers, architects, full-stack developers already working with AI tools
 - Secondary (mid-level): Engineers building the skill set to work within AI-driven toolkits
-- Intro article accessible to: CTOs, engineering managers, technical leadership
+- Introduction accessible to: CTOs, engineering managers, technical leadership
 
 **Timeline Thesis:** 18–24 months before this approach is fully operational for teams on the leading edge.
 
@@ -127,7 +127,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 
 ---
 
-### Article 1: Core Principles — Your Compass for Every Decision
+### Part 1: Core Principles — Your Compass for Every Decision
 
 **Purpose:** Establish the framework that the entire series depends on. Before we touch any phase, readers need to understand the principles and how they function as concurrent evaluation criteria — not a sequential checklist. Critically, introduce Scoring & Metrics and Correctness Verification as the mechanisms that make principles *enforceable* rather than aspirational.
 
@@ -154,9 +154,9 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 
 ---
 
-### Article 2: Building Your Toolkit — Tool Sets, SDD, and the Building Blocks
+### Part 2: Building Your Toolkit — Tool Sets, SDD, and the Building Blocks
 
-**Purpose:** Before diving into phases, establish what the toolkit *is*, how it's assembled, and how it's used. Introduces three essential concepts: building blocks (the individual components), tool sets (curated combinations of building blocks for specific purposes), and Specification Driven Development (the iterative methodology that drives every phase). Critically, establish that the Core Principles from Article 1 drive what goes into the toolkit — every building block must serve the principles.
+**Purpose:** Before diving into phases, establish what the toolkit *is*, how it's assembled, and how it's used. Introduces three essential concepts: building blocks (the individual components), tool sets (curated combinations of building blocks for specific purposes), and Specification Driven Development (the iterative methodology that drives every phase). Critically, establish that the Core Principles from Part 1 drive what goes into the toolkit — every building block must serve the principles.
 
 **Key Ideas:**
 - **The Consolidated Knowledge Base:** The AI-Centric Toolkit is an addendum to — not a replacement for — the team's existing body of knowledge. Documents, articles, technical references, videos, books, internal wikis, architecture decision records, past postmortems, vendor documentation, and industry standards are consolidated and made available for AI processing. This traditional knowledge becomes the foundation the entire toolkit draws from.
@@ -181,9 +181,9 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 
 ---
 
-### Article 3: Phase 1 — Information Gathering
+### Part 3: Phase 1 — Information Gathering
 
-> **Note on SDD in Phase Articles:** Each phase article (Articles 3–9) follows the SDD methodology defined in Article 2. The SDD cycle — Specify, Plan, Detail, Task, Implement — is applied within each phase using phase-appropriate tool sets. The articles will demonstrate how the cycle works in the context of each phase, with the tool sets and building blocks that are most relevant.
+> **Note on SDD in Phase Sections:** Each phase section (Parts 3–9) follows the SDD methodology defined in Part 2. The SDD cycle — Specify, Plan, Detail, Task, Implement — is applied within each phase using phase-appropriate tool sets. The phase sections will demonstrate how the cycle works in the context of each phase, with the tool sets and building blocks that are most relevant.
 
 **Purpose:** How to use AI to scan, summarize, triage, and synthesize the information landscape before any design decisions are made.
 
@@ -207,7 +207,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 
 ---
 
-### Article 4: Phase 2 — Analysis & Stack Selection
+### Part 4: Phase 2 — Analysis & Stack Selection
 
 **Purpose:** Transform gathered information into decisions. Business analysis, cost modeling, stack selection, initial threat modeling.
 
@@ -231,7 +231,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 
 ---
 
-### Article 5: Phase 3 — Design & Technical Analysis
+### Part 5: Phase 3 — Design & Technical Analysis
 
 **Purpose:** Take the analysis output and begin scoring, simulating, and locking in design direction. This is where Core Principles become explicit scorecards.
 
@@ -252,7 +252,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 
 ---
 
-### Article 6: Phase 4 — Architecture & Modular Design
+### Part 6: Phase 4 — Architecture & Modular Design
 
 **Purpose:** Detailed architecture. This is where the blueprint becomes concrete: modules, APIs, security boundaries, documentation strategy, governance model.
 
@@ -277,7 +277,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 
 ---
 
-### Article 7: Phase 5 — Implementation
+### Part 7: Phase 5 — Implementation
 
 **Purpose:** Building the thing. AI-assisted coding, continuous validation, and the feedback loop between writing code and evaluating it against the Core Principles.
 
@@ -310,7 +310,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 
 ---
 
-### Article 8: Phase 6 — Testing & Audit
+### Part 8: Phase 6 — Testing & Audit
 
 **Purpose:** Verification, validation, and compliance. Automated test generation, security audits, performance validation, documentation freeze.
 
@@ -341,7 +341,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 
 ---
 
-### Article 9: Phase 7 — Deployment & Evolution
+### Part 9: Phase 7 — Deployment & Evolution
 
 **Purpose:** Getting it live, keeping it alive, and evolving it. Monitoring, incident response, runbooks as AI orchestration scripts, and continuous improvement.
 
@@ -371,9 +371,9 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 
 ---
 
-### Article 10 (Written Last): The Introduction / Manifesto — Small Teams, Big AI, New Paradigm
+### Part 10 (Written Last): The Introduction / Manifesto — Small Teams, Big AI, New Paradigm
 
-**Purpose:** The bold, visionary introduction to the series. Written last because it could only be written with the full weight of the framework behind it. Explains *why* this matters, *why now*, and *who this is for*. This is the front door — the article a reader encounters first and the one that frames everything that follows.
+**Purpose:** The bold, visionary introduction to the series. Written last because it could only be written with the full weight of the framework behind it. Explains *why* this matters, *why now*, and *who this is for*. This is the front door — the part a reader encounters first and the one that frames everything that follows.
 
 **Tone:** Manifesto. Confident. Forward-looking.
 
@@ -424,5 +424,5 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 - Core Principles are not fixed — iterate as we work through phases
 - Tool-agnostic by design: describe *what* and *why*, not *which product*
 - The Paladin project serves as a real-world testbed but is not the focus of the series
-- Each article should be self-contained but reference the shared Core Principles framework
+- Each part should be self-contained but reference the shared Core Principles framework
 - The toolkit itself is built incrementally — you don't need everything on day one

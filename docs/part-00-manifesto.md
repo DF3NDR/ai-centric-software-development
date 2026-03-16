@@ -8,7 +8,7 @@ Software is about to change. Not the principles underneath it — those endure. 
 
 It is my belief that within the next 12 to 24 month the leading edge of professional software development will look like this: a team of one to five people, capable across the entire process from conception through deployment, orchestrating AI tools that perform specialist-level work across every discipline. These teams will deliver what fifty-person organizations once required — not by working harder, but by working through a fundamentally different interface.
 
-This is both a manifesto on what I believe is the inevitable paradigm shift that is already underway and the introduction to a series of article that will act as my own practitioner's guide to building that capability. This is the base on which I will continue to build all my software development projects, including the creation of my own libraries, tools and resources.  This collection stands as  the specification for that process. 
+This is both a manifesto on what I believe is the inevitable paradigm shift that is already underway and the introduction to a series that will act as my own practitioner's guide to building that capability. This is the base on which I will continue to build all my software development projects, including the creation of my own libraries, tools and resources.  This collection stands as  the specification for that process. 
 
 >> Note: This series is made up of living documents hosted in a public repository and so is open to revision.
 
@@ -124,7 +124,7 @@ The framework organizes the development process into seven phases. These are not
 
 **Phase 7: Deployment & Evolution** — The system goes live and continues evolving. Runbooks become AI orchestration scripts. Monitoring detects drift. Technical debt is managed. New features follow the SDD cycle with the same rigor as initial development. The framework is circular, not linear.
 
-Each phase is covered in its own article in this series, with the SDD cycle, relevant tool sets, Core Principle application, and common pitfalls described in practitioner-level detail.
+Each phase is covered in its own section of this series, with the SDD cycle, relevant tool sets, Core Principle application, and common pitfalls described in practitioner-level detail.
 
 ---
 
@@ -132,11 +132,11 @@ Each phase is covered in its own article in this series, with the SDD cycle, rel
 
 This series is written for three audiences, with different entry points.
 
-**Senior engineers and architects** — This is your primary material. You have the technical depth to evaluate the framework critically, the experience to recognize where it addresses real problems, and the skill to implement it. You will build the toolkit, run the SDD cycles, make the judgment calls, and orchestrate the AI tools. The phase-by-phase articles (Articles 3–9) are written for you.
+**Senior engineers and architects** — This is your primary material. You have the technical depth to evaluate the framework critically, the experience to recognize where it addresses real problems, and the skill to implement it. You will build the toolkit, run the SDD cycles, make the judgment calls, and orchestrate the AI tools. The phase-by-phase sections (Parts 3–9) are written for you.
 
-**Mid-level engineers** — You are building the skill set to work within AI-driven toolkits. The framework will feel new. Some of the practices — formal verification, principle-based scoring, specification-first development — may be unfamiliar. That is the point. The engineers who learn to work this way now will be the senior engineers and architects who lead teams in this paradigm. Start with this introduction and the Core Principles (Article 1), then work through the phases.
+**Mid-level engineers** — You are building the skill set to work within AI-driven toolkits. The framework will feel new. Some of the practices — formal verification, principle-based scoring, specification-first development — may be unfamiliar. That is the point. The engineers who learn to work this way now will be the senior engineers and architects who lead teams in this paradigm. Start with this introduction and the Core Principles (Part 1), then work through the phases.
 
-**CTOs, engineering managers, and technical leadership** — You need to understand what this shift means for your organization without necessarily implementing every detail. This introduction and the Core Principles article give you the strategic picture: why small teams with AI leverage will outperform large teams without it, what capabilities your engineers need to develop, and what the timeline looks like. The detailed phase articles are available when you want depth.
+**CTOs, engineering managers, and technical leadership** — You need to understand what this shift means for your organization without necessarily implementing every detail. This introduction and the Core Principles section give you the strategic picture: why small teams with AI leverage will outperform large teams without it, what capabilities your engineers need to develop, and what the timeline looks like. The detailed phase sections are available when you want depth.
 
 ---
 
@@ -172,15 +172,15 @@ What becomes less valuable is the ability to manually produce what AI can produc
 
 ## How to Read This Series
 
-The series is designed to be read in order but used as a reference. Each article is self-contained enough to be useful independently, while building on the shared framework of Core Principles, toolkit concepts, and SDD methodology.
+The series is designed to be read in order but used as a reference. Each section is self-contained enough to be useful independently, while building on the shared framework of Core Principles, toolkit concepts, and SDD methodology.
 
 **Start here.** This introduction gives you the vision, the rationale, and the structure.
 
-**Read Article 1 (Core Principles) next.** The principles are the foundation that everything else builds on. Without them, the toolkit has no direction and SDD has no criteria for evaluation.
+**Read Part 1 (Core Principles) next.** The principles are the foundation that everything else builds on. Without them, the toolkit has no direction and SDD has no criteria for evaluation.
 
-**Read Article 2 (Building Your Toolkit) next.** This defines the building blocks, tool sets, and SDD methodology that power every phase. It is the meta-layer — how to build the tools that build the software.
+**Read Part 2 (Building Your Toolkit) next.** This defines the building blocks, tool sets, and SDD methodology that power every phase. It is the meta-layer — how to build the tools that build the software.
 
-**Then work through the phases (Articles 3–9) in order or by need.** If you are starting a new project, begin at Phase 1. If you are mid-project, jump to the phase that matches your current work. Each phase article describes the SDD cycle, the relevant tool sets, the Core Principle application, and the common pitfalls for that phase.
+**Then work through the phases (Articles 3–9) in order or by need.** If you are starting a new project, begin at Phase 1. If you are mid-project, jump to the phase that matches your current work. Each phase section describes the SDD cycle, the relevant tool sets, the Core Principle application, and the common pitfalls for that phase.
 
 The appendices (forthcoming) will provide starter templates: a prompt library, incident response patterns, and a curated reference list.
 
@@ -196,6 +196,6 @@ Start building.
 
 ---
 
-*This is a living series. Every article, every framework element, and every example is open to iteration as the tools evolve, the methodology matures, and the practice deepens.*
+*This is a living series. Every section, every framework element, and every example is open to iteration as the tools evolve, the methodology matures, and the practice deepens.*
 
-*Next: [Article 1 — Core Principles: Your Compass for Every Decision]*
+*Next: [Part 1 — Core Principles: Your Compass for Every Decision]*

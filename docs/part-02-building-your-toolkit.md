@@ -6,11 +6,11 @@
 
 ## The Toolkit Is the Practice
 
-Article 1 established the six Core Principles — Security, Maintainability, Economics, Operations, Scoring & Metrics, and Correctness Verification. Those principles define what you care about. This article is about building the means to act on them — and defining the methodology that puts them into practice.
+Part 1 established the six Core Principles — Security, Maintainability, Economics, Operations, Scoring & Metrics, and Correctness Verification. Those principles define what you care about. This section is about building the means to act on them — and defining the methodology that puts them into practice.
 
 In AI-centric development, the toolkit is not a nice-to-have. It is the practice itself. When a three-person team delivers what a fifty-person organization once required, the difference is not that the three people work harder or know more. The difference is that they have assembled a set of tools — prompts, skills, instruction sets, MCP integrations, custom AIs, and a consolidated body of reference knowledge — organized into purposeful **tool sets** and applied through a disciplined, specification-first methodology.
 
-This article defines the three layers that make the toolkit operational:
+This section defines the three layers that make the toolkit operational:
 
 1. **Building blocks** — the individual components (prompts, skills, MCP servers, etc.)
 2. **Tool sets** — curated combinations of building blocks assembled for specific purposes
@@ -348,7 +348,7 @@ This review is itself a good use of AI and the SDD methodology. Specify the eval
 
 ## The Toolkit in Context
 
-The toolkit described in this article is not a product. It is not a framework to download or a platform to subscribe to. It is a practice — an ongoing, evolving collection of resources assembled by practitioners for their specific context, guided by shared principles, organized into purposeful tool sets, and applied through a consistent methodology.
+The toolkit described in this section is not a product. It is not a framework to download or a platform to subscribe to. It is a practice — an ongoing, evolving collection of resources assembled by practitioners for their specific context, guided by shared principles, organized into purposeful tool sets, and applied through a consistent methodology.
 
 The specifics will vary from team to team, project to project, and year to year. The prompts that work well with today's models may need revision as models improve. The MCP integrations available today will expand dramatically over the next eighteen to twenty-four months. The tool sets that seem comprehensive now will need restructuring as the field matures.
 
@@ -358,7 +358,7 @@ What endures is the structure: principles that define what matters, a consolidat
 
 ## What Comes Next
 
-With the Core Principles established in Article 1, the toolkit framework and SDD methodology defined here, we are ready to begin working through the development phases. Each subsequent article will walk through a specific phase of the AI-centric development process:
+With the Core Principles established in Part 1, the toolkit framework and SDD methodology defined here, we are ready to begin working through the development phases. Each subsequent section will walk through a specific phase of the AI-centric development process:
 
 - What the phase accomplishes
 - How the SDD cycle applies to this phase
@@ -366,11 +366,11 @@ With the Core Principles established in Article 1, the toolkit framework and SDD
 - How each Core Principle is applied and evaluated
 - Scoring checkpoints and correctness verification specific to the phase
 
-The next article covers **Phase 1: Information Gathering** — the starting point for any greenfield project. This is where the SDD cycle runs for the first time: specifying what information is needed, planning the research, detailing the questions, tasking the specific analyses, and implementing the research that produces the information report. It is where the consolidated knowledge base earns its first return and where the toolkit begins to take shape through actual use.
+The next section covers **Phase 1: Information Gathering** — the starting point for any greenfield project. This is where the SDD cycle runs for the first time: specifying what information is needed, planning the research, detailing the questions, tasking the specific analyses, and implementing the research that produces the information report. It is where the consolidated knowledge base earns its first return and where the toolkit begins to take shape through actual use.
 
 ---
 
 *This is a living document. The building block taxonomy, tool set patterns, SDD methodology, and examples will be expanded and refined as the series develops. Every part of this framework is open to iteration.*
 
-*Previous: [Article 1 — Core Principles: Your Compass for Every Decision]*
-*Next in the series: [Article 3 — Phase 1: Information Gathering]*
+*Previous: [Part 1 — Core Principles: Your Compass for Every Decision]*
+*Next in the series: [Part 3 — Phase 1: Information Gathering]*

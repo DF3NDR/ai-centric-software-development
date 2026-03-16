@@ -325,11 +325,11 @@ If gaps exist, the SDD cycle iterates. If a module specification is incomplete, 
 
 Phase 4 produces the complete architectural blueprint — module specifications, API contracts, security architecture, data architecture, documentation strategy, and governance model. These artifacts are precise enough to build from and structured enough for AI to consume as implementation context.
 
-Phase 5 is where building begins. The next article covers **Implementation** — where AI-assisted coding, continuous validation, specification conformance checking, formal verification, and the full implementation feedback loop transform the architecture into a working system. This is where the discipline of Phases 1–4 pays its largest dividend: precise specifications produce high-quality AI-generated code, and the scoring and verification frameworks established in earlier phases ensure that quality is measured, not assumed.
+Phase 5 is where building begins. The next part covers **Implementation** — where AI-assisted coding, continuous validation, specification conformance checking, formal verification, and the full implementation feedback loop transform the architecture into a working system. This is where the discipline of Phases 1–4 pays its largest dividend: precise specifications produce high-quality AI-generated code, and the scoring and verification frameworks established in earlier phases ensure that quality is measured, not assumed.
 
 ---
 
 *This is a living document. The tool sets, architectural patterns, and examples will be expanded and refined as the series develops. Every part of this framework is open to iteration.*
 
-*Previous: [Article 5 — Phase 3: Design & Technical Analysis]*
-*Next in the series: [Article 7 — Phase 5: Implementation]*
+*Previous: [Part 5 — Phase 3: Design & Technical Analysis]*
+*Next in the series: [Part 7 — Phase 5: Implementation]*

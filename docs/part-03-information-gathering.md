@@ -317,11 +317,11 @@ If significant gaps exist, the team cycles back to the appropriate SDD step — 
 
 Phase 1 produces a structured Information Report that captures the technology landscape, competitive analysis, compliance requirements, risks, reusable components, and open questions. It is comprehensive but not conclusive — it presents options and evidence, not decisions.
 
-Phase 2 transforms that evidence into decisions. The next article covers **Analysis & Stack Selection** — where the team uses the Information Report as input context for business analysis, cost modeling, stack evaluation, initial threat modeling, and benchmark definition. The SDD cycle runs again, but now the Specify step draws from the Information Report rather than from scratch. The decisions made in Phase 2 will constrain everything that follows.
+Phase 2 transforms that evidence into decisions. The next part covers **Analysis & Stack Selection** — where the team uses the Information Report as input context for business analysis, cost modeling, stack evaluation, initial threat modeling, and benchmark definition. The SDD cycle runs again, but now the Specify step draws from the Information Report rather than from scratch. The decisions made in Phase 2 will constrain everything that follows.
 
 ---
 
 *This is a living document. The tool sets, research patterns, and examples will be expanded and refined as the series develops. Every part of this framework is open to iteration.*
 
-*Previous: [Article 2 — Building Your Toolkit: Tool Sets, SDD, and the Building Blocks]*
-*Next in the series: [Article 4 — Phase 2: Analysis & Stack Selection]*
+*Previous: [Part 2 — Building Your Toolkit: Tool Sets, SDD, and the Building Blocks]*
+*Next in the series: [Part 4 — Phase 2: Analysis & Stack Selection]*

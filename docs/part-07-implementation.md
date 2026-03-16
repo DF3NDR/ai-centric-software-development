@@ -321,11 +321,11 @@ If gaps exist, the SDD cycle iterates at the module level. Phase 6 (Testing & Au
 
 Phase 5 transforms architecture into working, tested, scored, and verified code. The implementation feedback loop — generate, test, score, verify, refine — runs for every task in every module, producing code that is traceable to specifications and measurable against the Core Principles.
 
-Phase 6 applies a different lens. The next article covers **Testing & Audit** — where the team steps back from implementation and subjects the complete system to independent testing, security audits, performance validation, compliance verification, and documentation review. This is the phase where the Core Principles become pass/fail gates, where formal verification models from Phase 5 receive their engineer review, and where the system must demonstrate it meets the standards it was designed to satisfy.
+Phase 6 applies a different lens. The next part covers **Testing & Audit** — where the team steps back from implementation and subjects the complete system to independent testing, security audits, performance validation, compliance verification, and documentation review. This is the phase where the Core Principles become pass/fail gates, where formal verification models from Phase 5 receive their engineer review, and where the system must demonstrate it meets the standards it was designed to satisfy.
 
 ---
 
 *This is a living document. The tool sets, implementation patterns, and examples will be expanded and refined as the series develops. Every part of this framework is open to iteration.*
 
-*Previous: [Article 6 — Phase 4: Architecture & Modular Design]*
-*Next in the series: [Article 8 — Phase 6: Testing & Audit]*
+*Previous: [Part 6 — Phase 4: Architecture & Modular Design]*
+*Next in the series: [Part 8 — Phase 6: Testing & Audit]*

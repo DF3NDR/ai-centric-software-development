@@ -6,7 +6,7 @@
 
 ## Why Principles Come First
 
-Before we write a line of code, before we select a stack, before we even gather requirements — we need a shared framework for evaluating every decision we make. That framework is what this article establishes.
+Before we write a line of code, before we select a stack, before we even gather requirements — we need a shared framework for evaluating every decision we make. That framework is what this section establishes.
 
 In traditional development, principles like security, maintainability, and operational readiness tend to surface at different stages. Security gets a review before launch. Maintainability becomes a concern when someone inherits the codebase. Cost overruns get noticed at the quarterly budget review. By then, the decisions that created those problems were made months ago, buried under layers of subsequent work.
 
@@ -206,7 +206,7 @@ The framework is designed to grow. As you work through the phases described in t
 
 ## What Comes Next
 
-This article establishes the foundation. Every subsequent article in this series will reference these six principles explicitly. Each phase of the AI-centric development process will include:
+This section establishes the foundation. Every subsequent section will reference these six principles explicitly. Each phase of the AI-centric development process will include:
 
 - A description of what the phase accomplishes
 - How AI tools support the phase
@@ -214,7 +214,7 @@ This article establishes the foundation. Every subsequent article in this series
 - Scoring checkpoints and correctness verification relevant to the phase
 - Expandable sections for deeper dives
 
-The next article covers **Building Your Toolkit** — the building blocks, tool sets, and methodology that make principle-driven development operational. It introduces three essential concepts:
+The next section covers **Building Your Toolkit** — the building blocks, tool sets, and methodology that make principle-driven development operational. It introduces three essential concepts:
 
 First, the **Consolidated Knowledge Base** — the AI-Centric Toolkit is not a replacement for your existing body of knowledge but an addendum to it. Every team already has accumulated resources: documents, technical references, articles, videos, books, internal wikis, architecture decision records, past postmortems, and industry standards. In the AI-centric workflow, these traditional resources are consolidated and made available for processing by AI, becoming part of the working context that informs every phase.
 
@@ -230,4 +230,4 @@ Without the principles, the toolkit has no direction. Without the toolkit, the p
 
 *This is a living document. The principles, subcategories, and examples will be expanded and refined as the series develops. Every part of this framework is open to iteration.*
 
-*Next in the series: [Article 2 — Building Your Toolkit: Tool Sets, SDD, and the Building Blocks]*
+*Next in the series: [Part 2 — Building Your Toolkit: Tool Sets, SDD, and the Building Blocks]*

@@ -4,7 +4,7 @@ A practitioner's guide to building software in the age of AI — designed for sm
 
 ## 📖 About This Repository
 
-This repository contains a comprehensive series of articles that establish a methodology for modern software development in which small teams (1–5 people) orchestrate AI tools to perform specialist-level work across every discipline. These are **living documents** — continuously refined and updated as the field evolves and new practices emerge.
+This repository contains a comprehensive series of parts that establish a methodology for modern software development in which small teams (1–5 people) orchestrate AI tools to perform specialist-level work across every discipline. These are **living documents** — continuously refined and updated as the field evolves and new practices emerge.
 
 **Timeline Thesis:** At some point near the end of 2026 to late 2027 teams on the leading edge will transition to something like this approach.
 
@@ -23,12 +23,12 @@ This playbook covers the complete software development lifecycle through an AI-c
 
 ---
 
-## 📚 The Articles
+## 📚 The Parts
 
-### [Article 0: Manifesto — Small Teams, Big AI, New Paradigm](articles/article-00-manifesto.md)
+### [Part 0: Manifesto — Small Teams, Big AI, New Paradigm](docs/part-00-manifesto.md)
 The foundational vision. Why AI is reshaping what engineers do, why small teams will dominate, what changes and what doesn't, and what this series provides.
 
-### [Article 1: Core Principles — Your Compass for Every Decision](articles/article-01-core-principles.md)
+### [Part 1: Core Principles — Your Compass for Every Decision](docs/part-01-core-principles.md)
 The six principles that guide every decision at every phase:
 - **Security** — Threat modeling, zero-trust design, continuous audit hooks, compliance preparation
 - **Maintainability** — Testing strategy, documentation, technical debt control, observability
@@ -37,32 +37,32 @@ The six principles that guide every decision at every phase:
 - **Scoring & Metrics** — Measurable outcomes for every principle
 - **Correctness Verification** — Formal verification, automated checks, specification conformance
 
-### [Article 2: Building Your Toolkit — Tool Sets, SDD, and the Building Blocks](articles/article-02-building-your-toolkit.md)
+### [Part 2: Building Your Toolkit — Tool Sets, SDD, and the Building Blocks](docs/part-02-building-your-toolkit.md)
 How to assemble your AI-centric development toolkit:
 - The foundation: consolidated knowledge resources
 - Types of building blocks (prompts, skills, instruction sets, MCP servers, custom AIs)
 - Tool sets — curated combinations for specific purposes
 - Specification Driven Development (SDD) — the methodology that drives everything
 
-### [Article 3: Information Gathering — Starting with the Right Questions](articles/article-03-information-gathering.md)
+### [Part 3: Information Gathering — Starting with the Right Questions](docs/part-03-information-gathering.md)
 The first phase: understanding what you're building and why. Interview prompts, stakeholder mapping, and establishing the foundation for specifications.
 
-### [Article 4: Analysis & Stack Selection — Making Architectural Decisions](articles/article-04-analysis-stack-selection.md)
+### [Part 4: Analysis & Stack Selection — Making Architectural Decisions](docs/part-04-analysis-stack-selection.md)
 Evaluating options, selecting technologies, and making foundational architectural decisions with AI assistance while applying Core Principles.
 
-### [Article 5: Design & Technical Analysis — From Concept to Specification](articles/article-05-design-technical-analysis.md)
+### [Part 5: Design & Technical Analysis — From Concept to Specification](docs/part-05-design-technical-analysis.md)
 Creating detailed specifications, data models, API designs, and architectural blueprints that will drive implementation.
 
-### [Article 6: Architecture & Modular Design — Building for Scale and Change](articles/article-06-architecture-modular-design.md)
+### [Part 6: Architecture & Modular Design — Building for Scale and Change](docs/part-06-architecture-modular-design.md)
 Designing systems that are modular, testable, maintainable, and aligned with your Core Principles from day one.
 
-### [Article 7: Implementation — From Specification to Working Code](articles/article-07-implementation.md)
+### [Part 7: Implementation — From Specification to Working Code](docs/part-07-implementation.md)
 How AI-augmented implementation works in practice: generating code, reviewing output, maintaining quality, and keeping principles front and center.
 
-### [Article 8: Testing & Audit — Verifying Correctness at Every Level](articles/article-08-testing-audit.md)
+### [Part 8: Testing & Audit — Verifying Correctness at Every Level](docs/part-08-testing-audit.md)
 Comprehensive testing strategies, correctness verification, security audits, and ensuring your system meets its specifications.
 
-### [Article 9: Deployment & Evolution — Launch, Learn, and Iterate](articles/article-09-deployment-evolution.md)
+### [Part 9: Deployment & Evolution — Launch, Learn, and Iterate](docs/part-09-deployment-evolution.md)
 Taking systems to production and maintaining them over time. Monitoring, scaling, evolving, and keeping the feedback loop tight.
 
 ---
@@ -101,9 +101,9 @@ This SDD cycle runs continuously across all phases, with Core Principles evaluat
 
 ## 🚀 How to Use This Playbook
 
-1. **Start with the Manifesto** ([Article 0](articles/article-00-manifesto.md)) to understand the vision and paradigm shift
-2. **Learn the Core Principles** ([Article 1](articles/article-01-core-principles.md)) — these will guide everything else
-3. **Build Your Toolkit** ([Article 2](articles/article-02-building-your-toolkit.md)) to understand the methodology and building blocks
+1. **Start with the Manifesto** ([Part 0](docs/part-00-manifesto.md)) to understand the vision and paradigm shift
+2. **Learn the Core Principles** ([Part 1](docs/part-01-core-principles.md)) — these will guide everything else
+3. **Build Your Toolkit** ([Part 2](docs/part-02-building-your-toolkit.md)) to understand the methodology and building blocks
 4. **Follow the Phase Articles** (3–9) in sequence to see how the approach applies across the full development lifecycle
 5. **Reference as Needed** — These are living documents designed for repeated consultation, not one-time reading
 
@@ -111,7 +111,7 @@ This SDD cycle runs continuously across all phases, with Core Principles evaluat
 
 ## 🔄 Living Documents
 
-These articles are continuously refined based on:
+These parts are continuously refined based on:
 - Practical application in real projects
 - Evolution of AI tooling and capabilities
 - Feedback from practitioners
@@ -135,7 +135,7 @@ This is a practitioner's guide built from real-world experience. While primarily
 
 ## 📄 License
 
-These articles represent a methodology and practice guide. They are shared openly for learning and reference.
+These parts represent a methodology and practice guide. They are shared openly for learning and reference.
 
 ---
 

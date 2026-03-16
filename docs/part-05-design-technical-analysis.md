@@ -309,11 +309,11 @@ If gaps exist, the SDD cycle iterates within Phase 3 before the team proceeds.
 
 Phase 3 produces a validated technical direction — the strategic decisions that architecture will build on. The system's structure, interaction patterns, data architecture, deployment model, security model, and observability strategy are locked with scored rationale and documented trade-offs.
 
-Phase 4 takes this direction and makes it concrete. The next article covers **Architecture & Modular Design** — where the design direction is elaborated into module boundaries, API specifications, security boundaries, a documentation strategy, and a governance model. This is where the blueprint becomes detailed enough to build from, and where the principles-first approach produces its most tangible architectural benefits.
+Phase 4 takes this direction and makes it concrete. The next part covers **Architecture & Modular Design** — where the design direction is elaborated into module boundaries, API specifications, security boundaries, a documentation strategy, and a governance model. This is where the blueprint becomes detailed enough to build from, and where the principles-first approach produces its most tangible architectural benefits.
 
 ---
 
 *This is a living document. The tool sets, scoring patterns, simulation approaches, and examples will be expanded and refined as the series develops. Every part of this framework is open to iteration.*
 
-*Previous: [Article 4 — Phase 2: Analysis & Stack Selection]*
-*Next in the series: [Article 6 — Phase 4: Architecture & Modular Design]*
+*Previous: [Part 4 — Phase 2: Analysis & Stack Selection]*
+*Next in the series: [Part 6 — Phase 4: Architecture & Modular Design]*

@@ -502,16 +502,16 @@ foundation.
 
 | Version | Date | Changes |
 |---------|------|---------|
-| 1.0.0 | [date] | Initial release — all six files |
+| 1.0.0 | 12-03-26 | Initial release — all six files |
 
 ---
 
 ## Related Resources
 
 - [AI-Centric Software Development Playbook — Full Series](../../README.md)
-- [Article 1 — Core Principles](../../articles/article-01-core-principles.md)
-- [Article 2 — Building Your Toolkit](../../articles/article-02-building-your-toolkit.md)
-- [Article 3 — Phase 1: Information Gathering](../../articles/article-03-information-gathering.md)
+- [Part 1 — Core Principles](../../docs/part-01-core-principles.md)
+- [Part 2 — Building Your Toolkit](../../docs/part-02-building-your-toolkit.md)
+- [Part 3 — Phase 1: Information Gathering](../../docs/part-03-information-gathering.md)
 - [Phase 2 Tool Set](../phase-2-analysis-stack-selection/README.md)
   *(forthcoming)*
 

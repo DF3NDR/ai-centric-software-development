@@ -353,11 +353,11 @@ When all gates pass (or conditionally pass with documented plans), deployment pr
 
 Phase 6 applies independent scrutiny to the complete system and produces the deployment readiness determination. The scoring gates either clear the system for deployment or identify what must be fixed first.
 
-Phase 7 is the final phase. The next article covers **Deployment & Evolution** — where the system goes live, monitoring activates, the operational practices designed throughout the entire process begin running, and the framework shifts from building to sustaining. This is where runbooks become AI orchestration scripts, where incident response leverages the toolkit, where technical debt is tracked and managed, and where the SDD cycle continues driving the system's evolution.
+Phase 7 is the final phase. The next part covers **Deployment & Evolution** — where the system goes live, monitoring activates, the operational practices designed throughout the entire process begin running, and the framework shifts from building to sustaining. This is where runbooks become AI orchestration scripts, where incident response leverages the toolkit, where technical debt is tracked and managed, and where the SDD cycle continues driving the system's evolution.
 
 ---
 
 *This is a living document. The tool sets, audit patterns, scoring gate criteria, and examples will be expanded and refined as the series develops. Every part of this framework is open to iteration.*
 
-*Previous: [Article 7 — Phase 5: Implementation]*
-*Next in the series: [Article 9 — Phase 7: Deployment & Evolution]*
+*Previous: [Part 7 — Phase 5: Implementation]*
+*Next in the series: [Part 9 — Phase 7: Deployment & Evolution]*
