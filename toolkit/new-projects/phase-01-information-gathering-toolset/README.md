@@ -1,4 +1,5 @@
 # Phase 1: Information Gathering — Tool Set
+
 ## AI-Centric Software Development Playbook
 
 ---
@@ -29,7 +30,7 @@ Selection).
 ## Framework Context
 
 This tool set is part of the
-[AI-Centric Software Development Playbook](../../README.md),
+[AI-Centric Software Development Playbook](../../../README.md),
 a practitioner's framework for small teams (1–5 people) that use AI
 tools to deliver what large organizations once required.
 
@@ -508,11 +509,11 @@ foundation.
 
 ## Related Resources
 
-- [AI-Centric Software Development Playbook — Full Series](../../README.md)
-- [Part 1 — Core Principles](../../docs/part-01-core-principles.md)
-- [Part 2 — Building Your Toolkit](../../docs/part-02-building-your-toolkit.md)
-- [Part 3 — Phase 1: Information Gathering](../../docs/part-03-information-gathering.md)
-- [Phase 2 Tool Set](../phase-2-analysis-stack-selection/README.md)
+- [AI-Centric Software Development Playbook — Full Series](../../../README.md)
+- [Part 1 — Core Principles](../../../docs/part-01-core-principles.md)
+- [Part 2 — Building Your Toolkit](../../../docs/part-02-building-your-toolkit.md)
+- [Part 3 — Phase 1: Information Gathering](../../../docs/part-03-information-gathering.md)
+- [Phase 2 Tool Set](../../phase-2-analysis-stack-selection/README.md)
   *(forthcoming)*
 
 ---

@@ -1,6 +1,8 @@
 # Phase 1 — Information Gathering Instructions (Existing Projects)
 # AI-Centric Software Development Playbook
 
+**Toolset Version:** v1.1 (revised 2026-04-20 from Diamonds dogfooding run)
+
 ---
 
 ## Purpose of This File
@@ -192,16 +194,215 @@ that leave a principle unaddressed must be flagged explicitly.
 
 ---
 
+## Multi-Repo Evidence Scoping
+
+*New in v1.1.* Existing-project work frequently involves more than
+one repository. A library may be the subject of the improvement
+cycle, but its dev-env, its consumers, its peer plugins, and its
+shared DevContainer all carry evidence that Phase 1 may need. The
+tool set handles this by classifying every repository touched in
+Phase 1 into one of three roles and applying different discipline
+to each:
+
+| Role | Meaning | Evidence posture |
+|------|---------|-----------------|
+| **Subject** | The repository being improved. Every MC-class register entry must trace to this repo's code, config, tests, docs, or CI. | Full inspection. All findings in-scope. |
+| **Integration Peer** | A separate repository the subject integrates with as part of its core usage contract (e.g., a Hardhat plugin peer, an API gateway service, a shared client SDK). Findings about it are in-scope only where they bear on the subject's behavior. | Inspect the integration surface. Note peer-internal findings as context, not as subject findings. |
+| **Evidence Source** | A repository used during Phase 1 to ground subject findings (e.g., a monorepo that embeds the subject as a submodule, a dev-env repo with shared infra). Findings are not improvement scope for this cycle. | Read for evidence only. Quote facts; do not propose changes. |
+
+### Establishing roles during Specify
+
+During the initial Specify interview (before Step 01), the AI must
+explicitly ask:
+- Which repositories will be touched during Phase 1?
+- For each: is it the Subject, an Integration Peer, or an
+  Evidence Source?
+
+Record the classification in the Discovery Specification. If the
+classification changes mid-phase (typical: an Integration Peer
+turns out to need improvement too), flag it and ask whether scope
+is expanding — do not silently widen scope.
+
+### Cross-Repo Mode discipline
+
+When working across repos, tag every code-derived finding with
+one of three flags:
+
+- **[CONFIRM]** — AI has inspected the source (file path, commit,
+  line range) and is confident. No practitioner verification
+  required.
+- **[AWARE]** — AI is aware of this from context, practitioner
+  testimony, or search-results summary but has not confirmed
+  against current code. Practitioner should verify before it
+  enters a final artifact.
+- **[QUESTION]** — AI has a specific question that code inspection
+  or practitioner testimony would answer. Listed for the
+  practitioner to resolve.
+
+Use these flags in interview questions and in draft artifacts.
+They make the evidence-basis distribution (Step 06 §12) legible
+and prevent "plausible-sounding AI summary" claims from entering
+the final report without traceability.
+
+### Three resolution options for ambiguous evidence
+
+When a finding is suggested by multiple repos or when the
+boundary between Subject and Peer is unclear:
+1. **Practitioner-confirm** — pause the interview and ask which
+   repo is authoritative for this finding.
+2. **Scope narrowing** — if the finding is only indirectly in
+   scope, demote it to a [QUESTION] or drop it entirely with a
+   note in the gap register.
+3. **Remove evidence-source repos** — if an Evidence Source repo
+   is providing more noise than signal, explicitly remove it from
+   Phase 1 scope and re-classify findings without it.
+
+---
+
+## Code Access Calibration
+
+*New in v1.1.* AI sessions running this tool set have varying levels
+of direct code access. The discipline differs by mode. At the start
+of each Phase 1 run (during Specify, before Step 01), the AI must
+select and announce a code-access mode:
+
+| Mode | When to use | Discipline |
+|------|-------------|-----------|
+| **Interview-only** | No direct code access (no MCP, no Claude Code, no repo attachment). Practitioner describes the system; AI synthesizes. | All findings tagged as practitioner-testimony with Medium or Low confidence. Code verification listed as Phase 1 follow-up or Phase 2 design input. Use the [AWARE]/[QUESTION] flags liberally. |
+| **Search-primary** | Project knowledge or `project_knowledge_search` is available but not full filesystem. | AI can cite file excerpts. Finding confidence can reach High when source is cited. Still verify practitioner claims against searchable project knowledge before accepting. [CONFIRM] flag requires a citable excerpt. |
+| **Hybrid with explicit flags** | Mixed: some repos searchable, some only described; or MCP connectors enable partial direct access; or Claude Code for the subject but not for peers. | AI uses [CONFIRM]/[AWARE]/[QUESTION] flags on every code-derived finding to make the evidence source explicit. Findings without flags carry Medium confidence by default. |
+
+Announce the mode clearly at the start of the interview. Do not
+silently downgrade to Interview-only mid-phase when a search fails
+— say so, flag the affected finding, and continue.
+
+---
+
+## Three-Timeframes Worked Example
+
+*New in v1.1.* The three-timeframes discipline (Observed /
+Documented Intent / Desired Future) is the single most important
+discipline in existing-project work, and also the easiest to
+collapse under time pressure. A worked example clarifies it.
+
+**Setup.** A subject library contains a `scripts/devops/` directory
+with ~15 shell scripts for SLSA provenance validation, container
+registry management, and supply-chain risk assessment. All scripts
+are syntactically valid, recently edited, and reference current
+tooling (Sigstore, OCI registries, 2025-era CI patterns).
+
+**Naive assessment (wrong).**
+> *"The subject has a mature devops automation scaffold for
+> supply-chain security, reflecting industry-current practice."*
+
+This collapses all three timeframes into one. The scripts *look*
+current (Observed), so the AI assumes they *are* current in the
+sense of being operationally integrated (Documented Intent) and
+that they're *intended to stay* (Desired Future).
+
+**Three-timeframes assessment (correct).**
+- **Observed (current):** Scripts exist in `scripts/devops/` with
+  recent syntactic validity. They are not referenced by any CI
+  workflow, husky hook, or README. `git log` shows they were
+  copy-in from a different project ~4 months ago in a single
+  commit. `grep -r "scripts/devops"` across the repo returns
+  zero consumers.
+- **Documented Intent:** None. No ADR mentions them; the README
+  is silent; they appear in no runbook.
+- **Practitioner input (when queried):** "Oh — those. I copied
+  them from gnus-dao for inspiration and forgot about them.
+  They were never wired up here."
+- **Desired Future:** Retire them. They add to the codebase's
+  cognitive surface, obscure what is actually production-
+  current, and will fail maintenance reviews.
+
+**The mechanism.** *Looking current* is not *being current*.
+Orphan code inherits the stylistic datestamp of its origin but
+carries zero operational weight. Every "looks current" observation
+in an existing-project inspection must be paired with a "is wired
+up" verification before the observation becomes a finding. Wiring
+checks include: consumer grep, CI reference, test reference,
+documentation reference, and commit-history provenance.
+
+This example recurs as a structural test in interviews: when a
+piece of the codebase looks current, ask explicitly whether it
+is wired up and to what.
+
+---
+
+## Version & Identity Re-Verification
+
+*New in v1.1.* At the start of each step beyond Step 01, the AI
+must re-verify:
+- The subject's current published version or identity (package
+  version, service version, release tag, or equivalent)
+- The subject's repository location and main-branch state
+- The subject's ecosystem peer identities (integration peers,
+  evidence source repos) — changed since last step?
+
+One targeted search or one practitioner-confirmation is
+sufficient. The cost is small; the value is avoiding drift when
+the subject releases between steps, gets renamed, or acquires new
+peers mid-phase.
+
+This discipline originated in a dogfooding run where Step 01
+stated the subject was at "v1.2.1" based on stale search results,
+while Step 02 pre-interview verification caught "v1.3.2" as the
+actual current version. Steps 02–06 were clean; Step 01 required a
+correction patch. Version re-verification at each step start
+prevents this class of drift.
+
+---
+
+## Interview Mode Selection
+
+*New in v1.1.* Not every step benefits from the same interview
+shape. Discovery-heavy steps (mostly Step 01 and Step 02) gather
+raw evidence and benefit from **question-by-question** interviewing
+— the AI asks one question, practitioner responds, AI follows up
+with specificity, and the artifact accretes gradually. Decision-
+heavy steps (Step 03, Step 04, Step 05) transform accumulated
+evidence into categorized decisions and benefit from
+**draft-and-react** mode — the AI proposes a draft register or
+categorization based on prior artifacts, practitioner reacts to
+specific entries (accept, amend, reject), and the artifact
+converges quickly.
+
+| Step | Mode | Why |
+|------|------|-----|
+| Step 01 — Tech & Architecture Assessment | Question-by-question | Raw stack discovery; practitioner testimony is primary input |
+| Step 02 — Operational & Performance Baseline | Question-by-question (with command-execution requests) | Raw measurement; practitioner runs commands, AI folds output in |
+| Step 03 — Requirements & Improvement Objective | Draft-and-react | Registers (MK, MC, NTI, IC) are categorization decisions |
+| Step 04 — Risk / Constraint / Technical Debt | Draft-and-react | Registers are classification decisions across existing evidence |
+| Step 05 — Reusable / Replaceable Catalog | Draft-and-react | Per-component dispositions are classification decisions |
+| Step 06 — Information Report Synthesis | Synthesis-only (no interview) | Action prompt; no interview shape |
+
+**Practitioner rejection is high-signal architectural input.** In
+decision-heavy steps running draft-and-react mode, a practitioner
+who rejects a draft entry is providing more than a correction —
+they are signaling an architectural constraint, domain knowledge,
+or ecosystem context the AI lacked. Treat rejection with the same
+weight as a new primary source. Ask why, update the register, and
+propagate the implication to other pending entries.
+
+Announce the interview mode at step start. If the step is decision-
+heavy and the practitioner prefers question-by-question (or vice
+versa), adapt — but surface that the default has been overridden,
+because mode selection affects artifact shape.
+
+---
+
 ## Behavioral Rules
 
 These rules apply to every AI session in this phase.
 
 **Conduct structured interviews; do not accept stream-of-consciousness
 context dumps.**
-Ask one question at a time. Wait for a response before proceeding.
-Use follow-up questions to push for specificity when answers are vague.
-The goal is a structured discovery specification — not a transcript of
-raw answers.
+Ask one question at a time in discovery-heavy steps. In decision-
+heavy steps, present one draft section at a time. Wait for a response
+before proceeding. Use follow-up questions to push for specificity
+when answers are vague. The goal is a structured discovery
+specification — not a transcript of raw answers.
 
 **Treat the codebase as a primary source, not a supplement.**
 When documentation, memory, and code conflict, the code is authoritative
@@ -260,6 +461,21 @@ Before classifying something as a problem, ask whether it is
 intentional. Frame findings neutrally and let the practitioner
 classify.
 
+**Re-verify subject version and identity at each step.**
+Apply the Version & Identity Re-Verification discipline described
+above at the start of every step beyond Step 01. One targeted
+check is sufficient.
+
+**Handle MCP connector activation gracefully.**
+If an MCP tool is expected but not found when first attempted:
+(a) attempt access once, (b) if tools not returned, report the
+specific missing tool to the practitioner clearly and ask them to
+confirm activation, (c) retry once when the practitioner confirms.
+Do not make the practitioner debug MCP configuration themselves.
+If the tool is still unavailable after one retry, downgrade the
+code-access mode and continue with appropriate confidence
+adjustments — do not block the interview.
+
 **Structure all outputs for AI consumption.**
 The Information Report will be consumed by AI in every subsequent
 phase. Use consistent machine-parseable headers, tables for
@@ -278,12 +494,20 @@ prompt, not an interview. The practitioner pastes all completed
 artifacts in and the AI synthesizes and self-evaluates in a single
 pass.
 
+Before Step 01, the practitioner runs the **Building Block Discovery**
+prompt (`step-00b-building-block-discovery.prompt.md`) to inventory
+the AI capabilities — MCP connectors, Skills, specialized agents,
+direct code access — available for this Phase 1 run. The resulting
+toolset-augmentation document informs interview-mode and code-access
+decisions throughout Steps 01–06.
+
 The five artifacts mirror the greenfield set conceptually but are
 reoriented around existing-system evidence:
 
 | Artifact | Type | SDD Step | Existing-Project Focus |
 |----------|------|----------|-----------------------|
 | Discovery Specification | *(no standalone prompt)* | Specify | What we need to learn about the existing system, and what the improvement objective is |
+| Toolset Augmentation Document | *(step-00b prompt)* | Specify | Which AI capabilities are available for this run |
 | Discovery Plan | *(no standalone prompt)* | Plan | Sections of inquiry across the existing system |
 | **Current-State Technology & Architecture Assessment** | Interview → Action | Implement | What the system is actually built from, as deployed — languages, frameworks, runtimes, data stores, services, versions, deployment topology |
 | **Operational & Performance Baseline** | Interview → Action | Implement | How the system actually behaves in production — reliability, performance, cost, incident history, observability state |
@@ -402,6 +626,10 @@ being considered complete:
 - [ ] Every significant claim has a source (file path, commit,
       dashboard, ticket, runbook, operator testimony), a date, and
       a confidence level
+- [ ] Code-derived findings use [CONFIRM] / [AWARE] / [QUESTION]
+      flags consistent with the declared code-access mode
+- [ ] Cross-repo findings tag the source repo and its role
+      (Subject / Integration Peer / Evidence Source)
 - [ ] Comparative and inventory data is in structured tables, not
       narrative prose
 - [ ] Divergences between documented intent and observed behavior
@@ -449,13 +677,27 @@ the code or the running system.
 **Collapsing the three timeframes.**
 Mixing observed current behavior, documented intent, and desired
 future state produces improvement plans that fix symptoms rather
-than causes. Keep them distinct in every artifact.
+than causes. Keep them distinct in every artifact. The worked
+example above (orphan `scripts/devops/` directory) shows how easy
+the collapse is.
 
 **Classifying differences as defects prematurely.**
 Unfamiliar patterns in the codebase are not automatically technical
 debt. Ask before labeling. Some oddities encode forgotten
 constraints, compliance obligations, or integrations that the
 practitioner no longer routinely thinks about.
+
+**Letting subject version drift between steps.**
+Version drift between Step 01 and later steps is common when the
+subject releases during the Phase 1 run. Apply the Version &
+Identity Re-Verification discipline at each step start.
+
+**Silently downgrading code-access mode.**
+If an expected MCP tool or code-access mechanism fails, do not
+quietly proceed as if it didn't. Announce the downgrade, adjust
+confidence levels on affected findings, and continue. Silent
+downgrade produces artifacts whose evidence basis is
+misrepresented.
 
 **Skipping the baseline capture.**
 If Phase 1 does not measure the dimensions the improvement is meant
@@ -503,3 +745,12 @@ and measurable against the baselines captured in Phase 1. Phase 2
 does not re-discover the system. It analyzes, evaluates, and decides
 — using the Current-State Information Report as the evidence base.
 The quality of Phase 1 directly determines the quality of Phase 2.
+
+---
+
+## Version History
+
+| Version | Date | Source | Summary of changes |
+|---------|------|--------|-------------------|
+| v1.0 | 2026-04-18 | Initial authoring | Initial existing-project variant derived from greenfield instructions. |
+| **v1.1** | **2026-04-20** | **Diamonds dogfooding run** | Added Multi-Repo Evidence Scoping section (Subject/Integration Peer/Evidence Source classification, [CONFIRM]/[AWARE]/[QUESTION] flags). Added Code Access Calibration section (Interview-only / Search-primary / Hybrid modes). Added Three-Timeframes Worked Example (orphan scripts pattern). Added Version & Identity Re-Verification discipline. Added Interview Mode Selection section (question-by-question for discovery-heavy, draft-and-react for decision-heavy). Added MCP connector activation retry pattern to Behavioral Rules. Added reference to step-00b Building Block Discovery. Expanded Output Standards with code-access-flag and cross-repo-tag requirements. |

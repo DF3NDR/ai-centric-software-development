@@ -2,6 +2,8 @@
 # Phase 1: Information Gathering (Existing Projects)
 # AI-Centric Software Development Playbook
 
+**Toolset Version:** v1.1 (revised 2026-04-20 from Diamonds dogfooding run)
+
 ---
 
 ## Prompt Metadata
@@ -177,6 +179,50 @@ Draw from these question areas, adapting language to the practitioner's
 context. Always ask how a number is known — measured, estimated, or
 believed. Record gaps as findings; do not skip over unmeasured
 dimensions.
+
+### Local Evidence Collection
+
+*(New in v1.1. Step 02's measurements are the baseline Phase 6 will
+judge improvement success against, so the discipline of capturing
+actual numbers rather than beliefs matters more here than in any
+other step.)*
+
+Where capability allows, the AI should prompt the practitioner (or
+execute directly where code-execution is available) to run specific
+commands and paste the output. Typical local-evidence commands by
+category:
+
+| Category | Typical commands | Feeds into |
+|----------|------------------|-----------|
+| Build & test timings | `time npm run build`, `time pytest`, `time cargo test`, `time make test` | Performance rows, change-cost rows |
+| Dependency CVE posture | `npm audit --json`, `yarn npm audit`, `pip-audit`, `cargo audit`, `osv-scanner --lockfile=...`, `snyk test` | Known-vulnerability rows |
+| Codebase size / shape | `wc -l`, `tokei`, `cloc`, `find ... | wc -l` | Context-only context rows |
+| Release cadence | `git log --tags --simplify-by-decoration --pretty="format:%ai %d"`, `gh release list` | Release-cadence rows |
+| Test counts & pass rate | Test-runner output with reporter config | Test-quality rows |
+| Build reproducibility | Two consecutive clean builds + hash comparison | Reproducibility row |
+
+**Rules for folding command output into the baseline:**
+
+- Every row in the baseline tables is tagged **MEASURED**,
+  **ESTIMATED**, **BELIEVED**, or **UNMEASURED**. Command output
+  fills in MEASURED values.
+- If the practitioner runs a command and pastes the output, the AI
+  reproduces the specific numeric result in the baseline table and
+  cites the command as the evidence basis. Do not summarize away
+  specifics.
+- If the practitioner cannot or does not want to run a command
+  locally, record the dimension as UNMEASURED (not ESTIMATED). An
+  honest UNMEASURED row is more useful to Phase 2 than a guessed
+  ESTIMATED row.
+- Reinforce the tagging discipline: every numeric baseline row
+  ends with a MEASURED / ESTIMATED / BELIEVED / UNMEASURED label
+  and an evidence-basis note. This is the single most important
+  discipline in Step 02.
+
+If the Toolset Augmentation Document from step-00b indicates
+direct command execution is available to the AI, the AI executes
+commands itself and reports results. If not, the AI provides the
+command recipe and asks the practitioner to run and paste output.
 
 ### Operational Scope & Traffic Shape
 *(Establishes the frame — Operations, Scoring & Metrics)*
@@ -679,6 +725,21 @@ before Phase 2 can proceed?]
 
 ---
 
+## Verification Tasks for Next Step
+
+*(Added in v1.1. Step 02 frequently identifies baseline dimensions
+that are UNMEASURED but should become MEASURED before Step 03
+finalizes improvement targets. Enumerate those here, along with
+any Step 01 verification tasks this step did not resolve. Step 03
+will consult this list and ensure any must-change outcomes it
+derives are linked to a measured baseline.)*
+
+| Dimension / Finding | Current State (UNMEASURED / BELIEVED / ESTIMATED / Low-conf MEASURED) | Verification Task for Step 03 | Priority |
+|---------------------|----------------------------------------------------------------------|-------------------------------|----------|
+| | | [Run command / Pull dashboard / Accept as UNMEASURED in final report] | [H/M/L] |
+
+---
+
 ## Confidence Summary
 
 **Measured baselines:**
@@ -745,3 +806,12 @@ Before this artifact is accepted as complete, verify all items:
 *Companion file: `step-00-information-gathering.existing-project.instructions.md`*
 *Previous artifact: `step-01-current-state-technology-architecture-assessment.prompt.md`*
 *Next artifact: `step-03-requirements-improvement-objective-sketch.prompt.md`*
+
+---
+
+## Version History
+
+| Version | Date | Source | Summary of changes |
+|---------|------|--------|-------------------|
+| v1.0 | 2026-04-18 | Initial authoring | Initial Step 02 prompt. |
+| **v1.1** | **2026-04-20** | **Diamonds dogfooding run (obs 8, 11, 10)** | Added Local Evidence Collection subsection at the start of the Interview Question Bank (Cluster F) — codifies when to prompt practitioner to execute commands vs. rely on AI direct access, typical commands by category (audit / timing / git log / wc -l), rules for folding scan output into baseline rows, and reinforcement of MEASURED / ESTIMATED / BELIEVED / UNMEASURED tagging discipline. Added "Verification Tasks for Next Step" subsection to the artifact template — consolidates UNMEASURED dimensions that should become MEASURED plus any unresolved Step 01 verification tasks, passed forward to Step 03 (Cluster H). |

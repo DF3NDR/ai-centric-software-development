@@ -2,6 +2,8 @@
 # Phase 1: Information Gathering (Existing Projects)
 # AI-Centric Software Development Playbook
 
+**Toolset Version:** v1.1 (revised 2026-04-20 from Diamonds dogfooding run)
+
 ---
 
 ## Prompt Metadata
@@ -143,8 +145,43 @@ is evaluated separately because the disposition criteria differ.
 
 ### Your Behavioral Rules
 
-- Ask **one question at a time**. Wait for the practitioner's answer
-  before asking the next.
+- **Default to draft-and-react mode for this step.** *(New in v1.1.)*
+  Like Steps 03 and 04, Step 05 is decision-heavy — its work is
+  per-component disposition classification across hundreds of
+  catalog entries, not novel fact-finding. Draft a disposition
+  register based on prior artifacts (the Step 01 inventory, the
+  Step 02 baseline, the Step 03 must-keeps and must-changes, the
+  Step 04 debts), and walk the practitioner through it for react-
+  and-amend. Ask component-by-component questions only where the
+  prior artifacts genuinely do not settle the disposition.
+- **Expect 3–5 scope expansions to existing Must-Changes, not
+  net-new MCs.** *(New in v1.1.)* Step 05 catalog construction
+  examines every component individually, which reveals work the
+  higher-level Step 03 and Step 04 registers couldn't enumerate.
+  Typical pattern: a catalog-level finding (e.g. "three additional
+  unused devDeps also retire," "one extra example-script
+  subdirectory is in the Retire scope") prompts scope expansion
+  to an existing MC rather than authorship of a new MC. **Scope
+  expansion is preferred over new MC authorship** unless the new
+  finding is architecturally distinct. If Step 05 is generating
+  multiple net-new MCs rather than scope expansions, pause and
+  check whether Step 03/04 missed something structural.
+- **Treat each artifact independently. Do not inherit dispositions
+  across related artifacts.** *(New in v1.1.)* A "current"
+  source module does not imply its example scripts, wrapper
+  tools, downstream consumers, or documentation are current. An
+  active dependency does not imply all its transitive
+  dependencies are active. A supported framework does not imply
+  all modules using it are supported. If a source module is
+  marked Keep, that does not confer Keep status to scripts that
+  happen to use it — catalog each separately. If you catch
+  yourself writing "same as above" or inheriting a disposition
+  from a parent, stop and verify explicitly. This error is the
+  common reasoning failure in component catalog construction:
+  extension-by-association rather than extension-by-inspection.
+- Ask **one question at a time** when draft-and-react is not
+  applicable (novel components with no prior artifact signal).
+  Wait for the practitioner's answer before asking the next.
 - **Every existing component must get a disposition.** A component
   mentioned without Keep / Upgrade / Replace / Retire is incomplete.
   Ask directly if the practitioner leaves the disposition implicit.
@@ -381,6 +418,41 @@ capability in the improved system:
   non-starter issues (licensing, compliance, sanctions, vendor
   relationship)?
 
+### Comprehensiveness Check
+
+*(New in v1.1. This check runs after the component catalog is
+populated but before the AI produces the final artifact. It is
+specifically aimed at catching artifact-inheritance errors and
+component-category gaps.)*
+
+Before closing the interview and producing the output artifact,
+ask the practitioner the comprehensiveness question directly:
+
+> *"Given the possibility of blind spots in my catalog of this
+> system — is there any category of artifact whose disposition
+> may have been inherited incorrectly from a related artifact?
+> Specific candidates to consider:*
+>
+> - *Example scripts or wrapper tools that rely on a source
+>   module — are we certain the examples are current just because
+>   the module is?*
+> - *Test fixtures, mock data, or seed data linked to modules that
+>   are being kept or changed — are their dispositions independent?*
+> - *Documentation, tutorials, or runbooks that reference
+>   components — are we updating those as their referenced
+>   components change?*
+> - *Configuration files, environment templates, or sample
+>   configs that parallel retired or replaced components —
+>   did we catch those?*
+> - *Any partially-implemented feature, experimental module,
+>   or parked work that should have a Keep / Upgrade / Replace /
+>   Retire disposition — even if that disposition is Defer?"*
+
+"No, we treated each artifact independently" is a valid and
+valuable answer. The question exists to catch artifact-inheritance
+reasoning errors specifically, since those are the most common
+failure mode in Step 05 catalog construction.
+
 ---
 
 ## Output Format
@@ -436,6 +508,25 @@ High-level shape of the catalog, by component category.
 | Managed services | | | | | |
 | Patterns & architectures | | | | | |
 | **Total** | | | | | |
+
+### Disposition Ratio Interpretation
+
+*(Added in v1.1. The ratio of Keep / Upgrade / Replace / Retire
+across the catalog is itself a diagnostic signal about the
+improvement cycle's shape. Interpret the ratio explicitly; it
+informs Phase 2 sequencing.)*
+
+| Pattern | Likely cycle shape | Phase 2 sequencing implication |
+|---------|-------------------|--------------------------------|
+| **Keep ≫ Upgrade ≫ Retire** (Keep dominant, Upgrade second, Retire small) | Healthy productized system undergoing incremental improvement | Standard tiered sequencing; Upgrades are the main workload |
+| **Keep ≈ Retire ≫ Upgrade** (Keep and Retire similar-sized, Upgrade small) | Brownfield cleanup cycle — often the first productization pass for a system that has accumulated orphan tooling faster than it has been cleaned | Fast-retire block early (removes cognitive surface for subsequent work), then Upgrades, then Net-new |
+| **Upgrade ≫ Keep ≈ Retire** (Upgrade dominant) | Active capability-expansion cycle on a stable foundation | Stage upgrades carefully; coordinate breaking-change work in blocks |
+| **Retire ≫ Keep + Upgrade** (Retire dominant) | Sunset / consolidation cycle; probably a scope-boundary concern or project termination | Revisit improvement objective — is this actually an improvement cycle, or is it a scope-contraction exercise? |
+
+Name the pattern explicitly in the artifact's executive summary.
+"Our disposition ratio is Keep ≈ Retire ≫ Upgrade — this is a
+brownfield cleanup cycle" is a more useful Phase 2 handoff than
+a raw count table alone.
 
 ---
 
@@ -773,3 +864,12 @@ Before this artifact is accepted as complete, verify all items:
 *Companion file: `step-00-information-gathering.existing-project.instructions.md`*
 *Previous artifact: `step-04-risk-constraint-technical-debt-inventory.prompt.md`*
 *Next artifact: `step-06-current-state-information-report-synthesis.prompt.md`*
+
+---
+
+## Version History
+
+| Version | Date | Source | Summary of changes |
+|---------|------|--------|-------------------|
+| v1.0 | 2026-04-18 | Initial authoring | Initial Step 05 prompt. |
+| **v1.1** | **2026-04-20** | **Diamonds dogfooding run (obs 15, 16, 21, 22, 23, 7)** | Added draft-and-react as the default interview mode for this step (Cluster K). Added "expect 3–5 scope expansions to existing MCs, not net-new MCs" expectation to Behavioral Rules — calibrates practitioners on what this step's output will look like, and reinforces that scope expansion is preferred over new MC authorship (Cluster L). Added artifact-inheritance warning to Behavioral Rules — a "current" source module does not confer Keep status on scripts that happen to use it; each artifact is cataloged independently (Cluster P). Added Disposition Ratio Interpretation section to the Output Format — four-pattern taxonomy (Keep≫Upgrade≫Retire / Keep≈Retire≫Upgrade / Upgrade≫Keep≈Retire / Retire≫Keep+Upgrade) with Phase 2 sequencing implications, to be named explicitly in the executive summary (Cluster O). Added Comprehensiveness Check section at end of question bank, specifically aimed at catching artifact-inheritance errors (Cluster E). |

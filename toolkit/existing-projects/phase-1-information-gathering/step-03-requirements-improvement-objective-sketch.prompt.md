@@ -2,6 +2,8 @@
 # Phase 1: Information Gathering (Existing Projects)
 # AI-Centric Software Development Playbook
 
+**Toolset Version:** v1.1 (revised 2026-04-20 from Diamonds dogfooding run)
+
 ---
 
 ## Prompt Metadata
@@ -106,8 +108,22 @@ This prompt enforces the three-question separation structurally.
 
 ### Your Behavioral Rules
 
-- Ask **one question at a time**. Wait for the practitioner's answer
-  before asking the next.
+- **Default to draft-and-react mode for this step.** *(New in v1.1.)*
+  Step 03 is decision-heavy, not discovery-heavy: its work is
+  categorizing accumulated Step 01 and Step 02 evidence into
+  registers (Must-Keep, Must-Change, Nice-to-Improve, Incidental),
+  not gathering raw new facts. In draft-and-react mode, the AI
+  proposes a draft register entry or register subset based on
+  prior artifacts, the practitioner reacts (accept, amend, reject,
+  defer), and the register converges quickly. Ask one interview
+  question per turn only when the prior artifacts genuinely leave
+  a fact unavailable. If the practitioner prefers question-by-
+  question, adapt — but surface that the default has been
+  overridden, because mode selection affects interview shape.
+  **Practitioner rejection of a draft entry is high-signal
+  architectural input.** Treat rejection with the weight of a
+  new primary source — ask why, update the register, and
+  propagate the implication to other pending entries.
 - Use **follow-up questions** to push for specificity. Vague answers
   produce vague requirements and vague objectives. *"We need to
   modernize"* is not an objective. *"Reduce lead time for changes
@@ -207,6 +223,51 @@ Draw from these question areas, adapting language to the practitioner's
 context. Select the most relevant questions — not all apply to every
 project. Always follow up on vague answers and untagged statements
 before moving on.
+
+### Issue Tracker Consultation
+
+*(New in v1.1. If the project has an issue tracker — identified in
+Step 01's System Identification & Scope cluster, or in the step-00b
+Toolset Augmentation Document — Step 03 consults it as a primary
+source of candidate requirements. This subsection runs first,
+before the other question clusters.)*
+
+**Mandatory: classify every open issue.** Do not trust
+practitioner-memory counts ("we have a handful of open issues"). If
+AI-side tooling is available (GitHub MCP `list_issues` or
+equivalent), pull the actual open-issues list and walk through each
+one with the practitioner. If not available, ask the practitioner
+to paste the open-issues list.
+
+For each open issue, classify into exactly one of four categories:
+
+| Category | Meaning | Register destination |
+|----------|---------|---------------------|
+| **Must-Change (MC)** | An outcome the improvement cycle must achieve | MC register, linked to a baseline row from Step 02 |
+| **Nice-to-Improve (NTI)** | A desirable change that can wait; has a re-evaluation trigger | NTI backlog with re-evaluation trigger captured |
+| **Incidental** | A behavior the team wants to change but which is not a requirement — open to Phase 2 decision | Incidental register |
+| **Dropped** | The issue no longer applies, is resolved, or was miscategorized | Close with a one-line reason |
+
+**Rules for issue-by-issue classification:**
+
+- Every open issue lands in exactly one of the four categories.
+  No issue is skipped. A silent skip produces a register that
+  appears complete but isn't.
+- If the practitioner says "let me think about that one" for an
+  issue, record it in a short pending-classification list and
+  return to it before closing the section. Do not let it fall
+  off.
+- If the same issue maps to multiple registers, pick the most
+  specific fit and cross-reference the others with a note.
+- Newly surfaced items (things the practitioner remembers as
+  they review issues) are added to the list and classified the
+  same way.
+- Closed issues are not re-classified unless the practitioner
+  explicitly flags one as reopened or still-relevant.
+
+**Output target:** by the end of this subsection, every open
+issue has a classification, and the counts per category are
+captured as the seed for the registers built later in this step.
 
 ### The Improvement Frame
 *(Establishes why this improvement is happening now — anchors the objective)*
@@ -369,6 +430,35 @@ Operations, Correctness Verification)*
   yet but whose endorsement will be needed before commitment?
 - What questions remain unanswered that would materially change the
   improvement objective if resolved differently?
+
+### Comprehensiveness Check
+
+*(New in v1.1. This check runs after the register content is
+populated but before the AI produces the final artifact. It is
+the step's final net against silent omissions.)*
+
+Before closing the interview and producing the output artifact,
+ask the practitioner the comprehensiveness question directly:
+
+> *"Given the possibility of blind spots in my inventory of this
+> system — is there anything structurally important to the
+> improvement cycle that we haven't captured? Specific candidates
+> to consider:*
+>
+> - *A constraint, integration, or context that hasn't come up*
+> - *A user or stakeholder group that hasn't been named*
+> - *Any partially-implemented work, feature branch, or in-flight
+>   idea that should be documented — even as 'parked'*
+> - *Any interaction with peer systems that would shape Phase 2
+>   decisions*
+> - *Any piece of practitioner-knowledge that exists only in your
+>   head"*
+
+"No, Steps 01–03 captured it" is a valid and valuable answer. The
+question exists to prevent a Phase 1 artifact that has a known
+hole. Document whatever surfaces (even a confirmed "nothing
+missing") in the Phase 2 handoff notes — the discipline of having
+asked is part of the artifact's evidence basis.
 
 ---
 
@@ -727,3 +817,12 @@ Before this artifact is accepted as complete, verify all items:
 *Companion file: `step-00-information-gathering.existing-project.instructions.md`*
 *Previous artifact: `step-02-operational-performance-baseline.prompt.md`*
 *Next artifact: `step-04-risk-constraint-technical-debt-inventory.prompt.md`*
+
+---
+
+## Version History
+
+| Version | Date | Source | Summary of changes |
+|---------|------|--------|-------------------|
+| v1.0 | 2026-04-18 | Initial authoring | Initial Step 03 prompt. |
+| **v1.1** | **2026-04-20** | **Diamonds dogfooding run (obs 12, 14, 15, 16, 7)** | Added draft-and-react as the default interview mode for this step (Cluster K), with practitioner rejection treated as high-signal architectural input. Added Issue Tracker Consultation section at the top of the Interview Question Bank — mandatory classification of every open issue into MC / NTI / Incidental / Dropped, with explicit instruction not to trust practitioner-memory counts (Cluster I). Added Comprehensiveness Check section at the end of the question bank — direct question to the practitioner about possible blind spots, with "no, we captured it" as a valid answer (Cluster E). |

@@ -7,6 +7,7 @@
 **Tone:** Calm, methodical, example-driven. Practitioner-to-practitioner. The intro/manifesto (written last) will be bolder and more visionary.
 
 **Audience:**
+
 - Primary: Senior engineers, architects, full-stack developers already working with AI tools
 - Secondary (mid-level): Engineers building the skill set to work within AI-driven toolkits
 - Introduction accessible to: CTOs, engineering managers, technical leadership
@@ -26,23 +27,27 @@
 These are the six guiding principles — the lens through which every decision is evaluated at every phase. They are not a checklist to complete at a single stage. They travel with you from information gathering through deployment and beyond. The first four define *what* you're optimizing for. The last two define *how you know* you're getting it right.
 
 ### Security
+
 - Threat modeling
 - Zero-trust design
 - Continuous audit hooks
 - Compliance preparation (SOC 2, HIPAA, etc.) — build for it early, not as a scramble at the end
 
 ### Maintainability
+
 - Testing strategy
 - Documentation (living, queryable, AI-parseable)
 - Technical debt control
 - Observability and debuggability
 
 ### Economics
+
 - Cost forecasting (dev time, infrastructure, licensing, AI tool costs)
 - Speed-to-market
 - Resource scaling (team size, compute, services)
 
 ### Operations
+
 - Scalability
 - Reliability
 - Interoperability
@@ -91,6 +96,7 @@ In the AI-centric workflow, these traditional resources are consolidated and mad
 This consolidation is itself a toolkit-building activity. It requires organizing, indexing, and in some cases converting resources into formats that AI can consume effectively. It is ongoing, not one-time. As new resources are added and old ones become outdated, the consolidated knowledge base evolves alongside the toolkit.
 
 ### Types of Building Blocks
+
 - **Consolidated Knowledge Base** — The team's existing traditional resources (documents, articles, videos, books, internal wikis, standards, references) organized and made available for AI processing. This is the foundation that all other building blocks draw from.
 - **Prompts** — Interview-style prompts that extract information from humans ("Ask me 10 questions to define the requirements for this module") and action-oriented prompts that achieve goals directly ("Generate the OpenAPI spec from this data model")
 - **Skills** — Reusable instruction sets and context packages that give AI the right framing for specific tasks
@@ -132,6 +138,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 **Purpose:** Establish the framework that the entire series depends on. Before we touch any phase, readers need to understand the principles and how they function as concurrent evaluation criteria — not a sequential checklist. Critically, introduce Scoring & Metrics and Correctness Verification as the mechanisms that make principles *enforceable* rather than aspirational.
 
 **Key Ideas:**
+
 - Why these principles exist: they prevent AI (and humans) from optimizing for the wrong thing
 - How they interact: a decision that scores well on Economics but poorly on Security isn't a good decision — it's a deferred crisis
 - The scoring / trade-off model: how to weigh principles against each other for a given project
@@ -145,6 +152,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 - The formal verification example: AI builds the proof, but the engineer verifies the proof is asking the right question. This is the paradigm in miniature — AI does the volume work, the human does the judgment work.
 
 **Expandable Sections:**
+
 - Deep dive into each principle and its subcategories
 - Example scorecards / decision matrices
 - Correctness verification patterns for each principle
@@ -159,6 +167,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 **Purpose:** Before diving into phases, establish what the toolkit *is*, how it's assembled, and how it's used. Introduces three essential concepts: building blocks (the individual components), tool sets (curated combinations of building blocks for specific purposes), and Specification Driven Development (the iterative methodology that drives every phase). Critically, establish that the Core Principles from Part 1 drive what goes into the toolkit — every building block must serve the principles.
 
 **Key Ideas:**
+
 - **The Consolidated Knowledge Base:** The AI-Centric Toolkit is an addendum to — not a replacement for — the team's existing body of knowledge. Documents, articles, technical references, videos, books, internal wikis, architecture decision records, past postmortems, vendor documentation, and industry standards are consolidated and made available for AI processing. This traditional knowledge becomes the foundation the entire toolkit draws from.
 - Core Principles as the filter: every building block is evaluated against the six principles before inclusion — does it help us apply and enforce what we care about?
 - The taxonomy of building blocks (consolidated knowledge base, prompts, skills, instruction sets, MCP servers, custom AIs)
@@ -171,6 +180,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 - Starting small: you don't need a complete toolkit on day one — you build it as you go through the phases
 
 **Expandable Sections:**
+
 - Consolidating traditional resources: formats, indexing, and making knowledge AI-parseable
 - Starter prompt patterns (interview-style, action-oriented, evaluation-style)
 - Tool set composition patterns — how to assemble effective tool sets
@@ -188,6 +198,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 **Purpose:** How to use AI to scan, summarize, triage, and synthesize the information landscape before any design decisions are made.
 
 **Key Ideas:**
+
 - Pull public repos, APIs, existing frameworks — let AI summarize fast
 - Competitive scan: what stacks win, what breaks, what documentation is poor
 - Feature triage: AI ranks must-haves versus nice-to-haves based on market data and user research
@@ -200,6 +211,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 - Output: A crisp, structured report — ready to feed into analysis and design phases
 
 **Expandable Sections:**
+
 - Sample prompts for information gathering
 - How to structure the output report so it's AI-parseable for later phases
 - Techniques for competitive analysis with AI
@@ -212,6 +224,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 **Purpose:** Transform gathered information into decisions. Business analysis, cost modeling, stack selection, initial threat modeling.
 
 **Key Ideas:**
+
 - Run business analysis with AI: user needs, market fit, problem validation
 - Cost modeling: development time, infrastructure, licensing, ongoing maintenance
 - Stack decision-making: how to evaluate languages, frameworks, infrastructure choices
@@ -224,6 +237,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
   - Document the rationale — this becomes the decision record
 
 **Expandable Sections:**
+
 - AI-assisted cost modeling techniques
 - Sample prompts for business analysis
 - How to run AI-simulated "what if" scenarios for stack choices
@@ -236,6 +250,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 **Purpose:** Take the analysis output and begin scoring, simulating, and locking in design direction. This is where Core Principles become explicit scorecards.
 
 **Key Ideas:**
+
 - Take the Phase 2 report, plug in the Core Principles — start scoring
 - Architecture sketch: modular, API-first, container-ready
 - Let AI simulate: "If we go with this stack, does security hold? Does speed hold? What breaks?"
@@ -245,6 +260,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 - Final lock: what language, what infrastructure, what patterns we actually commit to
 
 **Expandable Sections:**
+
 - Scorecard templates and examples
 - AI simulation prompts for design validation
 - How to document design decisions for future AI consumption
@@ -257,6 +273,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 **Purpose:** Detailed architecture. This is where the blueprint becomes concrete: modules, APIs, security boundaries, documentation strategy, governance model.
 
 **Key Ideas:**
+
 - Modular breakdown: microservices, clean layers, or hybrid — whatever fits
 - API-first design: OpenAPI specs, auto-generated stubs, contract testing
 - Security baked in from the architecture level: zero-trust, least privilege, encryption strategy
@@ -270,6 +287,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
   - The architecture itself should make the principles *easier* to satisfy downstream
 
 **Expandable Sections:**
+
 - API-first design patterns and prompts
 - Security architecture patterns (zero-trust, least privilege)
 - Documentation strategy: living docs that AI can maintain
@@ -282,6 +300,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 **Purpose:** Building the thing. AI-assisted coding, continuous validation, and the feedback loop between writing code and evaluating it against the Core Principles.
 
 **Key Ideas:**
+
 - AI-assisted coding: generate from specs, iterate with AI, run tests live
 - Continuous security checks: automated scans, fuzzing, vulnerability detection as you code
 - Benchmark as you go — catch performance regressions early
@@ -301,6 +320,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
   - Scoring: automated metrics at every commit — coverage, complexity, performance, security posture
 
 **Expandable Sections:**
+
 - Prompts for AI-assisted code generation and review
 - Formal verification patterns: when to use them, how AI generates them, how engineers validate them
 - AI-vs-AI review workflows
@@ -315,6 +335,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 **Purpose:** Verification, validation, and compliance. Automated test generation, security audits, performance validation, documentation freeze.
 
 **Key Ideas:**
+
 - Automated test suites: unit, integration, AI-generated edge cases
 - Security audits: penetration testing, compliance checks, vulnerability scanning
 - Performance validation against the benchmarks set in Phase 2
@@ -331,6 +352,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
   - Gaps are identified, prioritized, and either fixed or documented as known risks
 
 **Expandable Sections:**
+
 - AI-generated test case patterns
 - Security audit checklists and prompts
 - Formal verification audit: how the engineer reviews AI-generated proofs
@@ -346,6 +368,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 **Purpose:** Getting it live, keeping it alive, and evolving it. Monitoring, incident response, runbooks as AI orchestration scripts, and continuous improvement.
 
 **Key Ideas:**
+
 - Roll out containerized, observable from day one
 - Monitor for drift: AI flags when reality diverges from design scorecards
 - Easy extension: plug new modules via APIs without destabilizing existing ones
@@ -363,6 +386,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
   - Operations: uptime, scaling behavior, interoperability in production
 
 **Expandable Sections:**
+
 - Deployment checklists (reference: Sylvain Kerkour's Rust production checklist as a model)
 - Runbook-to-orchestration-script patterns
 - Monitoring and alerting strategies
@@ -378,6 +402,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 **Tone:** Manifesto. Confident. Forward-looking.
 
 **Key Ideas:**
+
 - The premise: software will very soon be created by very small teams (3–5 people) who are capable across the entire process — from conception through deployment
 - These people aren't replacing specialists; they're orchestrating AI tools that perform specialist-level work
 - AI becomes the principal interface for every aspect: ideation, analysis, architecture, development, testing, deployment, monitoring
@@ -391,6 +416,7 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 - Tool sets as the organizational unit: building blocks combined for purpose, not scattered prompts used ad hoc
 
 **Expandable Sections:**
+
 - The economics of small teams vs. large teams
 - What "capable in every aspect" actually means
 - The skill set evolution: what engineers need to learn, what becomes less relevant
@@ -402,18 +428,21 @@ SDD is what gives the framework its structure. Without it, the toolkit is a coll
 ## Appendices (Future Expansion)
 
 ### Appendix A: Prompt Library Starter Kit
+
 - Interview prompts (requirements gathering, stakeholder alignment)
 - Action prompts (spec generation, code generation, test generation)
 - Evaluation prompts (scorecard filling, trade-off analysis, code review)
 - Meta prompts (toolkit evaluation, process improvement)
 
 ### Appendix B: Incident Response as AI Orchestration
+
 - How traditional runbooks become AI-executable scripts
 - Structuring playbooks for AI consumption
 - The feedback loop: incidents improve the playbook, which improves AI response
 
 ### Appendix C: References & Resources
-- Sylvain Kerkour: Deploying Rust to Production Checklist (https://kerkour.com/rust-production-checklist)
+
+- Sylvain Kerkour: Deploying Rust to Production Checklist (<https://kerkour.com/rust-production-checklist>)
 - [Additional references TBD as series develops]
 
 ---

@@ -2,6 +2,8 @@
 # Phase 1: Information Gathering (Existing Projects)
 # AI-Centric Software Development Playbook
 
+**Toolset Version:** v1.1 (revised 2026-04-20 from Diamonds dogfooding run)
+
 ---
 
 ## Prompt Metadata
@@ -121,7 +123,24 @@ place in the priority register. Collapsing technical debt into
 ### Your Behavioral Rules
 
 - Ask **one question at a time**. Wait for the practitioner's answer
-  before asking the next.
+  before asking the next. *(Like Step 03, Step 04 leans toward
+  draft-and-react mode when turning accumulated evidence into
+  register entries — use draft-and-react for the register
+  construction passes, question-by-question for novel-risk
+  discovery.)*
+- **Expect 2–4 net-new Must-Changes and 1–2 MC amendments to
+  emerge from this step.** *(New in v1.1.)* This is by design —
+  Step 04 examines the system through threat-and-constraint lenses
+  that Step 03 does not use, and new must-change items surface
+  naturally as you work the registers. Do not resist this. Do not
+  treat net-new MCs as a Step 03 failure. When a net-new MC
+  surfaces (typical examples: a security-risk remediation that
+  becomes non-negotiable once named; a compliance-posture gap
+  that must close; a hard-constraint that forces scope change),
+  add it to the MC register, link it to the Step 02 baseline row
+  it addresses, and note its Step 04 origin. If more than ~5
+  net-new MCs surface, pause and check whether Step 03 missed
+  something structural rather than continuing to accrete.
 - **Never minimize a stated risk.** If the practitioner names a concern,
   take it seriously, probe its dimensions, and document it fully. The
   job is to surface risks, not reassure.
@@ -223,6 +242,24 @@ likelihood, impact, evidence basis — are clear.
 ### Compliance Posture (Current & Forward)
 *(Principle: Security — primary)*
 
+> *(New in v1.1.)* **Standards-conformance framing for non-regulated
+> projects.** If the project has no regulatory compliance burden
+> (per Step 03's hard constraints, or practitioner confirmation:
+> "no HIPAA, no PCI-DSS, no SOC 2 obligation, no regulated data"),
+> do not leave the Compliance register empty. Use the
+> **standards-conformance** framing: for each standard, specification,
+> or convention the project claims to follow — language-level specs
+> (e.g. ERC-2535, RFC 7519/JWT, OAuth 2.1), ecosystem conventions
+> (semantic versioning, Keep-a-Changelog, Conventional Commits),
+> security standards (OWASP Top 10, CIS Benchmarks, SLSA levels),
+> licensing obligations — document three things: (a) the claim —
+> what the project says it follows, (b) what is actually enforced
+> by tooling, tests, or review, and (c) any divergence between the
+> two. This typically produces 3–6 entries for a library or
+> application, and converts what would otherwise be an empty
+> section into the Phase-1 equivalent of a compliance posture for
+> non-regulated brownfield work.
+
 - What regulatory or compliance regimes apply to this system today?
   (SOC 2, HIPAA, GDPR, PCI-DSS, FedRAMP, CCPA, ISO 27001, state
   privacy laws, industry-specific regulations)
@@ -241,6 +278,11 @@ likelihood, impact, evidence basis — are clear.
 - Are there upcoming compliance changes — new regulations taking
   effect, existing ones tightening, new certifications being
   pursued — that the improvement cycle must prepare for?
+- **If no regulatory regime applies**, what standards, specifications,
+  or conventions does the project *claim* to follow? For each:
+  what enforces the claim end-to-end today, and where are the
+  divergences between claim and enforcement? *(This feeds the
+  standards-conformance framing above.)*
 
 ### Live Security Risks
 *(Principle: Security)*
@@ -542,6 +584,21 @@ is, what the financial consequence is, what the reputational
 consequence is. This anchors the security risk conversation and the
 improvement cycle's risk tolerance.]
 
+> *(New in v1.1.)* **Seek a common mechanism across branches.** A
+> well-constructed worst-case narrative usually admits three or
+> four alternative endings — e.g., "an exploitable CVE lands
+> before patch," "an adopter walks silently on audit friction,"
+> "an external auditor flags the gap during client engagement."
+> Do not treat these as three unrelated bad outcomes. Keep writing
+> until the underlying mechanism that would produce *any* of them
+> is named — typically something like "the gap between what the
+> system claims and what the system can prove" or "the
+> concentration of operational knowledge in a single maintainer
+> during a dormancy period." When the common mechanism is named,
+> the synthesis is complete. When the narrative still reads like
+> three unrelated bad outcomes, the synthesis is not done —
+> keep writing.
+
 ---
 
 ## Section 3: Hard Constraints on the Improvement Cycle
@@ -793,3 +850,12 @@ Before this artifact is accepted as complete, verify all items:
 *Companion file: `step-00-information-gathering.existing-project.instructions.md`*
 *Previous artifact: `step-03-requirements-improvement-objective-sketch.prompt.md`*
 *Next artifact: `step-05-reusable-replaceable-components-catalog.prompt.md`*
+
+---
+
+## Version History
+
+| Version | Date | Source | Summary of changes |
+|---------|------|--------|-------------------|
+| v1.0 | 2026-04-18 | Initial authoring | Initial Step 04 prompt. |
+| **v1.1** | **2026-04-20** | **Diamonds dogfooding run (obs 18, 19, 20)** | Added "expect 2–4 net-new Must-Changes and 1–2 MC amendments" expectation to Behavioral Rules — calibrates practitioners so net-new MCs in Step 04 are not treated as a Step 03 failure (Cluster L). Added standards-conformance framing to the Compliance Posture cluster — for projects with no regulatory compliance burden, the Compliance register uses claim / enforced / divergence entries for standards the project claims to follow (Cluster M). Added common-mechanism discipline to the Worst-Case Security Scenario section — the narrative must keep writing until the underlying mechanism producing all branch outcomes is named (Cluster N). |
