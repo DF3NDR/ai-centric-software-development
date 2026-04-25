@@ -34,7 +34,7 @@ These three shifts became the opening section of the toolkit's instructions file
 
 ### What we built
 
-The toolkit ended up as seven files:
+The v1.0 toolkit ended up as seven files:
 
 | File | Role |
 |------|------|
@@ -45,6 +45,8 @@ The toolkit ended up as seven files:
 | `step-04-risk-constraint-technical-debt-inventory.prompt.md` | Compliance, security risk, hard constraints, debt |
 | `step-05-reusable-replaceable-components-catalog.prompt.md` | Per-component Keep / Upgrade / Replace / Retire dispositions |
 | `step-06-current-state-information-report-synthesis.prompt.md` | Capstone — synthesizes everything, runs the self-evaluation scorecard |
+
+*(The list above is the v1.0 snapshot. Subsequent revisions added the Building Block Discovery prompt in v1.1 and renamed the instructions file in v1.2. The current nine-file inventory is listed at the end of this article.)*
 
 The parallel to the greenfield set is deliberate. A practitioner who has used the greenfield toolkit should find the existing-projects variant familiar: same SDD cycle, same six principles, same phase-gate scorecard discipline at the end. What changes is the question set and the output structure — shifted from landscape-evaluation framing to current-state-inventory framing.
 
@@ -101,7 +103,7 @@ Some were bugs (of our own AI reasoning, more often than of the toolkit itself).
 
 Some observations validated patterns we'd designed for. The three-timeframes discipline caught an orphan `scripts/devops/` directory full of 15 shell scripts that looked current (recently edited, referenced 2025-era tooling) but turned out to be copy-in from a different project that had never been wired into Diamonds' CI, husky hooks, or documentation. Without explicit attention to observed-vs-documented-vs-desired, those scripts would have been treated as part of the current scaffold.
 
-Some surfaced genuine gaps. We had no mechanism in the toolkit to enumerate available AI capabilities — MCP connectors, skills, specialized agents — at the start of a run. We worked around this by asking the practitioner directly during the initial Specify interview, but this was ad-hoc; it should have been a formal step. Observation 1 and Observation 2 flagged this. The v1.1 revision adds a dedicated `step-00b-building-block-discovery.prompt.md` file (later renamed to `step-00` in the v1.2 sequence we're planning).
+Some surfaced genuine gaps. We had no mechanism in the toolkit to enumerate available AI capabilities — MCP connectors, skills, specialized agents — at the start of a run. We worked around this by asking the practitioner directly during the initial Specify interview, but this was ad-hoc; it should have been a formal step. Observation 1 and Observation 2 flagged this. The v1.1 revision added a dedicated Building Block Discovery prompt (authored as `step-00b-*.prompt.md`), and the v1.2 revision renamed it to `step-00-building-block-discovery.prompt.md` — the leading numbered step — once the instructions file was moved out of the numbered sequence.
 
 The full dogfooding observations file is in the repository at `toolkit/phase-01-information-gathering-existing-project-toolset/dogfooding-observations.md`. It contains all 26 observations with their source step, nature, evidence, proposed changes, priority, and current status (all now Acted as of v1.1).
 
@@ -182,13 +184,16 @@ We started this article by noting that this is a first revision. That framing ma
 
 The Diamonds run was one project profile — a small, solo-maintained, pre-production TypeScript library. The toolkit is calibrated to what that profile revealed. Several disciplines we added in v1.1 (the disposition-ratio interpretation, the three-timeframes worked example, the multi-repo evidence scoping) generalized well in our drafting, but generalization is hypothesis until tested. A larger team's codebase, a regulated-industry project, or a mature production system with real external users will almost certainly reveal gaps we haven't anticipated.
 
-The next planned work is a second dogfood on a different project profile — likely one with a genuinely different disposition ratio (our suspicion is that the brownfield-cleanup pattern that dominated the Diamonds catalog is itself a first-productization-pass pattern; a healthy productized library under ongoing improvement would show Keep-dominant ratios we haven't yet seen tested).
+The next planned work is a second application on a different project profile — likely one with a genuinely different disposition ratio (our suspicion is that the brownfield-cleanup pattern that dominated the Diamonds catalog is itself a first-productization-pass pattern; a healthy productized library under ongoing improvement would show Keep-dominant ratios we haven't yet seen tested).
 
-Things we expect to change in v1.2:
+What v1.2 already landed, beyond the v1.1 revision content:
 
-- **File naming** — dropping the `step-` prefix from the instructions file so its role (load-once context) is distinct from the numbered step prompts. The current naming works but is awkward.
-- **The tool set template** — extracting the patterns that worked (prompt metadata header, system instructions, kickoff, output format, evaluation checklist, version history) into a reusable skeleton before Phase 2 authoring begins. Retrofitting a template onto already-authored toolsets is harder than authoring from the template, so doing this before Phase 2 is time-valuable.
-- **Whatever the next dogfood reveals.** The toolkit should continue to evolve. A v1.1 that never becomes v1.2 suggests we stopped applying and observing, not that we reached completion.
+- **File naming cleanup.** The `step-` prefix was dropped from the instructions file, making its role (load-once context) distinct from the numbered step prompts. The Building Block Discovery prompt was renumbered from `step-00b` to `step-00`, taking its place as the genuine first numbered step. This addresses the naming awkwardness we flagged during the v1.1 session.
+
+What we expect to change in v1.3 and beyond:
+
+- **The tool set template.** Extract the patterns that worked (prompt metadata header, system instructions, kickoff, output format, evaluation checklist, version history) into a reusable skeleton before Phase 2 authoring produces a divergent shape. Retrofitting a template onto already-authored toolsets is harder than authoring from the template, so doing this before Phase 2 fully lands is time-valuable.
+- **Whatever the next application reveals.** The toolkit should continue to evolve. A version that never increments suggests we stopped applying and observing, not that we reached completion.
 
 ---
 
@@ -208,12 +213,20 @@ We'll author the Phase 2 toolkit, dogfood it on Diamonds (continuing the real ap
 
 ## What the Toolkit Files Actually Look Like
 
-We've referenced the files throughout this article without reproducing them. They are:
+We've referenced the files throughout this article without reproducing them. The v1.2 inventory of the Phase 1 Existing Projects toolkit is nine files:
 
 - `toolkit/phase-01-information-gathering-existing-project-toolset/README.md` — navigation, recommended sequence, MCP guidance, version history
-- `toolkit/phase-01-information-gathering-existing-project-toolset/step-00-information-gathering.existing-project.instructions.md` — load-once context file
-- `toolkit/phase-01-information-gathering-existing-project-toolset/step-00b-building-block-discovery.prompt.md` — AI capability inventory (new in v1.1)
-- `toolkit/phase-01-information-gathering-existing-project-toolset/step-01-current-state-technology-architecture-assessment.prompt.md` through `step-06-current-state-information-report-synthesis.prompt.md` — the six step prompts
+- `toolkit/phase-01-information-gathering-existing-project-toolset/information-gathering.existing-project.instructions.md` — load-once context file (renamed in v1.2, previously `step-00-*`)
+- `toolkit/phase-01-information-gathering-existing-project-toolset/step-00-building-block-discovery.prompt.md` — AI capability inventory (added in v1.1 as `step-00b`, renumbered in v1.2)
+- `toolkit/phase-01-information-gathering-existing-project-toolset/step-01-current-state-technology-architecture-assessment.prompt.md` — current-state inventory
+- `toolkit/phase-01-information-gathering-existing-project-toolset/step-02-operational-performance-baseline.prompt.md` — measured before-picture
+- `toolkit/phase-01-information-gathering-existing-project-toolset/step-03-requirements-improvement-objective-sketch.prompt.md` — registers and sharpened objective
+- `toolkit/phase-01-information-gathering-existing-project-toolset/step-04-risk-constraint-technical-debt-inventory.prompt.md` — risk, constraint, debt
+- `toolkit/phase-01-information-gathering-existing-project-toolset/step-05-reusable-replaceable-components-catalog.prompt.md` — per-component dispositions
+- `toolkit/phase-01-information-gathering-existing-project-toolset/step-06-current-state-information-report-synthesis.prompt.md` — capstone synthesis and scorecard
+
+Plus the dogfooding record and the skill, referenced throughout the article:
+
 - `toolkit/phase-01-information-gathering-existing-project-toolset/dogfooding-observations.md` — the 26 observations from the Diamonds run, all with status Acted (v1.1)
 - `skills/ai-centric-playbook/SKILL.md` and three reference files — framework-level reasoning packaged as a Claude skill
 
