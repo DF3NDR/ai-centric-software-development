@@ -2,7 +2,7 @@
 # Phase 2: Analysis & Improvement Planning (Existing Projects)
 # AI-Centric Software Development Playbook
 
-**Toolset Version:** v1.0 (initial authoring 2026-04-22, structured to v1.2 conventions)
+**Toolset Version:** v1.1 (revised 2026-05-22 from Diamonds Phase 2 dogfooding run)
 
 ---
 
@@ -13,9 +13,9 @@
 | **Type** | Interview Prompt → Action Prompt |
 | **Phase** | Phase 2 — Analysis & Improvement Planning (Existing Projects) |
 | **SDD Step** | Specify → Implement |
-| **Artifact Produced** | Phase 1 Input Validation document + Validation Gap Register |
+| **Artifact Produced** | Phase 1 Input Validation document + Validation Gap Register (split into Phase 2 local gaps and Upstream toolkit gaps) |
 | **Principles Addressed** | All six — by ensuring the Phase 1 inputs supporting Phase 2 decisions are correctly understood |
-| **Feeds Into** | Steps 02–06 (every Phase 2 decision relies on validated inputs) |
+| **Feeds Into** | Steps 02–06 (every Phase 2 decision relies on validated inputs); upstream toolkit revision queue (for any Phase 1 toolkit gaps surfaced) |
 | **Companion File** | `analysis-improvement-planning.existing-project.instructions.md` |
 
 ---
@@ -36,12 +36,21 @@ practitioner finds the AI's understanding incomplete or wrong,
 that's the signal to cycle back to Phase 1 to amend the input —
 not to re-interview the practitioner from memory.
 
-The other half of Step 01 is identifying **validation gaps** — items
-Phase 1 should have addressed but didn't, or items that were
-addressed but in ways that block Phase 2 work (e.g., a CONDITIONAL
-gate that Phase 2 must resolve before proceeding, an UNMEASURED row
-that Phase 2 needs measured before cost-modeling can happen, a
-deferred decision that Phase 2 must surface).
+The other half of Step 01 is identifying **validation gaps**. *(Per
+v1.1 — Cluster D from Diamonds dogfooding observation P2-Obs-05 —
+validation gaps are now classified into two scopes:*
+- ***Phase 2 local gaps:*** *items that Phase 2 must resolve or
+  acknowledge before proceeding (e.g., a CONDITIONAL gate that
+  Phase 2 must address, an UNMEASURED row Phase 2 needs measured,
+  a deferred decision that Phase 2 must surface)*
+- ***Upstream toolkit gaps:*** *items where the Phase 1 toolkit
+  itself was incomplete — Phase 2 work surfaced a structural
+  shortcoming in how Phase 1 captures certain kinds of information.
+  These gaps feed Phase 1 toolkit revision, not Phase 2 delay.*
+
+*The two-scope split makes the toolkit's inter-phase feedback channel
+explicit. Future runs will likely produce both kinds of gaps; the
+artifact template handles each distinctly.)*
 
 ---
 
@@ -63,7 +72,9 @@ deferred decision that Phase 2 must surface).
    *not* eliciting new findings — it is verifying its understanding
    of recorded ones.
 8. Review the output artifact against the prompt's evaluation
-   checklist before proceeding to Step 02.
+   checklist before proceeding to Step 02. **Pay particular attention
+   to the VG register split** — every gap should be classified as
+   either Phase 2 local or Upstream toolkit.
 
 ---
 
@@ -95,6 +106,22 @@ decision activity.
   Phase 2-deferred decision, or a discovery gap, list it
   separately as a validation gap. Phase 2 either resolves the
   gap or documents that it proceeds with the gap acknowledged.
+- **Classify each validation gap by scope.** *(New in v1.1.)*
+  Every gap is either:
+  - **Phase 2 local** — Phase 2 must resolve this within its own
+    six steps, or acknowledge it as documented limitation in the
+    Improvement Plan. The resolution path lives inside Phase 2.
+  - **Upstream toolkit** — the gap exists because the *Phase 1
+    toolkit itself* was incomplete in some structural way that
+    Phase 2 work surfaced. The Phase 2 cycle proceeds with an
+    amendment or workaround; the durable fix is a Phase 1 toolkit
+    revision (queued for a separate session, not blocking).
+  An upstream-toolkit gap is signaled when the Phase 1 *report* is
+  honest about what Phase 1 *did*, but Phase 1 *should have asked
+  about something else* that the report consequently doesn't cover.
+  Distinguish carefully from "the practitioner forgot to mention
+  something" (which is Phase 2 local — practitioner amends and
+  Phase 2 proceeds).
 - **Do not propose mechanisms, sequencing, weights, or costs.**
   Those are Steps 02-06. Step 01 is read-only with respect to
   decisions — it confirms what Phase 1 produced, not what Phase 2
@@ -131,7 +158,8 @@ Cover these in order:
    which were CONDITIONAL, which (if any) were FAIL. CONDITIONAL
    and FAIL gates inform Phase 2's scope.
 8. **Validation gap register** — Items Phase 2 must resolve or
-   acknowledge before proceeding.
+   acknowledge before proceeding. **Classified into Phase 2 local
+   gaps and Upstream toolkit gaps per v1.1.**
 
 ---
 
@@ -145,7 +173,7 @@ Please run the Phase 1 Input Validation interview. State your
 understanding of the Phase 1 Information Report findings one
 category at a time, and ask me to confirm. When complete, produce
 the Phase 1 Input Validation artifact plus the Validation Gap
-Register.
+Register (split into Phase 2 local gaps and Upstream toolkit gaps).
 ```
 
 ---
@@ -248,14 +276,23 @@ findings, not an elicitation.
 > Is this understanding correct, and do you want Phase 2 to
 > address these gates as listed?"
 
-### Q8 — Validation gaps
+### Q8 — Validation gaps (with scope classification per v1.1)
 
-> "Based on the above, here are the validation gaps I see — items
-> Phase 2 must resolve or acknowledge before proceeding:
+> "Based on the above, here are the validation gaps I see. I'm
+> classifying each by scope — Phase 2 local (must resolve or
+> acknowledge in this cycle) vs. Upstream toolkit (the Phase 1
+> toolkit itself was incomplete; the durable fix is a Phase 1
+> revision queued separately):
 >
-> [list candidate gaps]
+> **Phase 2 local gaps:**
+> - VG-XX: [text] — [resolution path inside Phase 2]
 >
-> Are these gaps accurate? Any to add or remove?"
+> **Upstream toolkit gaps:**
+> - VG-YY: [text] — Phase 2 amendment/workaround: [description];
+>   Phase 1 toolkit revision: [what should change in which file]
+>
+> Are these classifications accurate? Any to add, remove, or
+> reclassify?"
 
 ---
 
@@ -356,14 +393,40 @@ narrative building on this framing]
 
 ## 8. Validation Gap Register
 
-Items Phase 2 must resolve or acknowledge before proceeding.
+*(Split into Phase 2 local gaps and Upstream toolkit gaps per
+toolkit v1.1. This split makes the inter-phase feedback channel
+explicit.)*
 
-| Gap ID | Description | Source | Resolution Path |
-|--------|-------------|--------|-----------------|
+### 8.1 Phase 2 Local Gaps
+
+Items Phase 2 must resolve within its own six steps, or acknowledge
+as documented limitation in the Improvement Plan.
+
+| Gap ID | Description | Source | Resolution Path in Phase 2 |
+|--------|-------------|--------|----------------------------|
 | VG-01 | [text] | Phase 1 [...] | Resolve in Step [N] / Accept as documented limitation |
 
-If no validation gaps: state "No validation gaps surfaced; Phase 2
-proceeds with full Phase 1 evidence base."
+If no Phase 2 local gaps: state "No Phase 2 local gaps surfaced."
+
+### 8.2 Upstream Toolkit Gaps
+
+Items where the Phase 1 toolkit itself was incomplete in some
+structural way that Phase 2 work surfaced. Phase 2 amends or
+works around; durable fix is queued as Phase 1 toolkit revision.
+
+| Gap ID | Description | Phase 2 Amendment | Phase 1 Toolkit Revision |
+|--------|-------------|-------------------|--------------------------|
+| VG-XX | [text] | [how Phase 2 proceeds with this gap acknowledged] | [what should change in which Phase 1 file] |
+
+If no upstream toolkit gaps: state "No upstream toolkit gaps
+surfaced."
+
+### 8.3 Combined Totals
+
+**Total validation gaps:** [N total: M Phase 2 local + K Upstream
+toolkit]. All have documented resolution paths. **None block Phase 2
+from proceeding** — upstream toolkit gaps queue for separate
+revision; Phase 2 local gaps resolve within the cycle.
 
 ---
 
@@ -402,8 +465,12 @@ Before accepting the Phase 1 Input Validation artifact:
       Phase 2 resolution paths
 - [ ] Worst-case mechanism narrative confirmed
 - [ ] Phase 1 self-evaluation gate status confirmed
+- [ ] **Every validation gap classified into §8.1 (Phase 2 local) or
+      §8.2 (Upstream toolkit)** *(new in v1.1)*
+- [ ] **Upstream toolkit gaps name both the Phase 2 amendment and the
+      durable Phase 1 toolkit revision** *(new in v1.1)*
 - [ ] Validation Gap Register either lists specific gaps or
-      explicitly states none surfaced
+      explicitly states none surfaced (per category)
 - [ ] Phase 1 drift since completion is noted
 - [ ] Sources and dates are recorded
 
@@ -414,10 +481,11 @@ Before accepting the Phase 1 Input Validation artifact:
 | Version | Date | Source | Summary |
 |---------|------|--------|---------|
 | v1.0 | 2026-04-22 | Initial authoring | Initial Phase 2 Step 01 prompt. Question-by-question interview mode (exception to Phase 2 default draft-and-react) because validation is confirmation activity. Eight validation categories covering subject identity, objective, constraints, MCs, baselines, worst-case narrative, gates, and gap register. |
+| **v1.1** | **2026-05-22** | **Diamonds Phase 2 dogfooding run (P2-Obs-05, Cluster D)** | Split the Validation Gap Register into 8.1 (Phase 2 local gaps) and 8.2 (Upstream toolkit gaps). New behavioral rule directing AI to classify each VG by scope. Diamonds run produced 5 VGs of which 3 were upstream toolkit gaps — the split makes the toolkit's inter-phase feedback channel explicit. Q8 interview question revised to ask for the classification. Output Format §8 restructured. Evaluation Checklist items added for classification discipline. Pattern generalizes — future Phase-N-input-validation steps in subsequent toolkits should inherit the same split. |
 
 ---
 
-*Part of the Phase 2 Analysis & Improvement Planning (Existing Projects) Tool Set — v1.0*
+*Part of the Phase 2 Analysis & Improvement Planning (Existing Projects) Tool Set — v1.1*
 *AI-Centric Software Development Playbook*
 *Companion file: `analysis-improvement-planning.existing-project.instructions.md`*
 *Previous step: `step-00-building-block-discovery.prompt.md`*

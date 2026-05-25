@@ -2,7 +2,7 @@
 # Phase 2: Analysis & Improvement Planning (Existing Projects)
 # AI-Centric Software Development Playbook
 
-**Toolset Version:** v1.0 (initial authoring 2026-04-22, structured to v1.2 conventions)
+**Toolset Version:** v1.1 (revised 2026-05-22 from Diamonds Phase 2 dogfooding run)
 
 ---
 
@@ -115,6 +115,21 @@ weighted Core Principles.
   Confirm the subject is at the version captured in Step 01 — if
   the subject has released between Phase 2 steps, note any drift
   the Plan must accommodate.
+- **If Step 05 uses BELIEVED multipliers, Section 10 must surface
+  a Phase 7 calibration handoff.** *(New in v1.1 per Diamonds
+  dogfooding observation P2-Obs-04, Cluster C.)* The three-quantity
+  cost model uses AI-acceleration multipliers and tokens-per-dev-hour
+  ratios that are BELIEVED at v1.0 of any project (no historical
+  data). Phase 7 operational tracking is the mechanism that
+  graduates these from BELIEVED to ESTIMATED and eventually to
+  MEASURED. Whenever Step 05's cost rows include BELIEVED-tagged
+  multiplier or ratio inputs, the Improvement Plan's Section 10
+  (Gaps and Forward Handoffs) must include an explicit Phase 7
+  calibration-handoff row naming: (a) what should be tracked during
+  Phase 5 execution, (b) what calibration data the tracking produces,
+  (c) how the data feeds the next cycle's Phase 2 cost modeling.
+  Without this handoff, the BELIEVED multipliers stay BELIEVED
+  forever and the cost model never improves.
 
 ### Synthesis Categories
 
@@ -133,7 +148,8 @@ The Improvement Plan consolidates into these sections:
    criteria seeds
 8. **Worst-Case Plan-Failure Narrative** — preserved from Step 04
 9. **Self-Evaluation Scorecard** — the Phase 2 → Phase 3 phase gate
-10. **Gaps and Forward Handoffs** — explicit enumeration
+10. **Gaps and Forward Handoffs** — explicit enumeration **including
+    Phase 7 calibration handoff when applicable** *(v1.1 addition)*
 11. **Source & Evidence Register** — which Phase 2 artifacts
     informed what
 
@@ -148,7 +164,8 @@ Please run Phase 2 synthesis. Consolidate the five Phase 2
 artifacts into the Improvement Plan, then run the self-evaluation
 scorecard. Apply scorecard rigor — CONDITIONAL preferred over
 PASS-with-caveats. Apply synthesis-only discipline — no net-new
-decisions.
+decisions. If Step 05 used BELIEVED multipliers, include Phase 7
+calibration handoff in Section 10.
 ```
 
 ---
@@ -386,6 +403,47 @@ FAIL items and required Phase 2 amendment)
 
 [List with rationale for accepting; Phase 7 watch-triggers]
 
+### 10.4 Phase 7 Calibration Handoff *(New in v1.1; required when Step 05 uses BELIEVED multipliers)*
+
+*This subsection is required whenever Step 05's cost rows include
+BELIEVED-tagged AI-acceleration multipliers or
+tokens-per-dev-hour ratios. It names the operational tracking that
+Phase 7 must establish so that future cycles graduate BELIEVED
+inputs to MEASURED ones.*
+
+**What Phase 7 should track during Phase 5 execution:**
+
+| Quantity | Tracking Mechanism | Tag Status at Plan Date | Target Tag After Phase 5 |
+|----------|-------------------|-------------------------|--------------------------|
+| Actual dev-hours per MC (Senior baseline equivalent) | Time-tracking system or post-MC reflection log | UNMEASURED / ESTIMATED at v1.0 | MEASURED post-Phase 5 |
+| Actual maintainer-hours per MC | Same tracking system | UNMEASURED / ESTIMATED | MEASURED |
+| Implied AI-acceleration multiplier per MC and per category | Derived: dev-hours ÷ maintainer-hours | BELIEVED at v1.0 | ESTIMATED after first cycle; MEASURED after 2-3 cycles |
+| Actual token usage per MC | API usage logs or session reports | UNMEASURED at v1.0 | MEASURED post-Phase 5 |
+| Implied tokens-per-dev-hour ratio | Derived: tokens ÷ dev-hours | BELIEVED at v1.0 (default 6,000/hr) | ESTIMATED after first cycle |
+| Actual API cost per MC | Billing data or token × pricing computation | UNMEASURED at v1.0 | MEASURED post-Phase 5 |
+
+**How the calibration data feeds the next cycle's Phase 2 cost
+modeling:**
+
+- Per-category multipliers (mechanical cleanup 10×, doc authorship
+  8×, config edit 5×, novel design 3×) are validated or revised
+  against the actual ratios observed across Phase 5 work
+- Tokens-per-dev-hour ratio is validated or revised per category
+  (some work is more API-intensive than others)
+- Future Phase 2 Step 05 cost rows can use the calibrated values
+  with ESTIMATED tags instead of BELIEVED, increasing the trust
+  downstream phases place in the cost projections
+
+**Phase 7 toolkit forward implication:**
+
+When the Phase 7 (Deployment & Evolution) toolkit is authored, it
+should include the operational-tracking pattern for these
+quantities as a first-class capability — not as an afterthought.
+The data the practitioner collects during Phase 5 execution should
+flow into Phase 7's tracking surface as standard practice. *(This
+note may become a Phase 7 toolkit requirement once that toolkit is
+authored.)*
+
 ---
 
 ## Section 11: Source & Evidence Register
@@ -463,6 +521,8 @@ Before accepting the Improvement Plan:
       required to resolve
 - [ ] No net-new decisions, mechanisms, sequencing, or costs were
       introduced during synthesis
+- [ ] **Phase 7 calibration handoff section (§10.4) is present
+      whenever Step 05 used BELIEVED multipliers** *(new in v1.1)*
 - [ ] Sources and dates are recorded
 
 ---
@@ -472,10 +532,11 @@ Before accepting the Improvement Plan:
 | Version | Date | Source | Summary |
 |---------|------|--------|---------|
 | v1.0 | 2026-04-22 | Initial authoring | Initial Phase 2 Step 06 prompt (capstone). Synthesis-only discipline applied throughout — no net-new decisions during synthesis. Scorecard rigor discipline: CONDITIONAL preferred over PASS-with-caveats, target 4–5 PASS + 1–2 CONDITIONAL, each CONDITIONAL must name the specific Phase 3 decision required to resolve. Phase 3 design briefs and Phase 5 task-list seed are direct outputs (not afterthoughts) to make the Phase 2 → Phase 3 / Phase 5 handoff explicit. |
+| **v1.1** | **2026-05-22** | **Diamonds Phase 2 dogfooding run (P2-Obs-04, Cluster C)** | Added Phase 7 calibration handoff requirement when Step 05 uses BELIEVED multipliers. New §10.4 in Output Format with structured table for tracking dev-hours, maintainer-hours, AI-acceleration multipliers, token usage, and API cost per MC during Phase 5 execution. New behavioral rule directing AI to include §10.4 when applicable. Evaluation Checklist item added. Forward-looking note about Phase 7 toolkit capturing this pattern as first-class capability. |
 
 ---
 
-*Final artifact of the Phase 2 Analysis & Improvement Planning (Existing Projects) Tool Set — v1.0*
+*Final artifact of the Phase 2 Analysis & Improvement Planning (Existing Projects) Tool Set — v1.1*
 *AI-Centric Software Development Playbook*
 *Companion file: `analysis-improvement-planning.existing-project.instructions.md`*
 *Previous step: `step-05-cost-modeling-and-capacity-check.prompt.md`*

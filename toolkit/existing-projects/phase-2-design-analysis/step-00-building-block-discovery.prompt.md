@@ -2,7 +2,7 @@
 # Phase 2: Analysis & Improvement Planning (Existing Projects)
 # AI-Centric Software Development Playbook
 
-**Toolset Version:** v1.0 (initial authoring 2026-04-22, structured to v1.2 conventions)
+**Toolset Version:** v1.1 (revised 2026-05-22 from Diamonds Phase 2 dogfooding run)
 
 ---
 
@@ -13,7 +13,7 @@
 | **Type** | Interview Prompt (short — typically 5–10 minutes) |
 | **Phase** | Phase 2 — Analysis & Improvement Planning (Existing Projects) |
 | **SDD Step** | Specify (building-block inventory, run after loading the Phase 1 Information Report and before Step 01) |
-| **Artifact Produced** | Phase 2 Toolset Augmentation Document |
+| **Artifact Produced** | Phase 2 Toolset Augmentation Document **(treated as living throughout Phase 2 execution, not as a snapshot)** |
 | **Principles Addressed** | All six — indirectly, by shaping what evidence and AI capabilities the rest of Phase 2 can leverage |
 | **Feeds Into** | All of Steps 01–06 (interview-mode selection, code-access calibration, MCP availability) |
 | **Companion File** | `analysis-improvement-planning.existing-project.instructions.md` |
@@ -47,6 +47,20 @@ because a missing capability during a decision-making step often means
 the decision gets deferred or made with lower confidence rather than
 made at all.
 
+### Document Is Living, Not Snapshot *(New in v1.1)*
+
+The Toolset Augmentation Document is initial-state inventory, not a
+binding snapshot. *(New discipline per Diamonds dogfooding observation
+P2-Obs-06 — Context7 was unavailable at step-00 but became available
+mid-Step-03; the snapshot-only document was stale.)* When capabilities
+change mid-phase — a connector becomes available that wasn't, an MCP
+tool starts failing that wasn't, a model upgrades, a new Skill loads —
+the document is amended with a dated entry rather than being left
+stale. Phase 2 steps that benefit from a newly-available capability
+should call out the amendment; steps that lose a capability should
+downgrade their mode (e.g., draft-and-react with high confidence may
+need to become draft-and-react with explicit caveats).
+
 ---
 
 ## How to Use This Prompt
@@ -68,6 +82,9 @@ made at all.
    confirm with you, and document the toolset augmentation.
 7. Accept the Phase 2 Toolset Augmentation Document.
 8. Carry it forward into Step 01.
+9. **Amend the document if capabilities shift during Phase 2 execution.**
+   *(New in v1.1.)* Add a Mid-Phase Amendments row (see Output Format
+   §7) with date, capability change, and which steps benefit or degrade.
 
 > **Note on short turnaround:** This prompt should run in 5–10 minutes.
 > If it's taking longer, the inventory is over-scoped. Keep it brief.
@@ -108,6 +125,14 @@ Document** that will inform every subsequent step.
   scope adjustment, surface the implication but leave the decision to
   the practitioner.
 - **Produce the document in one pass at the end.**
+- **Treat the document as living. *(New in v1.1.)*** If a downstream
+  step (01–06) reveals that a capability has become available or
+  unavailable mid-phase, add a Mid-Phase Amendments entry to the
+  Toolset Augmentation Document with the date, the capability change,
+  and which Phase 2 steps the change affects. Do not produce a new
+  augmentation document; amend the existing one. Practitioners and
+  downstream AI sessions reading the document should be able to see
+  both the initial inventory and the amendment history.
 
 ### Capability Categories to Inventory
 
@@ -224,6 +249,7 @@ Augmentation Document in this format. Keep it short.
 **AI Model:** [model and version]
 **Practitioner:** [name or role]
 **Phase 1 Report:** Loaded — [date of Phase 1 completion]
+**Document Status:** Living — see §7 Mid-Phase Amendments for any post-inventory capability changes
 
 ---
 
@@ -301,7 +327,24 @@ explanation]
 
 ---
 
-## 7. Open Items for Practitioner Follow-Up Before Step 01
+## 7. Mid-Phase Amendments *(New section in v1.1; populated as Phase 2 progresses)*
+
+*This section is empty at initial inventory and amended during
+Phase 2 execution as capabilities shift. Each amendment is dated,
+names the capability change, and identifies which Phase 2 steps
+benefit or degrade.*
+
+| Amendment Date | Capability Change | Direction | Affected Steps | Notes |
+|----------------|-------------------|-----------|----------------|-------|
+| (none at inventory) | — | — | — | — |
+
+*Example amendment entry once Phase 2 is underway:*
+
+| 2026-05-22 mid-Step-03 | Context7 became available | Gained | Step 03 MC-01 and MC-08 mechanism decisions; Step 05 cost rationale for library-choice MCs | Step-00 inventory recorded Context7 as unavailable; mid-phase activation confirmed; library-currency questions now answered with primary-source verification rather than training-data caveat |
+
+---
+
+## 8. Open Items for Practitioner Follow-Up Before Step 01
 
 - [ ] [Any connectors the practitioner agreed to enable before
       Step 01]
@@ -324,6 +367,9 @@ Before accepting the Phase 2 Toolset Augmentation Document:
 - [ ] The practitioner has confirmed the document's posture is
       acceptable (or has agreed to enable connectors before Step 01)
 - [ ] Open items for practitioner follow-up are listed
+- [ ] **Mid-Phase Amendments section is present and empty at inventory
+      time** *(new in v1.1)* — to be populated during Phase 2 execution
+      as capabilities shift
 - [ ] The document is short (target: one page, two at most)
 
 ---
@@ -333,10 +379,11 @@ Before accepting the Phase 2 Toolset Augmentation Document:
 | Version | Date | Source | Summary |
 |---------|------|--------|---------|
 | v1.0 | 2026-04-22 | Initial authoring | Initial Phase 2 step-00 prompt. Adapted from Phase 1 step-00b/step-00 with Phase 2 emphases: Phase 1 Report loadability check (mandatory), capability-change-since-Phase-1 inventory, Phase 2-specific interview-mode defaults table. |
+| **v1.1** | **2026-05-22** | **Diamonds Phase 2 dogfooding run (P2-Obs-06, Cluster E)** | Added mid-phase capability-shift discipline: Toolset Augmentation Document is living, not snapshot. New §7 Mid-Phase Amendments section in Output Format (empty at inventory; populated as capabilities shift during Phase 2 execution). New behavioral rule directing AI to amend the existing document rather than producing a new one. New step in "How to Use This Prompt" instructing practitioner to amend if capabilities shift. Document Status header added to template. Evaluation Checklist item added. |
 
 ---
 
-*Part of the Phase 2 Analysis & Improvement Planning (Existing Projects) Tool Set — v1.0*
+*Part of the Phase 2 Analysis & Improvement Planning (Existing Projects) Tool Set — v1.1*
 *AI-Centric Software Development Playbook*
 *Companion file: `analysis-improvement-planning.existing-project.instructions.md`*
 *Previous step: initial Specify interview (via instructions file)*

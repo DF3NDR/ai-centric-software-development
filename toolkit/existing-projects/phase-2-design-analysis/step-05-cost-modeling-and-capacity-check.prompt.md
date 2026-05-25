@@ -2,7 +2,7 @@
 # Phase 2: Analysis & Improvement Planning (Existing Projects)
 # AI-Centric Software Development Playbook
 
-**Toolset Version:** v1.0 (initial authoring 2026-04-22, structured to v1.2 conventions)
+**Toolset Version:** v1.1 (revised 2026-05-22 from Diamonds Phase 2 dogfooding run)
 
 ---
 
@@ -12,134 +12,173 @@
 |-------|-------|
 | **Type** | Interview Prompt → Action Prompt |
 | **Phase** | Phase 2 — Analysis & Improvement Planning (Existing Projects) |
-| **SDD Step** | Specify → Implement |
+| **SDD Step** | Specify → Implement → Correctness Verification |
 | **Artifact Produced** | Cost Modeling and Capacity Check document |
-| **Principles Addressed** | Economics primarily; Maintainability secondarily (long-term change-cost). Other principles consulted for cost-trade-off interpretation. |
-| **Feeds Into** | Step 06 (synthesis); Phase 5 (capacity expectations); Phase 7 (run-cost projections) |
+| **Principles Addressed** | Economics (primary); Operations (capacity scaling); Scoring & Metrics (tag discipline); Maintainability (capacity envelope respects burn-out boundary) |
+| **Feeds Into** | Step 06 (per-tier and plan-total cost rows feed the synthesis); Phase 5 (cost concentrations flag attention focus); Phase 7 (run-cost projection and calibration handoff) |
 | **Companion File** | `analysis-improvement-planning.existing-project.instructions.md` |
 
 ---
 
 ## Purpose
 
-A plan that fits the budget envelope is a plan that gets executed.
-A plan that exceeds capacity becomes a plan that gets cut, deferred,
-or abandoned — usually under pressure, often badly. Step 05 produces
-the cost estimates and the capacity check that prevents that
-outcome.
+Phase 2 must produce a plan that **fits the practitioner's actual
+capacity** — not an abstract "wouldn't it be nice" list. Step 05
+estimates the cost of each MC under the chosen mechanism (Step 03),
+sums per-tier and plan totals, and compares the total against the
+practitioner's capacity envelope (HC-08 or equivalent from Phase 1).
+If the plan exceeds capacity, Step 05 produces a capacity-bound
+recommendation — re-sequence, re-mechanism, extend timeline, or
+expand envelope.
 
-Cost estimates use the same tagging discipline as Phase 1 baselines:
-**MEASURED / ESTIMATED / BELIEVED / UNMEASURED**. The tag tells
-downstream phases how much to trust the estimate. Solo OSS work
-will be ESTIMATED-dominant. Enterprise work should be MEASURED-
-dominant. The match between tag distribution and project profile
-is itself a quality signal.
+**Cost in AI-Centric Software Development practice is not a single
+quantity.** *(Substantially revised in v1.1 per Cluster A from
+Diamonds dogfooding observations P2-Obs-01 and P2-Obs-02.)* The
+AI-acceleration of implementation work has decoupled what was
+historically conflated: the intrinsic complexity of work (which
+scales roughly with human developer hours) and the maintainer's
+actual time spent (which is shaped by AI acceleration and may
+differ by an order of magnitude). v1.1 of this prompt formalizes
+the three-quantity cost model that addresses this — per the
+detailed discipline in the companion instructions file's *Cost
+Modeling Tag Discipline* section.
 
-Step 05 produces:
-
-- **Per-MC cost rows** with tag, rationale, and cost dimensions
-  relevant to the project (time, infrastructure, AI-tool, opportunity)
-- **Per-tier cost summaries** for the Step 04 tiered sequence
-- **Plan-vs-envelope comparison** — does the plan fit the hard
-  constraints from Phase 1?
-- **Cost-concentration analysis** — which MCs dominate cost,
-  and is that concentration justified?
-- **Re-sequencing recommendation** — if the plan exceeds capacity,
-  what does a capacity-fitting plan look like?
+Each per-MC cost row carries three primary quantities (dev-hours,
+AI-acceleration multiplier, maintainer-hours) plus two derived
+ones (token-count projection, token-cost projection). The
+capacity-vs-envelope comparison uses **maintainer-hours** as the
+binding constraint and **token cost** as the budget-envelope check.
+Dev-hours is the comparative-size figure across MCs, not a
+constraint quantity.
 
 ---
 
 ## How to Use This Prompt
 
-1. Complete Step 04 (Sequencing and Tiering).
+1. Complete Steps 01 through 04.
 2. Open a new AI session (or continue from Step 04).
 3. Confirm
    `analysis-improvement-planning.existing-project.instructions.md`
-   is loaded as project context.
-4. Paste the Phase 1 Input Validation, Principle Weighting,
-   Mechanism Decisions, and Sequencing and Tiering artifacts above
-   the kickoff line.
+   is loaded as project context. The Cost Modeling Tag Discipline
+   section there defines the three-quantity model and reference
+   tables.
+4. Paste the Steps 01-04 artifacts above the kickoff line for
+   context (especially Step 03 mechanism choices and Step 04
+   sequencing).
 5. Paste the **System Instructions** section below as your system
    prompt if not already loaded.
 6. Paste the **Kickoff** line to begin.
-7. React to draft cost estimates per MC. Then react to the per-tier
-   summary and the capacity-vs-envelope comparison. If the plan
-   exceeds capacity, react to the re-sequencing recommendation.
-8. Review the output artifact against the prompt's evaluation
-   checklist before proceeding to Step 06.
+7. React to draft per-MC cost rows in tier batches. The AI proposes
+   estimates with tags; the practitioner accepts, amends, or
+   downgrades tag.
+8. After all per-MC rows are confirmed, run the capacity-vs-envelope
+   comparison. If the plan exceeds capacity, run the capacity-bound
+   recommendation conversation.
+9. Review the output artifact against the evaluation checklist
+   before proceeding to Step 06.
 
 ---
 
 ## System Instructions
 
 You are a senior improvement planner operating within the AI-Centric
-Software Development framework. Your task is to produce per-MC cost
-estimates, check the plan against the capacity envelope, and
-recommend re-sequencing if the plan exceeds capacity. This step
-uses **draft-and-react interview mode**.
+Software Development framework. Your task is to estimate the cost
+of each MC (under its chosen mechanism from Step 03), assemble
+per-tier and plan totals, and produce the capacity-vs-envelope
+comparison. This step uses **draft-and-react interview mode**.
 
 ### Your Behavioral Rules
 
-- **Tag every cost estimate.** MEASURED / ESTIMATED / BELIEVED /
-  UNMEASURED — no exceptions. An untagged estimate is read as
-  MEASURED by downstream phases.
-- **Use cost dimensions appropriate to the project.** Solo OSS work
-  typically uses time (hours) as the primary dimension; enterprise
-  work adds infrastructure cost ($), opportunity cost (foregone
-  work), and labor cost ($). Match the dimensions to the project
-  profile from Phase 1.
-- **Draft per-MC costs in small batches, not all at once.** Walking
-  through 22 MC cost estimates in a single dump produces a
-  practitioner reaction of "all of those seem about right" — not
-  useful feedback. Walk through 4–6 at a time, capture reactions,
-  proceed.
-- **Compute per-tier summaries automatically.** Once per-MC estimates
-  are confirmed, sum them by tier (using the Step 04 tiering).
-  Present the summary as draft.
-- **Compare plan total to capacity envelope.** Reference the hard
-  constraints from Phase 1 (especially budget-related HC-* entries).
-  Identify whether the plan fits, exceeds, or fits-with-stretch-cut.
-- **If the plan exceeds capacity, propose re-sequencing.** Options
-  include: (a) accept the minimum-viable-completion floor from
-  Step 04 and explicitly cut stretch scope, (b) re-sequence within
-  tiers to bring high-cost MCs to later tiers, (c) revisit a Step 03
-  mechanism choice (a cheaper mechanism alternative), (d)
-  acknowledge the over-capacity and document the implication.
-- **Surface cost concentrations.** If 3 MCs out of 22 carry 60% of
-  the plan's cost, name them. Cost concentration is fine if
-  justified; cost concentration that nobody noticed is a Phase 5
-  surprise waiting to happen.
-- **Treat practitioner cost-correction as authoritative.** When the
-  practitioner says "no, MC-X will take twice that long because
-  [domain reason]," update the estimate and ask what other
-  estimates are similarly affected. Cost-corrections often surface
-  hidden complexity that affects multiple MCs.
-- **Apply the comprehensiveness check at the end.** Ask: "Given
-  the cost estimates and capacity check, is there a cost dimension
-  we haven't captured — opportunity cost, on-call burden, customer-
-  facing disruption — that should be in this artifact?"
+- **Work in tier batches.** Draft Tier 1 per-MC rows; practitioner
+  reacts; proceed to Tier 2; reacts; Tier 3; reacts. A 22-MC plan
+  at one batch per tier is three rounds of practitioner attention.
+- **Produce all three primary quantities per row.** Every cost row
+  has dev-hours (with tag), AI-acceleration multiplier (with tag
+  and category attribution), and maintainer-hours (derived). Plus
+  the two derived rows for token-count and token-cost. A row
+  missing any quantity is incomplete.
+- **Apply tag discipline rigorously.** Tags are:
+  - **MEASURED** — instrumented or directly observed data
+  - **ESTIMATED** — informed judgment with explicit reasoning
+  - **BELIEVED** — toolkit defaults or general experience without
+    project-specific calibration
+  - **UNMEASURED** — explicitly named as not estimated
+  Never silently upgrade a tag (BELIEVED → ESTIMATED → MEASURED is
+  a calibration event, not a stylistic choice).
+- **Use the per-category multiplier defaults from the instructions
+  file as BELIEVED inputs at v1.0.** Mechanical cleanup 10×, doc
+  authorship 8×, config edit 5×, novel design 3×. If the
+  practitioner has historical data to refine these for the current
+  project, the multiplier graduates to ESTIMATED or MEASURED.
+  Otherwise BELIEVED is honest.
+- **Attribute every multiplier to a work category.** "0.5× of
+  dev-hours" isn't useful; "Mechanical cleanup 10× (per Reference
+  Table 1)" is. The category attribution is the auditable trail.
+- **Use 6,000 tokens per Senior-dev-hour as the BELIEVED token
+  baseline at v1.0.** Per Reference Table 2 in the instructions
+  file. If the practitioner has token-usage data from prior cycles,
+  the ratio graduates to ESTIMATED.
+- **Apply the tag-distribution honesty check.** After per-MC rows
+  are confirmed, run the tag-distribution honesty check (Phase F
+  below). Compare the project's actual tag distribution to the
+  profile-based expected distribution. A mismatch is a calibration
+  signal worth surfacing.
+- **Capacity envelope is maintainer-hours, not dev-hours.** When
+  comparing plan total to HC-08 (or equivalent), use maintainer-
+  hours. Dev-hours is the comparative-size figure across MCs.
+- **Budget envelope is token cost.** When comparing plan total to
+  HC-03 (AI-usage layer, in Phase 1 v1.3+) or equivalent two-layer
+  budget, use token-cost projection. The token cost is typically
+  small relative to capacity binding, but the discipline of
+  capturing it makes the AI-usage layer of the budget visible.
+- **Surface cost concentrations.** If any single MC accounts for
+  >15% of plan maintainer-hours, name it explicitly as a
+  cost-concentration item. Step 06 surfaces these as Phase 5
+  attention flags.
+- **If plan exceeds capacity, propose specific re-sequencing or
+  re-mechanism options — do not just declare the plan over.**
+  The capacity-bound recommendation discipline (in the instructions
+  file) names four resolution paths: re-sequence, re-mechanism,
+  extend timeline, expand envelope. The AI proposes specific
+  examples of each; the practitioner picks.
+- **Surface BELIEVED multipliers for Phase 7 calibration handoff.**
+  If any cost rows in the plan use BELIEVED multipliers (the
+  typical v1.0 case), the Step 06 synthesis will include a Phase 7
+  calibration handoff. Step 05 names this forward at end-of-step
+  so Step 06 inherits the signal.
+- **Apply the comprehensiveness check at the end.** Ask the
+  practitioner whether a cost dimension is missing, or whether any
+  per-MC cost-estimate tag feels wrong (too confident, too
+  cautious).
 
-### Reference: Cost Dimensions by Project Profile
+---
 
-| Project profile | Primary dimensions | Secondary dimensions |
-|----------------|-------------------|---------------------|
-| Solo OSS (no commercial obligation) | Time (hours), AI-tool cost (sessions/month) | Opportunity cost (foregone capacity) |
-| Solo OSS (commercial side) | Time, AI-tool cost, opportunity cost | Customer-facing disruption window |
-| Small team (2–5) | Time per person, infrastructure cost, AI-tool cost | Coordination overhead, customer-facing disruption |
-| Enterprise team | Labor cost ($), infrastructure cost ($), licensing cost ($), opportunity cost | Compliance/audit cost, customer-facing disruption, on-call burden |
+## Reference Tables (For Quick Reference During Step 05)
 
-### Reference: Typical Cost-Estimate Tags by Project Profile
+The full definitions are in the companion instructions file's
+*Cost Modeling Tag Discipline* section. Reproduced here as quick
+reference:
 
-| Profile | MEASURED | ESTIMATED | BELIEVED | UNMEASURED |
-|---------|----------|-----------|----------|------------|
-| Solo OSS with no time tracking | Rare (specific commits, prior MC completion times if recorded) | Dominant | Some | Some |
-| Solo OSS with rough time awareness | Some | Dominant | Few | Few |
-| Small team with sprint-level tracking | Dominant | Some | Few | Rare |
-| Enterprise with full tracking | Dominant | Few | Rare | Rare |
+### Reference Table 1 — AI-Acceleration Multiplier Defaults (v1.0)
 
-A solo OSS project producing MEASURED-tagged time estimates without
-actual time tracking is producing false confidence. ESTIMATED is
-the honest tag for most solo OSS work.
+| Work Category | Default Multiplier | Tag at v1.0 |
+|---------------|--------------------|-------------|
+| Mechanical cleanup (find-and-replace, file deletion, dep removal) | 10× | BELIEVED |
+| Doc authorship (narrative, reference, README, CHANGELOG) | 8× | BELIEVED |
+| Config edit (CI workflow, ESLint, package.json, tool integration) | 5× | BELIEVED |
+| Novel design (interface, contract semantics, architecture, security boundary) | 3× | BELIEVED |
+
+### Reference Table 2 — Token Baseline Defaults (v1.0)
+
+| Quantity | Default | Tag at v1.0 |
+|----------|---------|-------------|
+| Tokens per Senior-dev-hour | 6,000 tokens/hr | BELIEVED |
+| Model pricing (Opus 4.7 mid-range) | ~$2.50 per 100K tokens | ESTIMATED |
+
+Both reference tables represent toolkit defaults at v1.0. Per-
+project calibration (the Phase 7 calibration handoff in Step 06
+§10.4) graduates these to ESTIMATED after one cycle of empirical
+tracking and to MEASURED after 2-3 cycles.
 
 ---
 
@@ -150,11 +189,12 @@ the honest tag for most solo OSS work.
 > artifacts should be loaded as context.
 ```
 Please run Cost Modeling and Capacity Check step. Draft per-MC
-cost estimates with MEASURED / ESTIMATED / BELIEVED / UNMEASURED
-tags. Walk through small batches so I can react. Then produce
-per-tier summaries, compare against the capacity envelope, and
-recommend re-sequencing if needed. At the end, run the
-comprehensiveness check.
+cost rows using the three-quantity model (dev-hours with tag, AI-
+acceleration multiplier with category attribution, maintainer-
+hours derived, token-count projection, token-cost projection), one
+tier at a time. After all tiers are confirmed, run the capacity-vs-
+envelope comparison and the tag-distribution honesty check, then
+the comprehensiveness check.
 ```
 
 ---
@@ -163,119 +203,163 @@ comprehensiveness check.
 
 ### Phase A — Cost Dimension Confirmation
 
-> "Based on the Phase 1 hard constraints, the cost dimensions that
-> matter for this project look like:
->
-> - [Primary dimension(s)]
-> - [Secondary dimension(s)]
->
-> Are these the right dimensions, or are there others I should
-> include — opportunity cost, customer-facing disruption,
-> coordination overhead, etc.?"
+Open by confirming dimensions:
 
-### Phase B — Per-MC Cost Drafts (in batches)
-
-For each batch of 4–6 MCs:
-
-> "**Batch [N] cost draft:**
+> "Per the v1.1 cost model, each MC carries three primary
+> quantities plus two derived ones:
 >
-> | MC ID | Cost | Tag | Rationale |
-> |-------|------|-----|-----------|
-> | MC-XX | [hours / $] | ESTIMATED | [text — basis for the estimate, comparable-MC reference if any] |
-> | MC-YY | [...] | [...] | [...] |
-> | [...] | [...] | [...] | [...] |
+> - Dev-hours (Senior Developer baseline; MEASURED / ESTIMATED /
+>   BELIEVED / UNMEASURED)
+> - AI-acceleration multiplier (per category; BELIEVED at v1.0
+>   default)
+> - Maintainer-hours (derived from above)
+> - Token-count projection (derived from dev-hours × 6,000)
+> - Token-cost projection (derived from tokens × pricing)
 >
-> Accept, amend, or reject each row?"
+> Confirmation request: Are these the right dimensions for the
+> [subject] plan, or do you want to add others — opportunity cost,
+> coordination overhead, customer-facing disruption, on-call
+> burden?"
 
-After each batch, capture amendments. Update batches downstream
-if a correction affects similar MCs.
+Capture practitioner adjustments before proceeding to per-MC
+drafts.
 
-### Phase C — Per-Tier Summary
+### Phase B — Per-MC Cost Drafts (One Tier at a Time)
 
-> "With per-MC costs as confirmed, the per-tier summaries are:
+For each tier (in Step 04 sequence order):
+
+> "**Tier [N] — [tier name]**
 >
-> | Tier | Total Cost | Tag Distribution | Cost Concentration |
-> |------|-----------|------------------|-------------------|
-> | Tier 1 — [name] | [sum] | [N MEASURED / M ESTIMATED / K BELIEVED / J UNMEASURED] | [if 1–3 MCs dominate, name them] |
-> | Tier 2 — [name] | [sum] | [...] | [...] |
-> | Tier 3 — [name] | [sum] | [...] | [...] |
+> Drafting per-MC cost rows. The format is one row per MC with
+> dev-hours / multiplier-with-category / maintainer-hours /
+> token-count / token-cost / rationale.
 >
-> **Plan total:** [sum across tiers]
+> [Present the tier's table; example structure:]
 >
-> Anything in this summary that doesn't match your expectation?"
+> | MC | Dev-hrs | DH Tag | Category & Multiplier | Maint-hrs | Tokens (~) | Token Cost (~) | Rationale |
+> |----|--------:|--------|----------------------|----------:|-----------:|---------------:|-----------|
+> | MC-XX | [N] | ESTIMATED | [Category] [X]× | [derived] | [derived] | [derived] | [reasoning citing mechanism and Phase 1 evidence] |
+> | [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+>
+> **Tier [N] totals: [dev-hrs] / [maint-hrs] / [tokens] / [cost].**
+>
+> Accept the tier, or any specific cost rows to amend or
+> downgrade tag?"
+
+If the practitioner amends a tag (e.g., "MC-X dev-hours should be
+BELIEVED, not ESTIMATED — I haven't done this kind of work
+before"), update the row and recompute the derived quantities.
+
+### Phase C — Plan Summary
+
+After all tiers are confirmed:
+
+> "**Plan total:**
+>
+> | Tier | Dev-hrs | Maint-hrs | Tokens | Token Cost |
+> |------|--------:|----------:|-------:|-----------:|
+> | Tier 1 | [...] | [...] | [...] | [...] |
+> | Tier 2 | [...] | [...] | [...] | [...] |
+> | Tier 3 | [...] | [...] | [...] | [...] |
+> | **TOTAL** | [...] | [...] | [...] | [...] |
+>
+> Minimum-viable floor totals (from Step 04 §3): [...] maint-hrs
+> at [...] token cost.
+>
+> Stretch delta: [...] maint-hrs at [...] token cost.
+>
+> Acceptable, or are any rollups questionable?"
 
 ### Phase D — Capacity-vs-Envelope Comparison
 
-> "The Phase 1 capacity envelope (from HC-* entries) is:
+> "**Capacity comparison:**
 >
-> - [HC-XX: budget constraint, e.g., '<5 hours/week ecosystem
->   maintainer-time']
-> - [HC-YY: other capacity bound]
+> Envelope: [HC-08 statement, e.g., '<5 hr/wk ecosystem, Diamonds-
+> minority-share ≈ 2 hr/wk'].
 >
-> The plan total is [X]. At the available capacity rate of [Y per
-> week], this plan represents approximately [Z weeks] of
-> execution.
+> | Scope | Maint-hrs | At [X] hr/wk continuous | At [reduced rate] |
+> |-------|----------:|:------------------------|:-------------------|
+> | Floor | [...] | [...] weeks | [...] weeks |
+> | Floor + most-load-bearing stretch | [...] | [...] | [...] |
+> | Full plan | [...] | [...] (≈[X] months) | [...] (≈[Y] months) |
 >
-> **Assessment:**
-> - Plan fits the envelope: [Yes / No / Fits with stretch scope cut]
-> - Constraint that would bind first: [name]
-> - Recommended action: [Proceed as planned / Cut stretch scope /
->   Re-sequence to defer high-cost MCs / Revisit mechanism choices
->   for cheaper alternatives / Acknowledge over-capacity and
->   document]
+> Token cost vs. budget envelope (HC-03 AI-usage layer): plan total
+> [$N] vs. envelope [$M] = [comfortable / tight / over].
 >
-> Does this assessment match your sense, or do I have the
-> capacity math wrong?"
+> **Assessment:** [Plan fits comfortably / Plan fits floor; stretch
+> needs cuts / Plan exceeds capacity — capacity-bound recommendation
+> follows].
+>
+> Does the assessment match your understanding, or am I missing
+> context that changes the math?"
 
-### Phase E — Re-Sequencing Recommendation (if needed)
+If the plan exceeds capacity, run the capacity-bound recommendation
+conversation:
 
-If the plan exceeds capacity:
+> "Plan exceeds capacity by [N] maintainer-hours. Four resolution
+> paths under the v1.1 discipline:
+>
+> 1. **Re-sequence** — cut stretch scope; floor + cut stretch fits.
+>    Specific cut: [proposal].
+> 2. **Re-mechanism** — swap [MC-X] from [chosen mechanism] to
+>    [lower-cost alternative]. Trade-off under Step 02 weights:
+>    [specific principle impact].
+> 3. **Extend timeline** — split into v[N].0 + post-v[N].0 patch
+>    releases. Floor becomes v[N].0; stretch becomes patch cadence.
+> 4. **Expand envelope** — if practitioner indicates capacity has
+>    been over-allocated.
+>
+> Which resolution path matches your preference?"
 
-> "Since the plan exceeds capacity, here's the re-sequencing
-> recommendation:
->
-> [Specific option from the recommended actions above, with
-> rationale]
->
-> Compared to the original plan:
-> - What changes: [list]
-> - What stays the same: [list]
-> - Capacity fit after re-sequencing: [new comparison]
->
-> Accept, amend, or reject?"
+### Phase E — Cost-Concentration Analysis
 
-If the practitioner rejects, ask what alternative they prefer.
-
-### Phase F — Cost-Concentration Analysis
-
-> "Across the plan, cost is concentrated in:
+> "Cost concentrations (single MCs >15% of plan maintainer-hours):
 >
-> | MC | Cost | % of Plan Total | Concentration justified? |
-> |----|------|----------------|--------------------------|
-> | MC-XX | [...] | [%] | [Yes — high-leverage / No — surprise] |
-> | [...] | [...] | [...] | [...] |
+> | MC | Maint-hrs | % of Plan | Justified? |
+> |----|----------:|----------:|------------|
+> | MC-XX | [N] | [%] | Yes/No with rationale citing Step 02 weights |
 >
-> [If concentration is high in a few MCs] — Is this concentration
-> justified, or is there a hidden complexity that should make us
-> revisit a mechanism choice or split an MC?"
+> These will surface in Step 06 as Phase 5 attention flags. Accept
+> the concentration analysis, or any concentrations that warrant
+> revisiting the mechanism choice?"
+
+### Phase F — Tag-Distribution Honesty Check
+
+> "Project profile: [Solo OSS / Small team / Commercial / etc.]
+> Expected tag-dominance: [ESTIMATED / MEASURED with mix / etc.]
+> Actual tag-dominance in this plan:
+> - Dev-hours: [N%] ESTIMATED, [N%] MEASURED, [N%] BELIEVED, [N%]
+>   UNMEASURED
+> - Multiplier: [N%] BELIEVED, [N%] ESTIMATED, [N%] MEASURED
+> - Token ratio: [N%] BELIEVED, [N%] ESTIMATED, [N%] MEASURED
+>
+> Match assessment: [Honest / Over-confident — too many MEASURED
+> for project profile / Under-investing — too many BELIEVED for
+> project profile with available data].
+>
+> Forward note for Phase 7 calibration: [if BELIEVED multipliers
+> are present, surface this as feeding Step 06 §10.4 Phase 7
+> calibration handoff]."
 
 ### Phase G — Comprehensiveness Check
 
-> "Two questions before producing the artifact:
+> "Before locking the Cost Modeling artifact, two questions:
 >
 > 1. Is there a cost dimension we haven't captured — opportunity
 >    cost, on-call burden, customer-facing disruption, coordination
 >    overhead — that should be in this artifact?
 >
-> 2. Are there MCs whose cost estimate tagging feels wrong — too
->    confident (MEASURED when ESTIMATED would be honest) or too
->    cautious (UNMEASURED when ESTIMATED would be useful)?"
+> 2. Are there any MCs whose cost-estimate tagging feels wrong —
+>    too confident (MEASURED when ESTIMATED would be honest) or
+>    too cautious (UNMEASURED when ESTIMATED would be useful)?"
+
+"All good" is a valid answer for either.
 
 ---
 
 ## Output Format
 
-When cost modeling is complete, produce the artifact.
+When the cost modeling is complete, produce the artifact.
 
 ```markdown
 # Cost Modeling and Capacity Check
@@ -284,117 +368,200 @@ When cost modeling is complete, produce the artifact.
 **Cost Modeling Date:** [date]
 **Practitioner:** [name or role]
 **AI Model:** [model and version]
+**Cost Model:** Three-quantity model per v1.1 toolkit
 
 ---
 
 ## 1. Cost Dimensions
 
-| Dimension | Primary or Secondary | Applies To |
-|-----------|---------------------|-----------|
-| Time (hours) | Primary | All MCs |
-| AI-tool cost | Secondary | All MCs |
-| [...] | [...] | [...] |
+| Dimension | Primary/Secondary | Tag | Applies To | Definition |
+|-----------|-------------------|-----|-----------|------------|
+| Dev-hours | Primary | MEASURED / ESTIMATED / BELIEVED / UNMEASURED | All MCs | Senior Developer baseline, without AI assistance |
+| AI-acceleration multiplier | Derivation | MEASURED / ESTIMATED / BELIEVED (BELIEVED at v1.0) | All MCs | Per-category default per Reference Table 1 |
+| Maintainer-hours | Derived | (inherited from inputs) | All MCs | dev-hours ÷ multiplier; what HC-08 caps |
+| Token-count projection | Derived | BELIEVED at v1.0 | All MCs | dev-hours × 6,000 tokens/hr |
+| Token-cost projection | Derived | ESTIMATED | All MCs | tokens × ~$2.50/100K (model midpoint) |
+
+**Cost dimensions not in this artifact:**
+[List dimensions explicitly considered and deemed N/A or implicit,
+e.g., opportunity cost captured in capacity envelope's "minority
+share" framing]
 
 ---
 
 ## 2. Per-MC Cost Rows
 
-| MC ID | Cost | Tag | Rationale | Mechanism Reference (Step 03) |
-|-------|------|-----|-----------|-------------------------------|
-| MC-XX | [value] | MEASURED / ESTIMATED / BELIEVED / UNMEASURED | [text] | [Step 03 reference] |
-| [...] | [...] | [...] | [...] | [...] |
+### 2.1 Tier 1 — [Tier Name]
+
+| MC | Dev-hrs | DH Tag | Category & Multiplier | Maint-hrs | Tokens | Token Cost | Rationale |
+|----|--------:|--------|----------------------|---------:|------:|-----------:|-----------|
+| MC-XX | [N] | [tag] | [Category] [X]× | [derived] | [derived] | [derived] | [reasoning] |
+| [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+| **Tier 1 totals** | **[sum]** | — | — | **[sum]** | **[sum]** | **[sum]** | — |
+
+### 2.2 Tier 2 — [Tier Name]
+[Same structure]
+
+### 2.3 Tier 3 — [Tier Name]
+[Same structure]
+
+### 2.4 [Optional] Sub-Item Breakouts (Staging Reference)
+
+[If any MC has staging structure — e.g., MC-07 layered docs with
+per-Layer staging — break out into a sub-table. The Step 04 cut
+order references this.]
 
 ---
 
-## 3. Per-Tier Summaries
+## 3. Plan Summary
 
-| Tier | Total | Tag Distribution | Concentration |
-|------|-------|------------------|---------------|
-| Tier 1 — [name] | [sum] | [count by tag] | [top-1-3 MCs by cost share] |
-| Tier 2 — [name] | [sum] | [...] | [...] |
-| Tier 3 — [name] | [sum] | [...] | [...] |
+### 3.1 Full-Scope Total
 
-**Plan total:** [grand sum]
+| Tier | Dev-hrs | Maint-hrs | Tokens | Token Cost |
+|------|--------:|----------:|------:|-----------:|
+| Tier 1 | [...] | [...] | [...] | [...] |
+| Tier 2 | [...] | [...] | [...] | [...] |
+| Tier 3 | [...] | [...] | [...] | [...] |
+| **Plan TOTAL** | **[sum]** | **[sum]** | **[sum]** | **[sum]** |
+
+### 3.2 Minimum-Viable Floor (from Step 04 §3)
+
+| Floor MC | Maint-hrs |
+|----------|----------:|
+| MC-XX | [N] |
+| [...] | [...] |
+| **Floor TOTAL** | **[sum]** maintainer-hours |
+
+**Floor token cost:** ~$[N] API total.
+
+### 3.3 Stretch Delta
+
+Stretch scope = [N maintainer-hours], [~$M token cost].
 
 ---
 
 ## 4. Capacity-vs-Envelope Comparison
 
-| Constraint | Value | Plan Demand | Fit |
-|-----------|-------|------------|-----|
-| [HC-XX: e.g., <5 hours/week] | [text] | [plan demand in compatible units] | Fits / Exceeds / Fits with stretch cut |
+**Envelope:** [HC-08 statement and working assumption]
 
-**Overall fit:** [text — single-sentence summary]
+**Plan demand at varying capacity rates:**
 
-**Constraint that would bind first:** [name]
+| Scope | Maint-hrs | At [X] hr/wk continuous | At [reduced rate] |
+|-------|----------:|:------------------------|:-------------------|
+| Floor | [...] | ~[N] weeks | ~[M] weeks |
+| Floor + most-load-bearing stretch | [...] | [...] | [...] |
+| Full plan | [...] | ~[N] weeks (≈[X] months) | ~[M] weeks (≈[Y] months) |
+
+### 4.1 Assessment
+
+[Plain-language assessment of fit. Possible framings: "Plan fits
+comfortably" / "Plan fits floor; stretch needs cuts" / "Full plan
+is out of single-burst capacity but matches HC-02 open-ended
+timeline if treated as v[N].0 release + post-v[N].0 patch
+releases."]
+
+### 4.2 Capacity-Bound Recommendation (if applicable)
+
+[If the plan exceeds capacity, the recommendation is one of the
+four paths from the discipline. Document the chosen path with
+specifics.]
+
+[If the plan fits, this subsection records "Plan fits within
+envelope; no capacity-bound re-sequencing required" plus any
+promotion candidates from Step 04 worth flagging.]
 
 ---
 
-## 5. Re-Sequencing Recommendation (if applicable)
+## 5. Re-Sequencing Recommendation
 
-[Either:]
+[If Step 04 sequencing requires no changes given the cost model,
+state so explicitly. If specific re-sequencing is recommended,
+detail the change and why.]
 
-**Plan fits capacity. No re-sequencing required.**
-
-[Or:]
-
-**Plan exceeds capacity. Recommended re-sequencing:**
-
-[Specific changes with rationale]
-
-**Result after re-sequencing:** [new capacity fit]
+**Promotion candidates from Step 04:**
+[List any MCs the cost-vs-capacity math suggests could promote from
+stretch to floor at small marginal cost.]
 
 ---
 
 ## 6. Cost-Concentration Analysis
 
-| MC | Cost | % of Plan | Justified? | Note |
-|----|------|----------|------------|------|
-| MC-XX | [...] | [%] | Yes / No | [text] |
+| MC | Maint-hrs | % of Plan | Justified? |
+|----|----------:|----------:|------------|
+| MC-XX | [N] | [%] | Yes/No with Step 02 weighted rationale and Step 04 mitigation |
+| [...] | [...] | [...] | [...] |
+| **Top concentrations** | **[sum]** | **[%]** | **[summary justification]** |
 
-**Concentrations flagged for Phase 5 attention:** [list]
-
----
-
-## 7. Comprehensiveness Check Result
-
-[Practitioner's response]
+**Phase 5 attention flags:**
+- [list MCs requiring specific Phase 5 attention based on
+  concentration analysis]
 
 ---
 
-## 8. Tag-Distribution Honesty Check
+## 7. Tag-Distribution Honesty Check
 
-**Project profile:** [solo OSS / small team / enterprise]
-**Expected tag-dominance:** [from reference table]
-**Actual tag-dominance:** [observed]
-**Match:** [Honest / Over-confident / Over-cautious]
+**Project profile:** [profile description]
+**Expected tag-dominance:** [from instructions file profile table]
 
-**If mismatch:** [revisions made to bring tag distribution into
-honesty]
+**Actual tag-dominance in this plan:**
+- Dev-hours: [breakdown]
+- AI-acceleration multipliers: [breakdown]
+- Token-count: [breakdown]
+- Token-cost: [breakdown]
+
+**Match assessment:** [Honest / Over-confident / Under-investing]
+
+**Forward note for Phase 7 calibration:**
+[If BELIEVED multipliers are present in the plan, name the
+calibration that Phase 5 execution should produce and that Step 06
+§10.4 will surface as the Phase 7 calibration handoff.]
+
+---
+
+## 8. Comprehensiveness Check Result
+
+[Practitioner's response to comprehensiveness questions; either
+"all good" or specific adjustments captured]
 
 ---
 
 ## 9. Forward Implications
 
 ### 9.1 For Step 06 (Synthesis)
-[Key cost insights the Improvement Plan should highlight]
+
+[Key cost insights to surface in the Improvement Plan executive
+summary; cost-concentration MCs requiring Phase 5 attention; any
+promotion candidates; capacity-vs-envelope framing for v[N].0
+release strategy]
 
 ### 9.2 For Phase 5 (Execution)
-[Capacity expectations per tier; cost-concentration MCs Phase 5
-should track specifically]
 
-### 9.3 For Phase 7 (Run-Cost)
-[Ongoing-cost implications surfaced during this step that affect
-post-cycle run-cost projections]
+[Per-tier capacity expectations; attention flags; estimate
+uncertainty notes (e.g., wider-uncertainty MCs that should
+re-estimate post Phase 3 design brief)]
+
+### 9.3 For Phase 7 (Run-Cost & Empirical Calibration)
+
+[Forward-handoff items for Phase 7: token baseline empirical
+validation, ongoing AI-usage cost tracking, BELIEVED → ESTIMATED →
+MEASURED graduation, watch-triggers]
 
 ---
 
 ## 10. Sources & Evidence Register
 
-- **Phase 1 Input Validation** — for HC-* capacity envelope
-- **Mechanism Decisions (Step 03)** — for mechanism-cost basis
-- **Sequencing and Tiering (Step 04)** — for tier-cost summaries
-- **Practitioner confirmations** — final authority on cost estimates
+- **Phase 1 Input Validation (Step 01)** — for HC-08 capacity envelope
+  and HC-03 budget framing
+- **Principle Weighting (Step 02)** — weights informing cost-concentration
+  justification and re-mechanism recommendations
+- **Mechanism Decisions (Step 03)** — per-MC mechanism-cost basis
+- **Sequencing and Tiering (Step 04)** — tier composition, floor/stretch
+  composition, staging mitigation flags
+- **Cost Modeling Tag Discipline** in companion instructions file —
+  three-quantity model definition, reference tables, capacity-bound
+  recommendation discipline
+- **Practitioner confirmations** — final authority on per-MC rows,
+  capacity assessment, comprehensiveness check
 ```
 
 ---
@@ -403,20 +570,38 @@ post-cycle run-cost projections]
 
 Before accepting the Cost Modeling and Capacity Check artifact:
 
-- [ ] Every MC has a cost row
-- [ ] Every cost row has a MEASURED / ESTIMATED / BELIEVED /
-      UNMEASURED tag (no untagged rows)
-- [ ] Every cost row has a rationale
-- [ ] Cost dimensions match the project profile
-- [ ] Per-tier summaries computed correctly
-- [ ] Plan-vs-envelope comparison performed against specific
-      Phase 1 HC-* constraints
-- [ ] Re-sequencing recommendation made if plan exceeds capacity
-      (or "no re-sequencing required" stated explicitly)
-- [ ] Cost concentrations identified and justified or flagged
-- [ ] Tag-distribution honesty check performed
-- [ ] Comprehensiveness check conducted
-- [ ] Forward implications listed
+- [ ] Every multi-mechanism MC and every single-mechanism MC has a
+      cost row in §2 (no MCs missing from cost modeling)
+- [ ] **Every cost row has all three primary quantities** — dev-hours
+      with tag, AI-acceleration multiplier with category attribution
+      and tag, maintainer-hours (derived) *(v1.1)*
+- [ ] **Every cost row has token-count and token-cost projections
+      (derived)** *(v1.1)*
+- [ ] **Multiplier category attribution cites Reference Table 1
+      explicitly** (Mechanical cleanup / Doc authorship / Config
+      edit / Novel design) *(v1.1)*
+- [ ] **Token ratio is 6,000 tokens/Senior-dev-hour default unless
+      project-specific calibration data exists** *(v1.1)*
+- [ ] Tags are never silently upgraded; tag changes are calibration
+      events with rationale
+- [ ] Per-tier and plan-total rows sum the primary and derived
+      quantities consistently
+- [ ] Floor and stretch maintainer-hour totals are stated explicitly
+- [ ] Capacity-vs-envelope comparison uses maintainer-hours (not
+      dev-hours) as the binding constraint
+- [ ] Budget-envelope comparison uses token-cost (not dev-hours) as
+      the AI-usage layer check
+- [ ] If plan exceeds capacity, specific capacity-bound
+      recommendation is produced (re-sequence / re-mechanism /
+      extend / expand)
+- [ ] Cost-concentration analysis surfaces MCs >15% of plan with
+      Step 02 weighted justification
+- [ ] Tag-distribution honesty check is conducted; project profile
+      and expected vs. actual distributions compared
+- [ ] **BELIEVED multipliers (if present) are surfaced forward to
+      Step 06 §10.4 Phase 7 calibration handoff** *(v1.1)*
+- [ ] Comprehensiveness check is conducted; result documented
+- [ ] Forward implications for Step 06, Phase 5, Phase 7 are listed
 
 ---
 
@@ -424,11 +609,12 @@ Before accepting the Cost Modeling and Capacity Check artifact:
 
 | Version | Date | Source | Summary |
 |---------|------|--------|---------|
-| v1.0 | 2026-04-22 | Initial authoring | Initial Phase 2 Step 05 prompt. Draft-and-react mode. Per-MC cost rows with MEASURED/ESTIMATED/BELIEVED/UNMEASURED tags matching Phase 1 baseline conventions. Per-tier summaries; capacity-vs-envelope comparison against Phase 1 HC-* constraints; re-sequencing recommendation if plan exceeds capacity. Tag-distribution honesty check (a profile-specific quality signal — solo OSS should be ESTIMATED-dominant; enterprise should be MEASURED-dominant; mismatch indicates over-confidence or over-caution). |
+| v1.0 | 2026-04-22 | Initial authoring | Initial Phase 2 Step 05 prompt. Draft-and-react mode in tier batches. Per-MC cost rows with single-dimension time cost. Capacity-vs-envelope comparison. Capacity-bound recommendation if over. Tag-distribution honesty check with project-profile expected distributions. Cost-concentration analysis. Comprehensiveness check. |
+| **v1.1** | **2026-05-22** | **Diamonds Phase 2 dogfooding run (P2-Obs-01 and P2-Obs-02, Cluster A)** | **Substantial revision.** Cost model expanded from single-dimension to three-quantity model: dev-hours (Senior baseline, with tag), AI-acceleration multiplier (per-category attribution, BELIEVED at v1.0), maintainer-hours (derived), token-count projection (derived), token-cost projection (derived). Per-MC cost row format expanded to 8-column layout. Two Reference Tables added for quick in-step access (per-category multiplier defaults: mechanical cleanup 10×, doc authorship 8×, config edit 5×, novel design 3×; token baseline: 6,000 tokens/Senior-dev-hour, Opus 4.7 ~$2.50/100K). Behavioral rules updated for three-quantity discipline. Output Format §2 row schema updated; §3 plan summary expanded; §7 tag-distribution honesty check updated. Evaluation Checklist substantially expanded (six new v1.1-specific items). BELIEVED-multiplier surfacing requirement added so Step 06 §10.4 Phase 7 calibration handoff inherits the signal. |
 
 ---
 
-*Part of the Phase 2 Analysis & Improvement Planning (Existing Projects) Tool Set — v1.0*
+*Part of the Phase 2 Analysis & Improvement Planning (Existing Projects) Tool Set — v1.1*
 *AI-Centric Software Development Playbook*
 *Companion file: `analysis-improvement-planning.existing-project.instructions.md`*
 *Previous step: `step-04-sequencing-and-tiering.prompt.md`*

@@ -4,6 +4,7 @@
 
 **Subject:** `@diamondslab/diamonds` v1.3.2
 **Toolkit version under test:** Phase 2 v1.0 (initial authoring 2026-04-22)
+**Toolkit version after revision:** Phase 2 v1.1 (revision landed 2026-05-22)
 **Reviewing AI:** Claude Opus 4.7
 **Practitioner:** Solo maintainer (DiamondsLab)
 **Phase 1 cycle reference:** Completed 2026-04-20; report 5 PASS + 1 CONDITIONAL
@@ -26,6 +27,12 @@ Phase 2 run.
 in §End-of-Phase-2 Review by Phase 2 v1.0 inheriting Phase 1 v1.2's mature
 disciplines. Future runs on different project profiles may surface
 additional observations.
+
+**Status of this file as of 2026-05-22:** All 7 observations are Acted at
+v1.1 (5 directly landing in Phase 2 v1.1; 1 routed to Phase 1 v1.3 queue;
+1 carrying forward as Phase 7 toolkit forward-handoff item that lands in
+Phase 2 v1.1 as the new §10.4 Phase 7 Calibration Handoff in step-06).
+See §v1.1 Revision Outcome below.
 
 ---
 
@@ -57,7 +64,11 @@ additional observations.
 - **Priority:** High — affects how Phase 2 plans capacity for every
   AI-accelerated project, and the Playbook's central thesis is precisely
   that AI acceleration is real.
-- **Status:** Open
+- **Status:** **Acted (v1.1, 2026-05-22).** Three-quantity cost model
+  formalized in `analysis-improvement-planning.existing-project.instructions.md`
+  *Cost Modeling Tag Discipline* section and operationalized in
+  `step-05-cost-modeling-and-capacity-check.prompt.md` per-MC row format,
+  Reference Tables 1 and 2, and Phase F tag-distribution honesty check.
 - **Cluster assignment:** Cluster A (Three-Quantity Cost Model)
 - **Cross-reference:** Pairs with P2-Obs-02 (token-cost dimension); the two
   observations together drive the three-quantity model.
@@ -83,7 +94,12 @@ additional observations.
 - **Priority:** High — pairs with P2-Obs-01 to produce a Phase 2 cost model
   that is meaningfully grounded in observable quantities rather than
   abstract "hours."
-- **Status:** Open
+- **Status:** **Acted (v1.1, 2026-05-22).** Token-count projection (derived:
+  dev-hours × 6,000 tokens/hr default) and token-cost projection (derived:
+  tokens × ~$2.50/100K Opus 4.7 midpoint) added as v1.1's fourth and fifth
+  cost dimensions. Reference Table 2 in both the instructions file and
+  step-05 documents the token baseline. Step 05's Output Format §1 lists
+  both dimensions explicitly; Phase F honesty check covers both.
 - **Cluster assignment:** Cluster A (Three-Quantity Cost Model)
 - **Cross-reference:** P2-Obs-01 (cost framing); P2-Obs-04 (Phase 7
   empirical validation of these ratios)
@@ -126,8 +142,13 @@ additional observations.
 - **Priority:** High — affects every project using the Phase 1
   existing-projects toolkit going forward, and is structurally important
   to the Playbook's central thesis.
-- **Status:** Open — will feed Phase 1 v1.3 revision rather than Phase 2
-  v1.1 (since the gap is in Phase 1)
+- **Status:** **Routed to Phase 1 v1.3 queue (2026-05-22).** Phase 2 v1.1
+  did not modify this observation's status because the fix belongs to the
+  Phase 1 toolkit, not Phase 2. Phase 2 v1.1 references the two-layer
+  budget framing in passing (instructions file §Behavioral Rules and
+  step-05 budget-envelope-check language assume HC-03 may be a two-layer
+  construct after Phase 1 v1.3 lands). Phase 1 v1.3 is queued for a
+  separate fresh session.
 - **Cluster assignment:** Cluster B (Phase 1 Budget Framing Gap)
 - **Cross-reference:** P2-Obs-01 (cost framing) and P2-Obs-02 (token-cost
   dimension); P2-Obs-03 is the Phase-1-side gap that makes P2-Obs-01/02
@@ -157,8 +178,17 @@ additional observations.
   are traceable.
 - **Priority:** Medium for Phase 2 toolkit, High for Phase 7 toolkit
   (which doesn't exist yet)
-- **Status:** Open — will feed Phase 2 v1.1 minor enhancement plus
-  Phase 7 toolkit authoring when that begins
+- **Status:** **Acted (v1.1, 2026-05-22) — Phase 2 portion landed; Phase 7
+  portion queued for future Phase 7 toolkit authoring.** Phase 2 v1.1
+  added §10.4 *Phase 7 Calibration Handoff* to
+  `step-06-improvement-plan-synthesis.prompt.md` Output Format,
+  required whenever Step 05 cost rows include BELIEVED multipliers. The
+  new section names six quantities to track (dev-hours, maintainer-hours,
+  implied multiplier, token usage, implied ratio, API cost) with their
+  expected tag-graduation paths. Step 06 behavioral rule added to enforce
+  the section. step-05 surfaces BELIEVED-multiplier signal forward to
+  Step 06. When the Phase 7 toolkit is authored, this becomes a
+  first-class capability per the v1.1 forward note.
 - **Cluster assignment:** Cluster C (Phase 7 Empirical Calibration)
 - **Cross-reference:** P2-Obs-01, P2-Obs-02
 
@@ -190,7 +220,19 @@ additional observations.
   Phase-N-input-validation steps in future toolkits.
 - **Priority:** Medium — improves the toolkit's self-improvement loop,
   which is exactly the Playbook's dogfooding-driven-improvement thesis.
-- **Status:** Open
+- **Status:** **Acted (v1.1, 2026-05-22).** Validation Gap Register split
+  into §8.1 Phase 2 Local Gaps and §8.2 Upstream Toolkit Gaps in
+  `step-01-phase-1-input-validation.prompt.md` Output Format. Behavioral
+  rule added directing AI to classify each VG by scope, with explicit
+  guidance distinguishing upstream-toolkit gaps (Phase 1 toolkit was
+  structurally incomplete) from practitioner-forgot-to-mention items
+  (Phase 2 local — practitioner amends and proceeds). Q8 interview
+  question revised to present both kinds of gaps. Evaluation Checklist
+  gains two new v1.1 items for the split discipline. README's Dogfooding
+  & Calibration Guidance section gains a new subsection "Phase 2 →
+  Phase 1 feedback channel is a feature" with pattern-generalization
+  note. The pattern is forward-noted for future Phase-N-input-validation
+  steps.
 - **Cluster assignment:** Cluster D (Phase 2 → Phase 1 Feedback Channel)
 
 ---
@@ -221,7 +263,17 @@ additional observations.
     can shift mid-phase; treat the augmentation document as living."
 - **Priority:** Low — covers a relatively rare situation but the capture
   costs nothing.
-- **Status:** Open
+- **Status:** **Acted (v1.1, 2026-05-22).** step-00 prompt's Purpose
+  section gains a new "Document Is Living, Not Snapshot" subsection;
+  System Instructions gain a new behavioral rule directing AI to amend
+  the existing document rather than producing a new one; Output Format
+  gains §7 Mid-Phase Amendments table with an example entry showing the
+  Diamonds Context7-mid-Step-03 case; Document Status header added;
+  Evaluation Checklist item added. Instructions file gains new Rule 6
+  for mid-phase capability shift handling, with guidance for both
+  capability-gained and capability-lost cases. README's MCP Server
+  Recommendations section gains "Capabilities can shift mid-phase"
+  subsection.
 - **Cluster assignment:** Cluster E (Mid-Phase Capability Shift)
 
 ---
@@ -243,14 +295,19 @@ additional observations.
   strategy itself was wrong.
 - **Proposed toolset change:** Add to step-03.prompt.md a clarifying note
   on batch sizing in System Instructions: "Default batch size 4 MCs.
-  Reduce to 2-3 when MCs share cross-references that benefit from being
+  Reduce to 2-3 when MCs share cross-references that benefate from being
   read together. Reduce to 1 for independent cleanup-type MCs. Maximum 6
   only when MCs are truly independent and the practitioner has signaled
   high attention bandwidth." This codifies the pattern improvised during
   the Diamonds run.
 - **Priority:** Low — practitioners can figure this out, but capturing it
   as guidance helps future runs.
-- **Status:** Open
+- **Status:** **Acted (v1.1, 2026-05-22).** step-03 prompt's System
+  Instructions "Work MC by MC" behavioral rule gains a sub-bullet
+  "Batch sizing guidance" with the four-level scale: default 4 MCs;
+  reduce to 2-3 for cross-referenced clusters; reduce to 1 for
+  independent cleanup MCs; never exceed 6. The Evaluation Checklist
+  gains an item asserting batch sizing matched MC characteristics.
 - **Cluster assignment:** Cluster F (Step 03 Batch Sizing)
 
 ---
@@ -274,14 +331,10 @@ additional observations.
 - Enhancement: 2 (P2-Obs-02, P2-Obs-04)
 - Pattern (positive): 3 (P2-Obs-05, P2-Obs-06, P2-Obs-07)
 
-**By status at Phase 2 close:** all 7 Open. None acted on during
-dogfooding per Option B protocol. End-of-Phase-2 review (below) converts
-Open → Acted based on v1.1 toolset revision decisions.
-
-**By status after v1.1 toolset revision (deferred to fresh session):**
-TBD when v1.1 lands. Cluster A drives substantial revisions to instructions
-file and step-05; Clusters C, D, E, F drive minor revisions across multiple
-files. Cluster B routes to Phase 1 v1.3 separately.
+**By status at v1.1 close (2026-05-22):**
+- **Acted in Phase 2 v1.1:** 6 (P2-Obs-01, 02, 04, 05, 06, 07)
+- **Routed to Phase 1 v1.3 queue:** 1 (P2-Obs-03)
+- **Open:** 0
 
 ---
 
@@ -339,13 +392,13 @@ Phase 2 toolkit v1.1 lands as a moderate revision affecting **7 of the
 
 | File | Cluster(s) | Change Scope |
 |------|-----------|--------------|
-| `README.md` | A, D | Version table v1.1; reference three-quantity cost model in Step 05 description; note Step 01 surfaces upstream-toolkit gaps; Version History row |
-| `analysis-improvement-planning.existing-project.instructions.md` | A, E | Cost Modeling Tag Discipline section substantial revision (three-quantity model definition + reference tables); Behavioral Rules add mid-phase capability-shift handling; Version History row |
-| `step-00-building-block-discovery.prompt.md` | E | System Instructions add "Toolset Augmentation Document is living, not snapshot"; Output Format adds optional "Mid-Phase Amendments" subsection; Version History row |
+| `README.md` | A, D, E | Version table v1.1; reference three-quantity cost model in Step 05 description; note Step 01 surfaces upstream-toolkit gaps; "Capabilities can shift mid-phase" subsection added under MCP Server Recommendations; "Conflating Dev-Hours and Maintainer-Hours" common pitfall added; Version History row |
+| `analysis-improvement-planning.existing-project.instructions.md` | A, E | Cost Modeling Tag Discipline section substantial revision (three-quantity model definition + reference tables); Behavioral Rules add mid-phase capability-shift handling (Rule 6); Version History row |
+| `step-00-building-block-discovery.prompt.md` | E | System Instructions add "Toolset Augmentation Document is living, not snapshot"; Output Format adds §7 Mid-Phase Amendments subsection; Version History row |
 | `step-01-phase-1-input-validation.prompt.md` | D | Output Format Section 8 splits VG Register into 8.1 (Phase 2 local) and 8.2 (Upstream toolkit gaps); Evaluation Checklist updated; Behavioral Rules add "classify each VG by scope"; Version History row |
 | `step-03-mechanism-decisions.prompt.md` | F | System Instructions batch-sizing guidance refinement; Version History row |
 | `step-05-cost-modeling-and-capacity-check.prompt.md` | A | Substantial revision: System Instructions for three-quantity model output; Reference tables with per-category multiplier defaults + token baselines; per-MC cost row format updated; Output Format cost row table format updated; tag-distribution honesty check updated; Evaluation Checklist updated; Version History row |
-| `step-06-improvement-plan-synthesis.prompt.md` | C | Output Format Section 10 adds explicit Phase 7 calibration-handoff row when Step 05 uses BELIEVED multipliers; Behavioral Rules updated; Version History row |
+| `step-06-improvement-plan-synthesis.prompt.md` | C | Output Format §10.4 adds explicit Phase 7 calibration-handoff section when Step 05 uses BELIEVED multipliers; Behavioral Rules updated; Version History row |
 
 **Files unchanged in Phase 2 v1.1:**
 - `step-02-principle-weighting.prompt.md` — no observation affected
@@ -367,8 +420,50 @@ Cluster B drives Phase 1 v1.3 in a separate session:
 
 This is a small revision (2 files); doing it in a fresh session preserves
 the focused-attention pattern that produced Phase 1 v1.1 and Phase 2 v1.1
-work. Phase 1 v1.3 can ride along with Phase 2 v1.1 authoring in the same
-fresh session.
+work.
+
+---
+
+## v1.1 Revision Outcome *(New section, recording the actual outcome of the v1.1 file authoring session)*
+
+**Authoring session:** 2026-05-22, immediately following the end-of-Phase-2
+review.
+
+**Authoring approach:** Three batches with checkpoints (Option A pacing).
+- **Batch 1 (small files):** step-03, step-00, step-06 — checkpoint, accepted
+- **Batch 2 (substantial files):** step-01, instructions file, step-05 —
+  checkpoint, accepted
+- **Batch 3 (wrap-up):** README, dogfooding-observations status update
+
+**Output location:** `/mnt/user-data/outputs/phase-02-toolkit-v1.1/`
+
+**v1.1 file inventory:**
+
+```
+phase-02-toolkit-v1.1/
+├── README.md                                                          [v1.1]
+├── analysis-improvement-planning.existing-project.instructions.md     [v1.1]
+├── step-00-building-block-discovery.prompt.md                         [v1.1]
+├── step-01-phase-1-input-validation.prompt.md                         [v1.1]
+├── step-02-principle-weighting.prompt.md                              [unchanged from v1.0]
+├── step-03-mechanism-decisions.prompt.md                              [v1.1]
+├── step-04-sequencing-and-tiering.prompt.md                           [unchanged from v1.0]
+├── step-05-cost-modeling-and-capacity-check.prompt.md                 [v1.1]
+├── step-06-improvement-plan-synthesis.prompt.md                       [v1.1]
+└── dogfooding-observations.md                                         [updated 2026-05-22 to mark observations Acted]
+```
+
+Note: step-02 and step-04 are not present in the v1.1 output directory
+because they are unchanged from v1.0. When the v1.1 toolkit is committed
+to repository, step-02 and step-04 carry forward from v1.0 unchanged;
+practitioners using the v1.1 toolkit should pull all nine files together
+(seven v1.1 + two carried-forward).
+
+**Pending:**
+- **Phase 1 v1.3 revision (separate fresh session)** — 2 files for
+  Cluster B (P2-Obs-03)
+- **Optional:** article for the existing-project Phase 2 toolkit +
+  dogfooding (parallel to the existing Phase 1 article)
 
 ---
 
@@ -409,11 +504,14 @@ land what is known now.
   P2-Obs-03 as origin of "zero-cost budget" framing gap
 - **Phase 1 dogfooding-observations.md** — 26 observations, all Acted at
   v1.1; structural model for this Phase 2 dogfooding-observations file
+- **Phase 2 v1.1 file authoring session (2026-05-22)** — produced the
+  seven revised files documented in §v1.1 Revision Outcome
 - **Practitioner confirmations 2026-05-22** — final authority on all
-  observation captures, cluster decisions, and v1.1 / v1.3 revision plans
+  observation captures, cluster decisions, v1.1 file content, and
+  Phase 1 v1.3 routing
 
 ---
 
-*Phase 2 Dogfooding Observations — v1.0 of this record*
+*Phase 2 Dogfooding Observations — v1.0 of this record, updated 2026-05-22 to reflect v1.1 outcome*
 *Source: AI-Centric Software Development Playbook — Phase 2 (Existing Projects) Toolkit Dogfooding Run*
 *Diamonds project, 2026-05-22*

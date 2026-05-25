@@ -2,7 +2,7 @@
 # Phase 2: Analysis & Improvement Planning (Existing Projects)
 # AI-Centric Software Development Playbook
 
-**Toolset Version:** v1.0 (initial authoring 2026-04-22, structured to v1.2 conventions)
+**Toolset Version:** v1.1 (revised 2026-05-22 from Diamonds Phase 2 dogfooding run)
 
 ---
 
@@ -82,6 +82,22 @@ mode** — the Phase 2 default.
   group). Do not draft all mechanism decisions at once and present
   them as a wall — the practitioner cannot react meaningfully to a
   20-decision dump.
+- **Batch sizing guidance.** *(Refined in v1.1 per Diamonds
+  dogfooding observation P2-Obs-07.)* Default batch size is **4
+  MCs**. Adjust as follows:
+  - **Reduce to 2-3 MCs per batch** when MCs share cross-references
+    that benefit from being read together (e.g., MCs that depend on
+    each other's mechanism choices, MCs in the same architectural
+    cluster).
+  - **Reduce to 1 MC per batch** for independent cleanup-type or
+    pure-execution MCs where the practitioner needs only to confirm
+    the chosen mechanism without comparative context.
+  - **Increase to 5-6 MCs per batch** only when MCs are genuinely
+    independent of each other and the practitioner has signaled
+    high attention bandwidth.
+  - **Never exceed 6 MCs per batch.** Beyond that, practitioner
+    attention fatigues and acceptance becomes performative rather
+    than considered.
 - **Identify which MCs have multiple candidate mechanisms first.**
   Some MCs have only one viable mechanism; those don't need a
   Phase 2 decision (they go forward as-is). The Step 03 work
@@ -358,6 +374,9 @@ Before accepting the Mechanism Decisions artifact:
 - [ ] Comprehensiveness check is conducted; result documented
 - [ ] Forward implications for Step 04, Step 05, Phase 3, Phase 6
       are listed
+- [ ] Batch sizing matched MC characteristics (4 default; 2-3 for
+      cross-referenced clusters; 1 for independent cleanup MCs;
+      never >6)
 
 ---
 
@@ -366,10 +385,11 @@ Before accepting the Mechanism Decisions artifact:
 | Version | Date | Source | Summary |
 |---------|------|--------|---------|
 | v1.0 | 2026-04-22 | Initial authoring | Initial Phase 2 Step 03 prompt. Draft-and-react mode with MC triage first (multi-mechanism vs. single-mechanism), then per-MC draft with chosen mechanism / alternatives / principle-weighted rationale / verification method / inter-MC dependencies. Inter-MC dependency graph feeds Step 04. Comprehensiveness check at end. |
+| **v1.1** | **2026-05-22** | **Diamonds Phase 2 dogfooding run (P2-Obs-07, Cluster F)** | Refined batch-sizing guidance in System Instructions: default 4 MCs per batch; reduce to 2-3 when MCs share cross-references; reduce to 1 for independent cleanup-type MCs; maximum 6 only when MCs are truly independent. Codifies the 4/3/1 batching pattern improvised during the Diamonds run. Evaluation Checklist updated to include batch-sizing item. |
 
 ---
 
-*Part of the Phase 2 Analysis & Improvement Planning (Existing Projects) Tool Set — v1.0*
+*Part of the Phase 2 Analysis & Improvement Planning (Existing Projects) Tool Set — v1.1*
 *AI-Centric Software Development Playbook*
 *Companion file: `analysis-improvement-planning.existing-project.instructions.md`*
 *Previous step: `step-02-principle-weighting.prompt.md`*

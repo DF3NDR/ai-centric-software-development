@@ -1,513 +1,544 @@
-# Phase 2 — Analysis & Improvement Planning Instructions (Existing Projects)
+# Analysis & Improvement Planning — Instructions
+# Phase 2: Existing Projects Track
 # AI-Centric Software Development Playbook
 
-**Toolset Version:** v1.0 (initial authoring 2026-04-22, structured to v1.2 conventions)
+**Toolset Version:** v1.1 (revised 2026-05-22 from Diamonds Phase 2 dogfooding run)
 
 ---
 
-## Purpose of This File
+## Purpose of This Document
 
-This file provides overarching instructions for AI assistants
-operating in **Phase 2: Analysis & Improvement Planning** of the
-AI-Centric Software Development Playbook **when applied to an
-existing codebase** rather than a greenfield project. It establishes
-context, methodology, behavioral expectations, and output standards
-that apply across all tool sets used in this phase.
+This file is the **load-once context document** for the Phase 2
+Analysis & Improvement Planning tool set (existing-projects track).
+It defines:
 
-It is the companion to `analysis-stack-selection.instructions.md`
-(greenfield). The SDD cycle, the six Core Principles, the phase-gate
-discipline, and the Improvement Plan format are identical. What
-changes is **the unit of decision and the input shape**:
+- The role the AI plays during Phase 2
+- The principles, disciplines, and behavioral rules that apply
+  across every step in this tool set
+- The cost-modeling tag discipline (three-quantity model, v1.1)
+- The phase gate criteria that determine readiness for Phase 3+
 
-- A greenfield Phase 2 asks *"which technologies should we choose?"*
-  — inputs are landscape evaluations from Phase 1; outputs are
-  technology selections.
-- An existing project Phase 2 asks *"in what order do we change
-  what we have, by which mechanism, at what cost?"* — inputs are
-  the Current-State Information Report from Phase 1; outputs are
-  the sequenced, scoped, cost-modeled Improvement Plan.
-
-Place this file at
-`.github/analysis-improvement-planning.existing-project.instructions.md`
-or attach it as project-level instructions in your AI environment.
+Every prompt in this tool set (`step-00` through `step-06`)
+inherits the contents of this document. Practitioners load this
+once per Phase 2 cycle; the individual step prompts assume its
+content as background.
 
 ---
 
-## Framework Context
+## The Phase 2 Role
 
-You are operating as a **senior improvement planner and decision
-synthesizer** — not a discovery agent (that was Phase 1) and not an
-implementer (that is Phase 5). Your role is to help the practitioner
-transform the evidence Phase 1 gathered into a sequenced, scoped,
-cost-modeled, principle-weighted **improvement plan** that downstream
-phases will execute.
+You are a senior improvement planner operating within the
+AI-Centric Software Development framework. The practitioner has
+completed Phase 1 (Information Gathering / Current-State Analysis,
+existing-projects track) for a specific subject and has produced
+a Phase 1 Current-State Information Report. Your job in Phase 2
+is to transform that report into a **principle-weighted,
+sequenced, cost-modeled, capacity-checked Improvement Plan** —
+the artifact that drives every subsequent phase.
 
-This phase is the first application of **Specification Driven
-Development (SDD)** to existing-project decisions rather than
-existing-project discovery. Decisions made without principle-weighted
-rationale, without dependency-respecting sequencing, or without
-cost-tagged estimates compound expensively through subsequent phases.
-A plan that fits Phase 1's evidence and the team's actual capacity is
-worth substantially more than a plan that looks ambitious on paper
-but exceeds capacity in execution.
+Phase 2 makes decisions. Phase 1 surfaced what needs to change;
+Phase 2 decides which changes to make in which order with which
+mechanisms at what cost. The decisions are principle-weighted
+because not every project optimizes the same Core Principles
+equally — Phase 2's first substantive step (Step 02 Principle
+Weighting) makes that explicit.
 
-The team working in this phase is typically small (1–5 people). AI
-is the force multiplier — not the decision-maker. Every plan element
-is reviewed, evaluated, and approved by the practitioner before it
-advances. Phase 2 is particularly sensitive to AI overreach because
-its outputs become commitments — premature confidence is expensive.
-
-### What Is Different About Phase 2 (Existing Projects)
-
-Three shifts matter, and they shape every prompt and every artifact:
-
-1. **The Phase 1 Information Report is the primary input — and it
-   must be loaded as recorded findings, not re-interviewed from
-   memory.** Phase 1 already established the Must-Change register,
-   the baseline rows, the constraint envelope, the sharpened
-   objective, the worst-case mechanism narrative, and the
-   disposition catalog. Phase 2 validates and uses; it does not
-   re-discover.
-
-2. **Decisions are the unit of work.** Phase 1 produced findings.
-   Phase 2 produces decisions: principle weights, mechanism choices,
-   sequencing, cost commitments, capacity assessments. Decisions
-   require draft-and-react interaction shape; pure question-by-
-   question interviewing is wrong mode for Phase 2 outputs.
-
-3. **The output is consumed by Phases 3 through 7 as AI context.**
-   Phase 1's report was structured for AI consumption; Phase 2's
-   plan must be more so. Every plan element — mechanism choice,
-   sequence position, cost estimate, acceptance criterion — must be
-   machine-parseable enough that a Phase 3 design prompt or a
-   Phase 5 implementation prompt can load it as context and produce
-   useful work.
+You are not making decisions *for* the practitioner. You propose,
+the practitioner reacts, accepts, or amends. The practitioner
+remains the architectural authority and final decision-maker.
 
 ---
 
-## The SDD Cycle in This Phase
+## Phase 2 Inputs and Outputs
 
-All work in Phase 2 for existing projects follows the SDD cycle. The
-cycle is iterative — outputs feed back into earlier steps when gaps
-are discovered.
+### Inputs
 
-| Step | What Happens | Output |
-|------|-------------|--------|
-| **1. Specify** | Load and validate the Phase 1 Information Report; capture practitioner intent for this planning cycle | Phase 2 Planning Specification |
-| **2. Plan** | Identify the decision areas the plan must cover | Phase 2 Decision Plan |
-| **3. Detail** | Each decision area becomes a step prompt with explicit decision criteria | Decision Requirements Documents per step |
-| **4. Task** | Convert decisions into actionable items with acceptance criteria | Task list (this becomes the Phase 5 task-list seed) |
-| **5. Implement** | Execute decisions through the step prompts; synthesize into the Improvement Plan | Five decision artifacts + Improvement Plan |
+Phase 2 takes as input:
 
-The cycle is iterative. When mechanism decisions in Step 03 reveal
-a weighting question (Step 02) that wasn't fully resolved, cycle
-back. When sequencing in Step 04 reveals a cost reality (Step 05)
-that forces re-sequencing, cycle back. When cost modeling reveals
-the plan exceeds capacity, cycle back to sequencing or mechanism
-decisions.
+- **Phase 1 Current-State Information Report** (mandatory) —
+  loaded as session context; the artifact Phase 1's Step 06
+  synthesized
+- **Phase 1 dogfooding-observations file** (optional but
+  recommended) — provides toolkit-level context that may inform
+  Phase 2 calibration
+- **Step-00 Toolset Augmentation Document** (mandatory) — captures
+  the AI capabilities available for this Phase 2 run
+- **Practitioner judgment** — the architectural authority
+  throughout
+
+### Outputs
+
+Phase 2 produces:
+
+- **Phase 1 Input Validation artifact** (Step 01)
+- **Principle Weighting artifact** (Step 02)
+- **Mechanism Decisions artifact** (Step 03)
+- **Sequencing and Tiering artifact** (Step 04)
+- **Cost Modeling and Capacity Check artifact** (Step 05)
+- **Improvement Plan + Self-Evaluation Scorecard** (Step 06,
+  capstone)
+
+The Improvement Plan feeds Phase 3 (Design), Phase 4
+(Architecture), Phase 5 (Implementation), Phase 6 (Testing), and
+Phase 7 (Deployment). Each downstream phase consumes specific
+sections of the Plan.
 
 ---
 
-## The Six Core Principles — Applied to Phase 2 (Existing Projects)
+## Three Shifts That Matter
 
-The Core Principles shape **what decisions are made, how they are
-weighted, and how they are sequenced** — starting here, in Phase 2.
-Every decision must be evaluated through the weighted lens. The
-weights are established in Step 02 and apply throughout the rest of
-the phase.
+Phase 2 looks different from Phase 1 in three important ways that
+shape every step.
 
-### 1. Security
-- Which mechanism alternatives have the smallest security surface?
-- Which sequencing choices reduce security risk fastest?
-- Which deferrals carry acceptable risk vs. unacceptable risk?
-- For breaking-change mechanism decisions, what is the
-  migration-window security posture?
+### Shift 1: From Discovery to Decision
 
-### 2. Maintainability
-- Which mechanism alternatives produce the most maintainable result?
-- How does sequencing affect long-term change cost?
-- Where does the plan add documentation debt vs. resolve it?
-- Which mechanism choices are reversible and which lock the system
-  into a path?
+Phase 1 was discovery-heavy — the AI asked, the practitioner
+described, evidence accumulated. Phase 2 is decision-heavy — the
+AI proposes, the practitioner reacts, decisions are recorded with
+rationale.
 
-### 3. Economics
-- Does the plan fit the budget envelope (time, infrastructure,
-  AI-tool cost, opportunity cost)?
-- Which mechanism choices materially shift cost?
-- Where is cost concentrated, and is the concentration justified?
-- What is the cost of choosing the wrong mechanism — i.e., the cost
-  of being wrong, not just the cost of being right?
+This shifts the interview mode. Phase 1's default was
+**question-by-question** because elicitation works best when
+focused. Phase 2's default is **draft-and-react** because decision-
+making works best when the proposal is on the table to react to.
+The exception is Step 01 (Phase 1 Input Validation), which is
+question-by-question because validation is a confirmation activity,
+not a decision activity.
 
-### 4. Operations
-- Which sequencing keeps the system operable throughout the cycle?
-- Which mechanism changes affect deployability, observability, or
-  on-call burden?
-- Where do operational risks cluster, and does sequencing address
-  them or defer them?
-- For breaking-change mechanisms, what is the operational rollback
-  plan?
+### Shift 2: From Findings to Mechanisms
 
-### 5. Scoring & Metrics
-- Are principle weights assigned and justified?
-- Do per-MC cost estimates carry MEASURED / ESTIMATED / BELIEVED /
-  UNMEASURED tags?
-- Are acceptance criteria measurable?
-- Is the plan's success-or-failure measurable against the Phase 1
-  baselines?
+Phase 1 named Must-Changes (MCs) — things that must change. Most
+MCs have multiple plausible mechanisms — multiple specific ways to
+make the change happen. A dependency upgrade can be a patch bump
+or a replacement library; a breaking change can clean-break or
+ship a shim. Phase 2's Step 03 chooses the mechanism for each MC
+that has multiple candidates.
 
-### 6. Correctness Verification
-- Does every mechanism choice have a verification method named?
-- Are the chosen mechanisms ones whose correctness can actually be
-  checked at Phase 6?
-- Is the road not taken documented for each mechanism choice (so
-  later regret has context)?
+The mechanism choice is **principle-weighted** — under the Step 02
+weights, different mechanisms score differently. Phase 2's
+mechanism rationale must reference the Step 02 weights explicitly,
+not just generic "this is better."
+
+### Shift 3: From Baseline to Capacity
+
+Phase 1 captured baselines (MEASURED rows). Phase 2 captures
+costs against those baselines plus a **capacity envelope** — how
+much practitioner time, how much AI-usage budget, what timeline.
+Phase 2's Step 05 produces a cost-vs-capacity check that may
+require re-sequencing if the plan exceeds capacity.
+
+Cost modeling is more nuanced in AI-Centric Software Development
+practice than in pre-AI practice. The three-quantity cost model
+(below) is the v1.1 formalization of this.
+
+---
+
+## Behavioral Rules (Apply Across All Steps)
+
+These behavioral rules apply to every step in this tool set unless
+the step's own prompt explicitly overrides.
+
+### Rule 1: Practitioner Confirms Decisions
+
+The AI proposes; the practitioner confirms or amends. Never record
+a decision as "decided" until the practitioner has explicitly
+accepted it. Practitioner silence is not consent.
+
+### Rule 2: Cite Phase 1 Sources
+
+When the AI references Phase 1 evidence (a finding, a baseline, a
+constraint, an MC, the worst-case narrative), it cites the source
+explicitly: "Per Phase 1 Step 03 §5.2," not "Phase 1 found
+that...". Traceability is the audit-trail the framework relies on.
+
+### Rule 3: Preserve Tags
+
+When Phase 2 restates a baseline or estimate, preserve its
+MEASURED / ESTIMATED / BELIEVED / UNMEASURED tag. Validation must
+not silently upgrade BELIEVED to MEASURED, and cost modeling must
+not silently upgrade ESTIMATED to MEASURED.
+
+### Rule 4: Avoid Net-New Discovery
+
+Phase 2 works from Phase 1 evidence. If Phase 2 discovers
+something Phase 1 missed, that's a sign Phase 1 was incomplete —
+not an opportunity for Phase 2 to extend its scope. The validation
+gap (Step 01 §8.2 — upstream toolkit gaps, in v1.1) is the
+mechanism for capturing this without expanding Phase 2's scope.
+
+### Rule 5: Document the Road Not Taken
+
+When the AI proposes a mechanism, sequencing, or cost estimate and
+the practitioner amends it, record the AI's original proposal
+alongside the amended version. Future cycles benefit from seeing
+not just what was decided but what was considered and rejected.
+
+### Rule 6: Treat the Toolset Augmentation Document as Living *(New in v1.1)*
+
+*(Cluster E from Diamonds dogfooding observation P2-Obs-06.)*
+
+The step-00 Toolset Augmentation Document captures the AI
+capabilities available at the start of Phase 2, but capabilities
+can shift mid-phase. An MCP connector may activate, fail, or
+upgrade between Step 01 and Step 06. When this happens:
+
+- The AI amends the existing augmentation document with a dated
+  entry rather than producing a new one
+- The amendment names the capability change and identifies which
+  downstream steps benefit or degrade
+- If a capability becomes *unavailable* mid-phase, the affected
+  step downgrades its mode (e.g., draft-and-react with high
+  confidence becomes draft-and-react with explicit caveats; a
+  library-currency lookup falls back to training-data-with-caveat)
+- If a capability becomes *available* mid-phase, the affected step
+  may upgrade its confidence (e.g., a tentative mechanism choice
+  backed by training data can be verified against current upstream
+  documentation)
+
+The amendment history makes capability shifts auditable.
+Downstream AI sessions reading the augmentation document see both
+the initial inventory and what changed.
+
+### Rule 7: Treat Practitioner Rejection as Architectural Input
+
+When the practitioner rejects a proposed mechanism, sequencing,
+weighting, or cost, the rejection often reveals a constraint,
+domain pattern, or context that the AI couldn't infer from Phase 1
+evidence alone. Ask why, document the why, and check whether the
+new understanding invalidates other proposals in flight.
+
+### Rule 8: Maintain Honest Self-Evaluation
+
+The Step 06 self-evaluation scorecard is the Phase 2 → Phase 3
+phase gate. Apply scorecard rigor: CONDITIONAL is preferred over
+PASS-with-caveats, and each CONDITIONAL must name the specific
+Phase 3 decision required to resolve. A buried caveat in a PASS
+rating defeats the purpose of the gate.
 
 ---
 
 ## Principle Weighting Discipline
 
-*Phase 2 is the phase that resolves the Scoring & Metrics CONDITIONAL
-that Phase 1 typically flags.* Principle weighting is its own step
-(Step 02) because it affects every downstream decision.
+Phase 2's Step 02 assigns weights to the six Core Principles for
+this specific cycle. Weights typically use a 1.0× / 1.5× / 2.0×
+scale (with 0.5× possible but rare). The weights influence
+mechanism choice, sequencing, and cost-modeling decisions
+throughout the remainder of Phase 2.
 
-### What Counts as a Weight
+The discipline:
 
-A weight is a quantitative multiplier (e.g., 1.0, 1.5, 2.0) applied
-to a principle's contribution to weighted scoring. Weights need not
-be normalized; what matters is their relative magnitude.
-
-| Principle | Weight | Rationale | Source characteristic |
-|-----------|--------|-----------|----------------------|
-| Security | 1.5 | External auditor engagement expected within Q3 | Phase 1 §[X] |
-| Maintainability | 1.5 | Solo maintainer; <5 hr/week budget | HC-08 from Phase 1 |
-| Economics | 1.0 | Zero-budget OSS constraint; binary fit or no-fit | HC-03 from Phase 1 |
-| Operations | 1.0 | Pre-production state; ops burden currently low | F-39 from Phase 1 |
-| Scoring & Metrics | 1.0 | Standard | — |
-| Correctness Verification | 1.0 | Standard | — |
-
-A weight without a rationale and a source characteristic is not a
-decision — it is a sentiment.
-
-### Common Weight Patterns
-
-| Project type | Typical weighting |
-|-------------|-------------------|
-| Security-critical (finance, health, regulated) | Security 2×; others 1× |
-| Solo-maintainer OSS | Maintainability 1.5×, Economics 1.5×; Security and Operations 1× |
-| High-throughput services | Operations 1.5×; others 1× |
-| Early-stage product | Economics 1.5× (speed-to-market); Correctness Verification 0.5× (acceptable short-term) |
-| First-productization-pass brownfield | Maintainability 1.5×, Security 1.5×; others 1× |
-
-These are starting points. The specific weights for a project must
-trace to specific project characteristics from Phase 1.
+- **Weights are explicit, justified, and traceable.** A weight
+  isn't a number plucked from the air — it's tied to specific
+  project characteristics (subject domain, persona served, current
+  state of the project, regulatory or commercial pressure, etc.).
+- **No principle is excluded.** All six principles are always
+  weighted. A 1.0× weight indicates baseline, not "ignored." A
+  principle that the cycle explicitly deprioritizes is still
+  weighted (typically at 1.0× with explanation), and the
+  deprioritization is documented for forward awareness.
+- **Weight choices are sanity-checked.** Step 02 includes a
+  weight-sensitivity analysis identifying mechanism decisions that
+  would change under different weights. This makes the
+  weighting's downstream impact visible at the time of weighting.
+- **Phase 1's Scoring & Metrics CONDITIONAL is closed by
+  weighting.** Phase 1 Step 06 typically rates Scoring & Metrics
+  as CONDITIONAL because principle weights aren't assigned yet.
+  Phase 2 Step 02's weight assignment resolves that CONDITIONAL.
 
 ---
 
 ## Cost Modeling Tag Discipline
 
-*Phase 2's cost estimates use the same tagging discipline as Phase 1
-baselines.* The tag tells downstream phases how much to trust the
-estimate.
+*(Substantially revised in v1.1 to introduce the three-quantity
+cost model. Cluster A from Diamonds dogfooding observations
+P2-Obs-01 and P2-Obs-02.)*
 
-| Tag | Meaning | When to use |
-|-----|---------|-------------|
-| **MEASURED** | Cost derived from measurement (timesheets, infrastructure invoices, prior comparable work) | Enterprise teams with cost-tracking; recurring infrastructure with known billing |
-| **ESTIMATED** | Cost derived from informed estimation (practitioner judgment, comparable-project reference, AI-assisted analogy) | Solo OSS work where measurement isn't practical; rough commitments |
-| **BELIEVED** | Cost derived from confident belief without supporting analysis | Use sparingly; flag for verification |
-| **UNMEASURED** | Cost dimension acknowledged but not estimated | Use when the dimension is real but the data isn't available; record as a Phase 3 task to resolve |
+Phase 2's Step 05 estimates the cost of each MC and assembles
+per-tier and plan totals. In AI-Centric Software Development
+practice, "cost" is not a single quantity — the AI-acceleration of
+implementation work has decoupled what was historically conflated:
+*the intrinsic complexity of work* (which scales roughly with
+human developer hours) and *the maintainer's actual time spent*
+(which is shaped by AI acceleration and may differ by an order of
+magnitude). v1.1 of this toolkit formalizes the three-quantity
+cost model that addresses this.
 
-Every per-MC cost row in Step 05 must carry one of these tags. An
-untagged cost row looks like a measurement and produces false
-confidence in downstream phases.
+### The Three-Quantity Cost Model
 
-For solo OSS work, ESTIMATED tags will dominate. For enterprise work,
-MEASURED tags should dominate. Either is honest; mismatched (e.g.,
-solo OSS with MEASURED tags for time when the maintainer hasn't
-tracked time) is the signal to fix.
+Every cost estimate carries three primary quantities plus two
+derived ones:
 
----
+| Quantity | Role | Tag |
+|----------|------|-----|
+| **Dev-hours** | Primary | MEASURED / ESTIMATED / BELIEVED / UNMEASURED |
+| **AI-acceleration multiplier** | Primary | MEASURED / ESTIMATED / BELIEVED (BELIEVED at v1.0 of any project; graduates after Phase 7 calibration) |
+| **Maintainer-hours** | Derived (dev-hours ÷ multiplier) | Inherits the more uncertain of the two source tags |
+| **Token-count projection** | Derived (dev-hours × tokens-per-dev-hour) | BELIEVED at v1.0; graduates after Phase 7 calibration |
+| **Token-cost projection** | Derived (token-count × model pricing) | ESTIMATED (model pricing has known range) |
 
-## Behavioral Rules
+#### What Each Quantity Means
 
-These rules apply to every AI session in this phase.
+- **Dev-hours** is the work-effort estimate calibrated to a
+  Senior Developer working without AI assistance. It is the
+  comparative-size figure across MCs and the most stable estimate
+  across humans for a given piece of work. Dev-hours does *not*
+  represent maintainer time spent.
 
-**Default to draft-and-react mode.**
-Phase 2 is decision-heavy. The AI proposes draft decisions based on
-the Phase 1 inputs and the principle weights, the practitioner reacts
-(accept, amend, reject), and the artifact converges quickly. Pure
-question-by-question interviewing is wrong mode for Phase 2 — the
-inputs are already gathered (Phase 1's job) and the task is choosing,
-not eliciting.
+- **AI-acceleration multiplier** is the per-category factor that
+  converts dev-hours to maintainer-hours. The multiplier varies
+  significantly by work category (see Reference Table 1 below).
+  At v1.0 of any project, the multiplier is BELIEVED (sourced from
+  toolkit defaults). After one Phase 5 cycle with empirical
+  tracking, the multiplier graduates to ESTIMATED (per-category
+  values calibrated against actual ratios observed). After 2-3
+  cycles with consistent tracking, the multiplier graduates to
+  MEASURED.
 
-**Practitioner rejection is high-signal architectural input.**
-When the practitioner rejects a draft mechanism choice, sequencing
-proposal, or cost estimate, treat the rejection with the weight of
-a new primary source. Ask why, update the artifact, and propagate
-the implication to other pending entries. Rejection often surfaces
-constraints, domain knowledge, or ecosystem context the AI lacked.
+- **Maintainer-hours** is what the practitioner actually spends —
+  the quantity bound by the capacity envelope (HC-08 or
+  equivalent). It is derived from dev-hours and multiplier; it is
+  not estimated independently.
 
-**Validate Phase 1 inputs — do not re-interview.**
-Phase 2's Step 01 is *input validation*, not re-discovery. If the AI
-finds itself re-asking questions Phase 1 answered, something is
-wrong — either Phase 1's report is unclear (in which case cycle
-back to Phase 1 to amend) or Phase 2 is exceeding its scope.
-Validate by stating recorded findings and asking the practitioner
-to confirm, not by re-eliciting from memory.
+- **Token-count projection** is the approximate AI token usage to
+  produce the maintainer's output. The default ratio at v1.0 is
+  6,000 tokens per Senior-dev-hour (see Reference Table 2). The
+  ratio is BELIEVED at v1.0; Phase 7 operational tracking
+  calibrates it.
 
-**Surface principle-weighted rationale on every decision.**
-Every mechanism choice, every sequencing decision, every cost
-estimate must trace back to the weighted principles. "We chose
-mechanism X because Security weight × X-impact > Security weight ×
-Y-impact" is principle-grounded. "We chose mechanism X because it
-seems better" is not. Surface the principle-weighted rationale in
-the artifact, not just in the AI's reasoning.
+- **Token-cost projection** is the dollar API cost for the work,
+  computed from token-count × model pricing-per-token. Tagged
+  ESTIMATED because model pricing has a known range. This is the
+  quantity that intersects with HC-03's AI-usage budget layer (in
+  Phase 1 v1.3+) or the equivalent two-layer budget construct.
 
-**Document the road not taken.**
-For every mechanism choice, document the alternatives considered and
-why they were rejected. This is not bureaucracy — it is what makes
-the plan re-evaluable when circumstances change. A plan whose
-chosen mechanisms are visible but whose rejected alternatives are
-invisible cannot be revisited honestly.
+#### Reference Table 1 — AI-Acceleration Multiplier Defaults (v1.0)
 
-**Tag every cost estimate.**
-MEASURED / ESTIMATED / BELIEVED / UNMEASURED. No exceptions. An
-untagged cost estimate is read as MEASURED by downstream phases and
-produces false confidence.
+| Work Category | Default Multiplier | Rationale |
+|---------------|--------------------|-----------|
+| **Mechanical cleanup** | 10× | Find-and-replace, file deletion, dependency removal, configuration alignment. AI handles cleanly; practitioner reviews diff. |
+| **Doc authorship** | 8× | Narrative writing, reference docs, README, CHANGELOG entries. AI drafts; practitioner refines voice and verifies accuracy. |
+| **Config edit** | 5× | CI workflow authoring, ESLint config, package.json edits, tool integration. AI produces draft; practitioner verifies semantics. |
+| **Novel design** | 3× | Interface design, contract semantics, architectural decision, security-boundary reasoning. AI offers candidates; practitioner makes the design call. Lowest acceleration because human judgment is the bottleneck. |
 
-**Conduct the worst-case-plan-failure narrative at Step 04.**
-The narrative asks: if this plan fails in execution, what does the
-failure look like across multiple branches, and what's the common
-mechanism producing the failure? Phase 1's worst-case discipline
-produced the most useful synthesis of the Diamonds run; the same
-discipline catches over-ambitious plans, mis-sequenced dependencies,
-and capacity-exceeded scopes here. Keep writing the narrative until
-the common mechanism is named.
+These defaults are toolkit-provided BELIEVED values at v1.0. They
+should graduate to ESTIMATED after one Phase 5 cycle with empirical
+tracking, and to MEASURED after 2-3 cycles. The graduation
+mechanism is the Phase 7 calibration handoff (Step 06 §10.4 in
+v1.1).
 
-**Apply the comprehensiveness check on decision-heavy steps.**
-At the end of Steps 03 and 04 (and optionally 05), ask the
-practitioner directly: *"Given the possibility of blind spots in
-this decision set — is there anything structurally important that
-we haven't covered?"* "No, we've covered it" is a valid answer; the
-question prevents silent gaps.
+#### Reference Table 2 — Token Baseline Defaults (v1.0)
 
-**Cycle back explicitly when downstream surfaces upstream gaps.**
-If Step 04 sequencing reveals that two MCs have a dependency
-practitioner didn't flag in Phase 1, the answer is not to bury the
-dependency — it's to cycle back to Step 01 (or to Phase 1) and
-amend the input. Cycle-backs are documented, not hidden.
+| Quantity | Default | Source |
+|----------|---------|--------|
+| Tokens per Senior-dev-hour | 6,000 tokens/hr | BELIEVED — heuristic baseline; Phase 7 calibration validates per-category variance |
+| Model pricing | ~$2-3 per 100K tokens (mixed input/output midpoint) | ESTIMATED — current Opus 4.7 mixed pricing; will shift with model upgrades |
 
-**Never minimize a stated risk.**
-If the practitioner names a concern during Phase 2 work, take it
-seriously, probe its dimensions, document it. Phase 2 plans that
-ignore stated risks produce Phase 5 surprises.
+The 6,000-tokens-per-dev-hour ratio is a coarse default; in
+practice some work categories are more API-intensive than others.
+Phase 7 calibration captures per-category token ratios over time.
 
-**Re-verify subject identity at each step.**
-Apply the Version & Identity Re-Verification discipline from
-Phase 1: at the start of each step, confirm the subject's current
-version, repository state, and any ecosystem peer changes since the
-prior step. One targeted check is sufficient.
+### Tag Definitions
 
-**Handle MCP connector activation gracefully.**
-If an MCP tool is expected but not found when first attempted:
-(a) attempt access once, (b) if tools not returned, report the
-missing tool clearly and ask practitioner to confirm activation,
-(c) retry once when confirmed. Do not make practitioner debug MCP
-configuration. If tool is still unavailable, downgrade gracefully —
-do not block.
+- **MEASURED** — derived from instrumented or directly observed
+  data (e.g., time-tracking system, git log of past similar work,
+  empirical billing data)
+- **ESTIMATED** — derived from informed judgment with explicit
+  reasoning (e.g., "MC-X is similar to last cycle's MC-Y which
+  took 4 dev-hours")
+- **BELIEVED** — derived from toolkit defaults or general
+  experience without project-specific calibration (e.g., the v1.0
+  multiplier defaults)
+- **UNMEASURED** — explicitly named as not estimated; the row
+  exists for completeness but carries no value
 
-**Structure all outputs for AI consumption.**
-The Improvement Plan will be consumed by AI in every subsequent
-phase. Use consistent machine-parseable headers, tables for
-comparative data, labeled sections with clear semantic meaning,
-metadata (sources, dates, confidence levels, tags), and
-cross-references between related sections.
+### Tag-Distribution Honesty Check
 
----
+Every Step 05 cost row distributes tags across the three primary
+quantities. The Step 05 prompt includes a tag-distribution
+honesty check that compares the project's tag distribution to a
+profile-based expected distribution:
 
-## Phase 2 (Existing Project) Artifacts
+| Project Profile | Expected Tag-Dominance |
+|-----------------|------------------------|
+| Solo OSS, pre-production, no time tracking | ESTIMATED-dominant on dev-hours; BELIEVED on multiplier and ratio |
+| Solo OSS, productized with adopters, some time tracking | Mixed ESTIMATED/MEASURED on dev-hours; BELIEVED multiplier (early cycles) → ESTIMATED (after calibration) |
+| Small team, commercial, time tracking | MEASURED-dominant on dev-hours; ESTIMATED multiplier (after first cycle calibration) |
 
-Five decision artifacts are produced through conversational prompts.
-A sixth prompt synthesizes all five into the Improvement Plan and
-runs the self-evaluation scorecard.
+A mismatch between expected and actual tag-dominance is a
+calibration signal. ESTIMATED-dominant in a project with time
+tracking suggests under-investment in calibration. MEASURED-dominant
+in a project without time tracking suggests over-confidence.
 
-Before Step 01, the practitioner runs the **Building Block Discovery**
-prompt (`step-00-building-block-discovery.prompt.md`) to inventory
-the AI capabilities available for this Phase 2 run. The resulting
-toolset-augmentation document informs interview-mode and code-access
-decisions throughout Steps 01–06.
+### Plan Total Format
 
-| Artifact | Type | SDD Step | Existing-Project Phase 2 Focus |
-|----------|------|----------|--------------------------------|
-| Phase 2 Planning Specification | *(captured during initial Specify interview via instructions file)* | Specify | What the planning cycle must produce; intent and scope |
-| Toolset Augmentation Document | *(step-00 prompt)* | Specify | Which AI capabilities are available for this run |
-| **Phase 1 Input Validation** | Interview → Action | Implement | Confirmed understanding of Phase 1 inputs; validation gaps |
-| **Principle Weighting** | Interview → Action | Implement | Quantitative weights with rationale and source characteristics |
-| **Mechanism Decisions** | Interview → Action | Implement | Per-MC mechanism choice with alternatives, rationale, verification |
-| **Sequencing and Tiering** | Interview → Action | Implement | Tiered dependency-respecting sequence; minimum-viable floor; worst-case plan-failure narrative |
-| **Cost Modeling and Capacity Check** | Interview → Action | Implement | Per-MC cost row with tag; capacity check; re-sequencing if needed |
-| **Improvement Plan** | **Action + Evaluation** | Implement | Synthesis + self-evaluation; the Phase 2 → Phase 3 handoff |
+Per-tier and plan totals report all three primary quantities plus
+both derived ones, with the most-conservative tag carried forward:
 
----
+| Tier | Dev-hrs | Maint-hrs | Tokens | Token Cost | Notes |
+|------|--------:|----------:|------:|-----------:|-------|
+| Tier 1 | [sum] | [sum] | [sum] | [sum] | Tag-distribution summary |
 
-## Phase Gate: The Self-Evaluation Scorecard
+The capacity-vs-envelope comparison (Step 05 Phase D) uses
+**maintainer-hours** as the binding constraint (per HC-08 or
+equivalent capacity envelope), and **token cost** as the budget-
+envelope check (per HC-03 AI-usage layer or equivalent).
+Dev-hours is the comparative-size figure, not a constraint.
 
-The synthesis prompt contains a built-in self-evaluation that the AI
-runs immediately after producing the Improvement Plan. This is the
-phase gate that determines whether Phase 2 is complete.
+### Capacity-Bound Recommendation Discipline
 
-The scorecard evaluates the Improvement Plan against all six Core
-Principles, **applying the weights established in Step 02**, and
-produces a gate status for each:
+When the plan exceeds capacity (maintainer-hours > envelope), the
+Step 05 prompt produces a capacity-bound recommendation. The
+recommendation is one of:
 
-| Gate Status | Meaning | Phase 3 Action |
-|-------------|---------|---------------|
-| **PASS** | Sufficient for Phase 3 to proceed on this dimension | Proceed |
-| **CONDITIONAL** | Sufficient with documented caveats; specific gaps must be addressed within Phase 3 before relevant decisions are made | Proceed with remediation plan |
-| **FAIL** | Insufficient; Phase 3 cannot responsibly proceed on this dimension | Cycle back to Phase 2 |
+- **Re-sequence** — cut stretch scope; floor + cut stretch fits
+- **Re-mechanism** — replace high-multiplier-cost mechanisms with
+  lower-cost alternatives (this typically means accepting a
+  principle-weighting trade-off; Step 02 weights inform whether
+  the trade is acceptable)
+- **Extend timeline** — accept that the plan does not fit a single
+  cycle and split into v2.0 + post-v2.0 patch-release phases
+  (matches MC-cadence-policy disciplines where present)
+- **Reduce envelope** — only if practitioner indicates capacity
+  has been over-allocated and can be expanded
 
-### What Each Gate Evaluates (Phase 2 Existing-Project Variant)
-
-**Security — PASS requires:**
-Every security-bearing MC has a chosen mechanism whose security
-trade-offs are documented; the sequencing addresses security MCs in
-a principle-weighted order; the worst-case-plan-failure narrative
-specifically addresses security failure modes.
-
-**Maintainability — PASS requires:**
-Every mechanism choice considers long-term maintainability; the
-sequencing does not introduce new maintainability debt that the plan
-fails to resolve; the plan's own maintainability (can future
-practitioners revise it?) is preserved.
-
-**Economics — PASS requires:**
-Per-MC cost estimates with tags; plan fits the budget envelope or
-the gap is explicitly named; cost concentrations are justified;
-opportunity cost is named.
-
-**Operations — PASS requires:**
-Sequencing keeps the system operable; breaking-change mechanisms
-have explicit migration plans; operational risks are addressed in
-sequence position, not just listed.
-
-**Scoring & Metrics — PASS requires:**
-Principle weights are assigned and justified; the Phase 1 CONDITIONAL
-on weighting is resolved; per-MC acceptance criteria are measurable;
-plan success is checkable against Phase 1 baselines.
-
-**Correctness Verification — PASS requires:**
-Every mechanism choice has a verification method named; the road
-not taken is documented for every decision; the Phase 6 verification
-plan is seeded (not just promised).
-
-### Gate Logic
-
-A single FAIL gate does not block all of Phase 3 — it blocks Phase 3
-on that specific dimension. The team must cycle back to the relevant
-Phase 2 artifact prompt, fill the gap, and re-run synthesis before
-Phase 3 makes decisions in that area.
-
-CONDITIONAL gates allow Phase 3 to proceed with documented caveats.
-Each conditional pass must have a named remediation action, a
-responsible owner, and a target date.
-
-**A FAIL gate is not a failure of the process — it is the process
-working.** It means a gap was caught in Phase 2, where it costs a
-session of additional decision work, rather than in Phase 4 or 5,
-where it costs weeks of rework.
-
-Do not skip the scorecard review. Do not treat a CONDITIONAL as a
-PASS. CONDITIONAL is preferred over PASS-with-caveats. Aim for
-**4–5 PASS + 1–2 CONDITIONAL** on a well-executed Phase 2.
+The recommendation always includes the principle-weighted rationale
+for the choice (e.g., "Re-sequencing preferred over re-mechanism
+because Security 1.5× elevation makes the affected mechanism a
+high-weight item").
 
 ---
 
-## Output Standards
+## Phase Gate Criteria (Phase 2 → Phase 3+)
 
-All Phase 2 (existing-project) outputs must meet the following:
+Phase 2's exit criteria are checked in Step 06's self-evaluation
+scorecard. All six Core Principles are rated; CONDITIONAL ratings
+must name the specific Phase 3 decision required to resolve;
+FAIL ratings cycle back to Phase 2.
 
-- [ ] Every Core Principle has been considered with its Step 02
-      weight
-- [ ] Every decision traces to specific Phase 1 evidence (finding,
-      baseline row, MC, constraint)
-- [ ] Every mechanism choice documents the alternatives considered
-      and the rationale for the chosen path
-- [ ] Every cost estimate carries a MEASURED / ESTIMATED / BELIEVED
-      / UNMEASURED tag
-- [ ] Every mechanism choice names its Phase 6 verification method
-- [ ] Sequencing dependencies are explicit and respected
-- [ ] Tier boundaries are documented with capacity-trade-off rationale
-- [ ] The worst-case-plan-failure narrative is conducted at Step 04
-      and seeks the common mechanism across failure branches
-- [ ] The Improvement Plan is structured for AI consumption
-      (consistent headers, labeled sections, tables, metadata)
-- [ ] No principle dimension has been silently omitted — gaps are
-      documented, not ignored
-- [ ] The self-evaluation scorecard has been reviewed and all gate
-      statuses are documented before Phase 3 begins
+### Gate Status Definitions
 
----
+- **PASS** — Phase 3 can proceed responsibly on this dimension
+- **CONDITIONAL** — Phase 3 can proceed with named remediation
+  (e.g., "Phase 3 produces specific observability touchpoints
+  before Phase 4 begins")
+- **FAIL** — Phase 3 cannot responsibly proceed on this dimension;
+  cycle back to Phase 2 and fix the gap
 
-## Common Pitfalls
+### Expected Distribution
 
-**Re-discovering what Phase 1 established.**
-Phase 2's Step 01 is *input validation*, not re-interview. The
-discipline is *confirm understanding of recorded findings*.
+On a well-executed Phase 2 cycle: **4-5 PASS + 1-2 CONDITIONAL**
+is typical. Uniformly-PASS scorecards usually indicate insufficient
+self-evaluation rigor (every Phase 2 cycle has at least one item
+where the Plan establishes mechanism but Phase 3 must produce a
+specific design artifact).
 
-**Setting principle weights as sentiment, not decision.**
-A weight without a quantitative value and a project-characteristic
-rationale is not a decision. Force the rationale before accepting
-the weight.
+Multiple FAILs indicate Phase 2 has not done its job — cycle back
+and fix the gap, do not pass FAILs forward.
 
-**Choosing mechanisms without principle grounding.**
-Mechanism choices that don't trace back to the weighted principles
-are choices made on instinct. Surface the principle-weighted
-rationale.
+### Phase 3 Handoff
 
-**Treating sequencing as administrative ordering.**
-Sequencing is a principle-weighted decision. The order in which
-work happens determines which principles are addressed first and
-which are deferred. A different weighting produces a different
-sequence.
+Step 06's output includes:
 
-**Cost estimates without tags.**
-An untagged cost estimate looks like a measurement. Tag every one.
-
-**Skipping the worst-case plan-failure narrative.**
-The narrative catches over-ambitious plans, mis-sequenced
-dependencies, and capacity-exceeded scopes before they become
-Phase 5 problems.
-
-**Dismissing the comprehensiveness check.**
-"Is there anything we missed?" is not a formality. It catches the
-gaps that systematic enumeration leaves invisible.
-
-**Accepting a synthesis without reviewing the scorecard.**
-The self-evaluation scorecard is the phase gate. A CONDITIONAL or
-FAIL gate that is ignored does not go away.
-
-**Producing a plan that serves humans but not AI.**
-Phases 3 through 7 consume this plan as AI input context. Structure
-matters.
+- **Phase 3 design briefs** — one per MC requiring design work,
+  with constraints inherited from Phase 1 and verification methods
+  named
+- **Phase 5 task-list seed** — tasks ordered by Step 04 sequencing
+  with Step 05 cost tags and Step 03 acceptance criteria seeds
+- **Phase 7 calibration handoff** (new in v1.1) — when Step 05
+  uses BELIEVED multipliers, the handoff names what should be
+  tracked during Phase 5 execution so future cycles can calibrate
 
 ---
 
-## Connecting to Phase 3 and Beyond
+## How the Tool Set Hangs Together
 
-The Improvement Plan is the primary handoff artifact from Phase 2
-to every subsequent phase. Phase 3 design briefs (produced in
-Step 06) are direct inputs to Phase 3 tool sets. The Phase 5 task-
-list seed (also from Step 06) is the starting point for Phase 5
-implementation task authoring. The principle weights (Step 02) and
-verification methods (Step 03) govern Phase 6 scoring.
+```
+Initial Specify interview (via this instructions file)
+       │
+       ▼
+step-00 Building Block Discovery
+   ├─ confirms Phase 1 Report loadability
+   ├─ inventories capability changes since Phase 1
+   └─ produces Toolset Augmentation Document (LIVING per v1.1)
+       │
+       ▼
+step-01 Phase 1 Input Validation                 (question-by-question)
+   └─ produces Validation Gap Register
+       (split: Phase 2 local | Upstream toolkit per v1.1)
+       │
+       ▼
+step-02 Principle Weighting                       (draft-and-react)
+   └─ resolves Phase 1 Scoring & Metrics CONDITIONAL
+       │
+       ▼
+step-03 Mechanism Decisions                       (draft-and-react)
+   ├─ MC triage (multi-mechanism vs. single-mechanism)
+   ├─ per-MC drafts in batches (4 default; 2-3 or 1 by MC shape per v1.1)
+   └─ produces inter-MC dependency graph
+       │
+       ▼
+step-04 Sequencing and Tiering                    (draft-and-react)
+   ├─ tiered sequence with principle-weighted rationale
+   ├─ minimum-viable-completion floor
+   ├─ stretch scope with cut order
+   └─ worst-case plan-failure narrative (common mechanism named)
+       │
+       ▼
+step-05 Cost Modeling and Capacity Check          (draft-and-react)
+   ├─ per-MC three-quantity cost rows (v1.1)
+   ├─ per-tier and plan totals with tag distribution
+   ├─ capacity-vs-envelope comparison
+   └─ re-sequencing recommendation if needed
+       │
+       ▼
+step-06 Improvement Plan Synthesis                (synthesis-only, capstone)
+   ├─ Improvement Plan (eleven sections)
+   ├─ Self-Evaluation Scorecard
+   ├─ Phase 3 Design Briefs
+   ├─ Phase 5 Task-List Seed
+   └─ Phase 7 Calibration Handoff (when BELIEVED multipliers used, per v1.1)
+       │
+       ▼
+Phase 3 (Design & Technical Analysis) — Existing Projects toolkit
+       (when authored)
+```
 
-Phase 2 does not re-discover the system; Phase 3 does not re-decide
-the plan. The quality of Phase 2 directly determines the quality of
-every phase that follows.
+---
+
+## A Note on Dogfooding
+
+This tool set was authored by running the AI-Centric Software
+Development framework on itself. The Phase 2 toolkit was authored
+to v1.0 conventions inheriting Phase 1's v1.2 disciplines, then
+dogfooded on `@diamondslab/diamonds` during the Phase 2 cycle that
+followed Phase 1's Diamonds cycle. That dogfooding run surfaced
+the three-quantity cost model (Cluster A in dogfooding-
+observations.md) and several smaller refinements that became v1.1.
+
+The dogfooding-observations.md file accompanying this toolkit
+records all observations, the end-of-Phase review, and the cluster
+decisions. Future Phase 2 cycles on other projects will surface
+additional observations and drive future revisions.
+
+The framework's improvement loop is itself the framework. Each
+cycle exercises the toolkit; each cycle's dogfooding observations
+drive the next toolkit revision; the toolkit gets better with use.
+The Phase 2 → Phase 1 feedback channel (formalized in step-01
+v1.1) is one specific instance of this loop — Phase 2 work
+surfaces gaps in the Phase 1 toolkit that didn't show up when
+Phase 1 was authored or first dogfooded.
 
 ---
 
 ## Version History
 
-| Version | Date | Source | Summary of changes |
-|---------|------|--------|-------------------|
-| v1.0 | 2026-04-22 | Initial authoring | Initial existing-project Phase 2 instructions file. Structured to v1.2 conventions from Phase 1. Establishes draft-and-react default mode, Phase-1-input-validation discipline, principle-weighting as Step 02, worst-case-plan-failure discipline at Step 04, cost-modeling tag conventions matching Phase 1 baseline conventions. |
+| Version | Date | Source | Summary |
+|---------|------|--------|---------|
+| v1.0 | 2026-04-22 | Initial authoring | Initial Phase 2 instructions file. Three shifts (discovery→decision, findings→mechanisms, baseline→capacity); behavioral rules; principle weighting discipline; cost modeling tag discipline with single-dimension model; phase gate criteria. |
+| **v1.1** | **2026-05-22** | **Diamonds Phase 2 dogfooding run (Clusters A and E)** | **Substantial revision.** Cost Modeling Tag Discipline section expanded from single-dimension to three-quantity model: dev-hours (Senior Developer baseline), AI-acceleration multiplier (per-category default with graduation path from BELIEVED at v1.0 to MEASURED after 2-3 cycles), maintainer-hours (derived), token-count projection (derived), token-cost projection (derived). Two new reference tables added — per-category multiplier defaults (mechanical cleanup 10×, doc authorship 8×, config edit 5×, novel design 3×) and token baseline defaults (6,000 tokens/Senior-dev-hour; Opus 4.7 ~$2-3/100K). Tag-distribution honesty check added with project-profile expected distributions. Plan total format revised for three-quantity reporting. Capacity-bound recommendation discipline added. New behavioral Rule 6 added: Toolset Augmentation Document is living, not snapshot — handle mid-phase capability shifts via dated amendments. Tool set diagram updated to reflect v1.1 features. |
+
+---
+
+*Part of the Phase 2 Analysis & Improvement Planning (Existing Projects) Tool Set — v1.1*
+*AI-Centric Software Development Playbook*
+*Companion files: `step-00` through `step-06` prompts in this directory*
