@@ -1,5 +1,7 @@
 # Building a Phase 1 Toolkit for Existing Projects
 
+This is the first in a series in which we go implement our (AI-Centric Software Development Playbook)[https://github.com/df3ndr/ai-centric-software-development] and develop a toolkit using our existing (Diamonds node module project)[https://github.com/diamondslab/diamonds] to refine the results through a forging process of real world usage.
+
 The foundational articles in the **AI-Centric Software Development Playbook** described a framework: the six Core Principles, the Specification Driven Development cycle, the seven phases, and the idea that every team's toolkit is a practice to build rather than a product to purchase. A later article walked through the construction of a Phase 1 toolkit for greenfield projects — the "what should we choose?" variant.
 
 This article covers the sibling work: the **Phase 1 toolkit for existing projects** — the "what do we have, where are we, and what must change?" variant. It covers three arcs of a single working session:
@@ -34,7 +36,7 @@ These three shifts became the opening section of the toolkit's instructions file
 
 ### What we built
 
-The v1.0 toolkit ended up as seven files:
+The v1.0 toolkit for Phase 1 ended up as seven files:
 
 | File | Role |
 |------|------|
@@ -66,7 +68,7 @@ None of these decisions is unambiguously correct. Each could have been made diff
 
 ## Section 2: Applying It — The Diamonds Run
 
-With the toolkit drafted, we ran it on `@diamondslab/diamonds` — a TypeScript library we maintain that deploys ERC-2535 Diamond Proxy smart contracts on Hardhat. The project has three characteristics that made it a useful first test:
+With the toolkit drafted, we ran it on (@diamondslab/diamonds)[https://github.com/diamondslab/diamonds] — a TypeScript library we maintain that deploys ERC-2535 Diamond Proxy smart contracts on Hardhat. The project has three characteristics that made it a useful first test:
 
 - **Solo maintainer** (one of us), with a documented sub-5-hour-per-week ecosystem time budget
 - **Pre-production state** — used in three private projects we also maintain, with no external adopters
