@@ -1,7 +1,7 @@
 # Phase 1 — Information Gathering Instructions (Existing Projects)
 # AI-Centric Software Development Playbook
 
-**Toolset Version:** v1.1 (revised 2026-04-20 from Diamonds dogfooding run)
+**Toolset Version:** v1.3 (revised 2026-05-22 from Phase 2 Diamonds dogfooding feedback)
 
 ---
 
@@ -79,6 +79,74 @@ Three shifts matter, and they shape every question and every artifact:
 
 ---
 
+## Two-Layer Budget Framing
+
+*New in v1.3 per Phase 2 Diamonds dogfooding observation P2-Obs-03
+(Cluster B).*
+
+In pre-AI software development practice, "budget" was a single quantity
+— the dollar envelope for the work, typically dominated by labor cost
+or, for self-funded OSS, often $0 by construction. AI-Centric Software
+Development practice splits this into **two layers** that must be
+captured distinctly:
+
+1. **Commercial-services / SaaS-tier budget** — the dollar envelope for
+   external vendors, managed services, paid tooling, certification
+   bodies, and any other entity to which the project transfers money.
+   This layer can legitimately be **$0 for OSS or self-funded projects**
+   ("no commercial-tier services") — and that $0 is honest as-stated.
+
+2. **AI-usage budget** — the dollar envelope for AI assistance: API
+   tokens, model-provider subscriptions, and AI-tool usage in any form.
+   This layer is **structurally non-zero** for any project applying
+   AI-Centric Software Development practice. The amount may be small
+   ($5/month casual usage, $50/month working project, $500/month
+   intensive cycle) or "we'll figure out as we go" — but it is not $0,
+   and Phase 1 must capture it explicitly as a separate constraint.
+
+### Why the Split Matters
+
+A "zero budget" framing that conflates the two layers is **honest about
+commercial-service exclusion but misleading about total cost**. A
+Phase 1 cycle that captures budget as a single "$0" constraint will
+produce a Phase 2 cost-modeling step that discovers AI usage incurs
+real (often small but non-zero) costs — and the discovery gets forced
+into Phase 2 as an in-line amendment when it belonged in Phase 1's
+constraint capture. The two-layer framing prevents this class of
+downstream surprise. It also makes the practitioner's AI-usage posture
+an explicit Phase 1 output that downstream phases can plan against —
+Phase 2's Step 05 cost modeling uses the AI-usage envelope as the
+budget-check counterpart to the capacity envelope (maintainer-time).
+
+### Where the Split Applies
+
+The two-layer framing appears in three places in the Phase 1 toolkit:
+
+- **Step 03 (Requirements & Improvement Objective Sketch)** — the budget
+  interview question splits into commercial-services and AI-usage; the
+  Must-Keep Compliance & Security Posture section accommodates the
+  two-layer distinction for MK-style "Zero-budget / OSS-only operation"
+  entries.
+- **Step 04 (Risk, Constraint & Technical Debt Inventory)** — the
+  Hard Constraints section captures the budget envelope as two rows
+  (H-01a commercial-services budget, H-01b AI-usage budget) with
+  separate Value/Boundary entries.
+- **This instructions file** — the discipline is stated once as
+  load-once context for all steps; Steps 03 and 04 reference back to it.
+
+### When the AI-Usage Layer Is Genuinely Zero
+
+A project where the practitioner does *not* use AI assistance at all is
+possible (a strictly non-AI-Centric improvement cycle on a codebase that
+will adopt AI-Centric practice in a future cycle). For such projects,
+the AI-usage layer is honestly $0 by exclusion, and the practitioner
+states this explicitly. The split still applies — it just produces
+"AI-usage budget: $0, no AI assistance in use this cycle" as a
+documented constraint rather than collapsing into a single "zero
+budget" entry that doesn't distinguish.
+
+---
+
 ## The SDD Cycle in This Phase
 
 All work in Phase 1 for existing projects follows the SDD cycle. The
@@ -149,7 +217,9 @@ that leave a principle unaddressed must be flagged explicitly.
   vendor lock-in or license-renewal risks concentrated?
 - What is the realistic cost envelope for improvement — not just
   dollars, but team capacity, tolerance for regression, and
-  acceptable disruption to live operations?
+  acceptable disruption to live operations? *(In v1.3+, the dollar
+  envelope is two layers — commercial-services and AI-usage. See the
+  Two-Layer Budget Framing section above.)*
 
 ### 4. Operations
 - How is the system currently deployed and operated? Is the
@@ -466,6 +536,19 @@ Apply the Version & Identity Re-Verification discipline described
 above at the start of every step beyond Step 01. One targeted
 check is sufficient.
 
+**Apply the two-layer budget framing.**
+*New in v1.3.* When budget enters the conversation — in Step 03's
+hard-constraint questions, Step 04's Hard Constraints inventory, or
+anywhere a practitioner names a "budget" — capture it as two
+distinct layers: commercial-services / SaaS-tier budget (which can
+legitimately be $0) and AI-usage budget (which is structurally
+non-zero for any AI-Centric work, unless the cycle excludes AI
+assistance entirely). Never accept "zero budget" as a complete
+answer; ask the disambiguating follow-up. The discipline is defined
+in the Two-Layer Budget Framing section of this instructions file;
+Step 03 and Step 04 prompts operationalize it in their interview
+question banks and output formats.
+
 **Handle MCP connector activation gracefully.**
 If an MCP tool is expected but not found when first attempted:
 (a) attempt access once, (b) if tools not returned, report the
@@ -562,9 +645,11 @@ miss the work that actually makes the system sustainable.
 Current run-cost measured (infrastructure, licensing, third-party,
 operational labor), change-cost indicators captured (deployment
 frequency, lead time, change failure rate, MTTR where available),
-realistic improvement-budget envelope defined. If this gate fails,
-Phase 2 cost modeling will project improvements against unmeasured
-baselines and produce unreliable ROI estimates.
+realistic improvement-budget envelope defined *(two-layer per v1.3
+discipline: commercial-services budget and AI-usage budget captured
+separately)*. If this gate fails, Phase 2 cost modeling will project
+improvements against unmeasured baselines and produce unreliable
+ROI estimates.
 
 **Operations — PASS requires:**
 Current deployment topology documented, observability state
@@ -643,6 +728,9 @@ being considered complete:
       change-failure-rate from 22% to under 10% and eliminate the
       four recurring incident classes on the authentication path
       within two release cycles")
+- [ ] **Budget constraints are captured as two layers (commercial-
+      services and AI-usage) per the v1.3 Two-Layer Budget Framing
+      discipline**
 - [ ] The Information Report is structured for AI consumption
       (consistent headers, labeled sections, tables, metadata)
 - [ ] No principle dimension has been silently omitted — gaps are
@@ -712,6 +800,16 @@ performance" are starting points, not objectives. A vague objective
 produces a vague Phase 2 and an unfocused Phase 3. Sharpen the
 objective in this phase.
 
+**Conflating commercial-services budget with AI-usage budget.**
+*New in v1.3.* "Zero budget" as a stated constraint typically means
+"no commercial-tier services" — the SaaS layer of the budget. It
+does *not* mean zero total cost. AI-Centric Software Development
+work has structurally non-zero AI-usage costs (tokens, API calls)
+that the practitioner must capture as a separate constraint at
+Phase 1, so Phase 2 cost modeling has a budget envelope to compare
+against. Apply the Two-Layer Budget Framing discipline at every
+point budget enters the conversation.
+
 **Proposing solutions in this phase.**
 The temptation is strong in existing-project work — the problems
 are visible and the fixes seem obvious. Resist. Phase 1 discovers
@@ -746,6 +844,14 @@ does not re-discover the system. It analyzes, evaluates, and decides
 — using the Current-State Information Report as the evidence base.
 The quality of Phase 1 directly determines the quality of Phase 2.
 
+The Phase 2 toolkit's Step 01 (Phase 1 Input Validation) splits its
+Validation Gap Register into Phase 2 local gaps and Upstream toolkit
+gaps. Upstream toolkit gaps — gaps in the Phase 1 toolkit itself
+surfaced by Phase 2 work — feed back into Phase 1 toolkit revision.
+This Phase 1 v1.3 revision is itself the product of that feedback
+channel: Phase 2 Diamonds dogfooding surfaced the two-layer budget
+gap (P2-Obs-03) that this revision closes.
+
 ---
 
 ## Version History
@@ -753,4 +859,11 @@ The quality of Phase 1 directly determines the quality of Phase 2.
 | Version | Date | Source | Summary of changes |
 |---------|------|--------|-------------------|
 | v1.0 | 2026-04-18 | Initial authoring | Initial existing-project variant derived from greenfield instructions. |
-| **v1.1** | **2026-04-20** | **Diamonds dogfooding run** | Added Multi-Repo Evidence Scoping section (Subject/Integration Peer/Evidence Source classification, [CONFIRM]/[AWARE]/[QUESTION] flags). Added Code Access Calibration section (Interview-only / Search-primary / Hybrid modes). Added Three-Timeframes Worked Example (orphan scripts pattern). Added Version & Identity Re-Verification discipline. Added Interview Mode Selection section (question-by-question for discovery-heavy, draft-and-react for decision-heavy). Added MCP connector activation retry pattern to Behavioral Rules. Added reference to step-00b Building Block Discovery. Expanded Output Standards with code-access-flag and cross-repo-tag requirements. |
+| v1.1 | 2026-04-20 | Diamonds dogfooding run | Added Multi-Repo Evidence Scoping section (Subject/Integration Peer/Evidence Source classification, [CONFIRM]/[AWARE]/[QUESTION] flags). Added Code Access Calibration section (Interview-only / Search-primary / Hybrid modes). Added Three-Timeframes Worked Example (orphan scripts pattern). Added Version & Identity Re-Verification discipline. Added Interview Mode Selection section (question-by-question for discovery-heavy, draft-and-react for decision-heavy). Added MCP connector activation retry pattern to Behavioral Rules. Added reference to step-00b Building Block Discovery. Expanded Output Standards with code-access-flag and cross-repo-tag requirements. |
+| **v1.3** | **2026-05-22** | **Phase 2 Diamonds dogfooding run (P2-Obs-03, Cluster B)** | Added Two-Layer Budget Framing as a new section between Framework Context and SDD Cycle. The framing distinguishes commercial-services / SaaS-tier budget (which can legitimately be $0) from AI-usage budget (which is structurally non-zero for any AI-Centric work). New Behavioral Rule "Apply the two-layer budget framing" added between "Re-verify subject version" and "Handle MCP connector activation." Economics principle question set (under "The Six Core Principles" §3) gains note referencing the two-layer framing. Output Standards list gains check for two-layer budget capture. New Common Pitfall added: "Conflating commercial-services budget with AI-usage budget." Phase Gate Economics PASS requirement updated to reference two-layer budget capture. Connecting to Phase 2 section gains note explaining the Phase 2 → Phase 1 feedback channel that produced this revision. (v1.2 was not authored as a distinct revision — v1.3 follows v1.1 directly.) |
+
+---
+
+*Part of the Phase 1 (Existing Projects) Information Gathering Tool Set — v1.3*
+*AI-Centric Software Development Playbook*
+*Companion files: step-00 through step-06 prompts in this directory*

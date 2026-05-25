@@ -2,7 +2,7 @@
 # Phase 1: Information Gathering (Existing Projects)
 # AI-Centric Software Development Playbook
 
-**Toolset Version:** v1.1 (revised 2026-04-20 from Diamonds dogfooding run)
+**Toolset Version:** v1.3 (revised 2026-05-22 from Phase 2 Diamonds dogfooding feedback)
 
 ---
 
@@ -92,7 +92,10 @@ conflated:
 - **Hard constraints** — Fixed boundaries on budget, timeline,
   team capacity, change windows, disruption tolerance, and
   infrastructure that cannot be changed and must be designed
-  around.
+  around. **In v1.3+, the budget envelope is captured as two
+  distinct layers — commercial-services / SaaS-tier budget and
+  AI-usage budget. See the Two-Layer Budget Framing section in the
+  companion instructions file.**
 - **Project & operational risks** — Risks that could cause the
   improvement effort to fail, stall, or introduce regressions —
   independent of external threats.
@@ -160,6 +163,14 @@ place in the priority register. Collapsing technical debt into
 - **For compliance: separate "documented" from "enforced end-to-end."**
   Many existing systems claim compliance with requirements that are
   only partially implemented. Surface these gaps explicitly.
+- **For budget: apply the two-layer framing.** *(New in v1.3.)*
+  When budget enters the conversation, capture commercial-services /
+  SaaS-tier budget and AI-usage budget as two distinct constraints.
+  Never accept "zero budget" as a complete answer — ask the
+  disambiguating follow-up. The discipline is defined in the
+  Two-Layer Budget Framing section of the companion instructions
+  file. Operationalized in Section 3 of the Output Format below as
+  separate H-01a (commercial-services) and H-01b (AI-usage) rows.
 - **For technical debt: reject "old code is debt" framing.** Debt is
   accumulated work that is costing the team today or threatening to
   cost the team tomorrow. Old code that works, is tested, and doesn't
@@ -197,7 +208,9 @@ flagged explicitly — they carry disproportionate downstream impact.
    or the post-improvement system? Licensing surprises, vendor
    pricing changes, end-of-life support contracts, compliance
    certification costs, cost of the debt backlog if left
-   unaddressed?
+   unaddressed? *(In v1.3+, the improvement-cycle budget envelope
+   is two layers — commercial-services and AI-usage. See Hard
+   Constraints section.)*
 
 4. **Operations** — What could fail during the improvement or in
    the improved system's production operation? Dependency risks,
@@ -410,7 +423,29 @@ This section captures debt that is *costing the team today* or
 Many of these may already appear in the Requirements & Improvement
 Objective Sketch. Capture any not yet surfaced.
 
-- What is the hard budget envelope for the improvement cycle?
+**Budget — apply the two-layer framing** *(new in v1.3)*. Budget
+is two distinct constraints, not one:
+
+- What is the hard **commercial-services / SaaS-tier budget** for
+  the improvement cycle? (Dollars to external vendors, managed
+  services, paid tooling, certification bodies. Can legitimately
+  be $0 for OSS — and that $0 is honest as-stated.)
+- What is the hard **AI-usage budget** for the improvement cycle?
+  (Dollars for API tokens, model-provider subscriptions, AI-tool
+  usage. Structurally non-zero for any AI-Centric Software
+  Development work, unless the practitioner is explicitly running
+  a non-AI-Centric cycle. May be a hard ceiling, a monthly cap, a
+  general expectation, or "we'll figure out as we go" — but
+  capture it as an explicit number or range, not as silence.)
+- If the practitioner answers "$0 budget" or "zero budget" without
+  the disambiguating split, follow up: "Which layer is $0 — the
+  commercial-services / SaaS layer, the AI-usage layer, or both?
+  In AI-Centric work the commercial layer often is genuinely $0,
+  but the AI-usage layer is rarely $0 — even small projects incur
+  API costs in the single-dollars-to-tens-of-dollars range."
+
+**Other hard constraints:**
+
 - What is the hard deadline, if any, and what drives it?
   (Regulatory, contractual, vendor EOL, announced customer
   commitment, internal roadmap)
@@ -605,9 +640,14 @@ improvement cycle's risk tolerance.]
 
 Fixed boundaries that bound every Phase 2 decision.
 
+**Budget is captured as two distinct layers per v1.3 discipline:
+commercial-services / SaaS-tier (H-01a) and AI-usage (H-01b). Other
+constraints continue with their v1.1 IDs.**
+
 | ID | Constraint | Value / Boundary | Source | Consequence If Violated | Principles |
 |----|-----------|-----------------|--------|------------------------|-----------|
-| H-01 | Budget ceiling | | | | Economics |
+| H-01a | Commercial-services / SaaS-tier budget ceiling | [$N, or $0 for OSS] | | | Economics |
+| H-01b | AI-usage budget ceiling | [$N — structurally non-zero for AI-Centric work; or "$0, no AI assistance" if non-AI-Centric cycle] | | | Economics |
 | H-02 | Delivery deadline | | | | Economics, Operations |
 | H-03 | Team capacity | | | | Economics, Maintainability |
 | H-04 | Disruption tolerance | | | | Operations |
@@ -618,7 +658,8 @@ Fixed boundaries that bound every Phase 2 decision.
 
 *(Add rows for all identified hard constraints. Hard constraints from
 the Requirements & Improvement Objective Sketch should be consolidated
-here to avoid duplication.)*
+here to avoid duplication. Note that v1.3 splits the prior H-01 budget
+row into H-01a and H-01b to capture the two-layer framing.)*
 
 ---
 
@@ -761,7 +802,9 @@ they are inputs the downstream phase must not miss.
 [Which compliance gaps, security risks, hard constraints, and debt
 items most directly constrain the Phase 2 scoping decision? What
 must Phase 2 threat modeling of the improved system address that
-this inventory surfaced?]
+this inventory surfaced? Phase 2's Step 05 cost modeling uses both
+budget layers from Section 3 (H-01a, H-01b) as the budget-envelope
+check against per-MC AI-usage cost projections.]
 
 **For Phase 3 (Design & Technical Analysis):**
 [Which risks and debt items require specific design-level
@@ -832,6 +875,13 @@ Before this artifact is accepted as complete, verify all items:
       data integrity during cutover, observability gaps hiding
       regressions) are captured separately from post-improvement
       operational risks
+- [ ] **Hard Constraints Section 3 captures budget as two layers —
+      H-01a (commercial-services / SaaS-tier) and H-01b (AI-usage)
+      — with explicit values for each, not a single conflated row**
+      *(new in v1.3)*
+- [ ] **If practitioner stated "zero budget," the disambiguating
+      follow-up was asked and both layers have explicit values**
+      *(new in v1.3)*
 - [ ] Priority register consolidates all categories in one ranked
       view
 - [ ] All six Core Principles are addressed
@@ -845,7 +895,7 @@ Before this artifact is accepted as complete, verify all items:
 
 ---
 
-*Part of the Phase 1 (Existing Projects) Information Gathering Tool Set*
+*Part of the Phase 1 (Existing Projects) Information Gathering Tool Set — v1.3*
 *AI-Centric Software Development Playbook*
 *Companion file: `step-00-information-gathering.existing-project.instructions.md`*
 *Previous artifact: `step-03-requirements-improvement-objective-sketch.prompt.md`*
@@ -858,4 +908,5 @@ Before this artifact is accepted as complete, verify all items:
 | Version | Date | Source | Summary of changes |
 |---------|------|--------|-------------------|
 | v1.0 | 2026-04-18 | Initial authoring | Initial Step 04 prompt. |
-| **v1.1** | **2026-04-20** | **Diamonds dogfooding run (obs 18, 19, 20)** | Added "expect 2–4 net-new Must-Changes and 1–2 MC amendments" expectation to Behavioral Rules — calibrates practitioners so net-new MCs in Step 04 are not treated as a Step 03 failure (Cluster L). Added standards-conformance framing to the Compliance Posture cluster — for projects with no regulatory compliance burden, the Compliance register uses claim / enforced / divergence entries for standards the project claims to follow (Cluster M). Added common-mechanism discipline to the Worst-Case Security Scenario section — the narrative must keep writing until the underlying mechanism producing all branch outcomes is named (Cluster N). |
+| v1.1 | 2026-04-20 | Diamonds dogfooding run (obs 18, 19, 20) | Added "expect 2–4 net-new Must-Changes and 1–2 MC amendments" expectation to Behavioral Rules — calibrates practitioners so net-new MCs in Step 04 are not treated as a Step 03 failure (Cluster L). Added standards-conformance framing to the Compliance Posture cluster — for projects with no regulatory compliance burden, the Compliance register uses claim / enforced / divergence entries for standards the project claims to follow (Cluster M). Added common-mechanism discipline to the Worst-Case Security Scenario section — the narrative must keep writing until the underlying mechanism producing all branch outcomes is named (Cluster N). |
+| **v1.3** | **2026-05-22** | **Phase 2 Diamonds dogfooding run (P2-Obs-03, Cluster B)** | Added two-layer budget framing across the prompt. New Behavioral Rule "For budget: apply the two-layer framing" directs AI to capture commercial-services / SaaS-tier budget and AI-usage budget as two distinct constraints. Interview Question Bank's Hard Constraints subsection restructured: budget questions now split into commercial-services and AI-usage with a disambiguating follow-up scripted for the "zero budget" answer. Output Format Section 3 (Hard Constraints) splits the prior H-01 budget row into H-01a (commercial-services / SaaS-tier) and H-01b (AI-usage) with explicit Value/Boundary entries. Cross-Phase Handoff Notes Phase 2 paragraph updated to reference the two-layer budget feeding Phase 2's Step 05 budget-envelope check. Evaluation Checklist gains two new v1.3-specific items for two-layer budget capture and the disambiguating-follow-up discipline. Closes the Phase 2 → Phase 1 feedback channel surfaced by Diamonds Phase 2 Step 01's Upstream Toolkit Gap register. (v1.2 was not authored as a distinct revision — v1.3 follows v1.1 directly.) |

@@ -2,7 +2,7 @@
 # Phase 1: Information Gathering (Existing Projects)
 # AI-Centric Software Development Playbook
 
-**Toolset Version:** v1.1 (revised 2026-04-20 from Diamonds dogfooding run)
+**Toolset Version:** v1.3 (revised 2026-05-22 from Phase 2 Diamonds dogfooding feedback)
 
 ---
 
@@ -162,6 +162,18 @@ This prompt enforces the three-question separation structurally.
   must continue to do, what it must do differently, and what
   constraints apply. *How* the improvement is accomplished is Phase 2
   and Phase 3 territory.
+- **For budget: apply the two-layer framing.** *(New in v1.3 per the
+  Two-Layer Budget Framing discipline in the companion instructions
+  file.)* When budget enters the conversation in the Non-Negotiable
+  Constraints subsection, capture it as two distinct constraints:
+  commercial-services / SaaS-tier budget (which can legitimately be
+  $0 for OSS or self-funded projects) and AI-usage budget (which is
+  structurally non-zero for any AI-Centric Software Development cycle).
+  Never accept "zero budget" as a complete answer — ask the
+  disambiguating follow-up. The MK Compliance & Security Posture
+  section similarly accommodates the two-layer distinction for
+  "Zero-budget / OSS-only operation" entries: the Must-Keep, if any,
+  is "no commercial-tier services," not "zero total cost."
 - When the interview is complete, announce it clearly, then produce
   the Requirements & Improvement Objective Sketch in the structured
   format defined below.
@@ -184,7 +196,9 @@ at least one of these six lenses:
 3. **Economics** — What must the improvement cost within, in both
    dollars and team capacity? What cost trajectory must the improved
    system achieve? What business value is the improvement intended
-   to unlock or protect?
+   to unlock or protect? *(In v1.3+, the dollar envelope is two
+   layers — commercial-services and AI-usage. See Non-Negotiable
+   Constraints subsection in the question bank.)*
 
 4. **Operations** — What availability and reliability targets must
    the improved system meet? What scale must it handle post-
@@ -319,6 +333,12 @@ Operations, Correctness Verification)*
 - Are there behaviors users rely on that are not documented but
   would cause outcry if changed? (Undocumented API behaviors, timing
   assumptions, idempotency guarantees, error codes)
+- **For OSS or self-funded projects:** if the project operates on
+  a "no commercial-tier services" posture today, capture it as a
+  Must-Keep with explicit two-layer framing — the Must-Keep is
+  "no commercial-tier services" (the commercial-services layer),
+  not "zero total cost." AI-usage cost is captured separately as
+  a Non-Negotiable Constraint (see below). *(New in v1.3.)*
 
 ### Incidental Behaviors (Not Requirements)
 *(Prevents current behavior from becoming an over-constraining requirement)*
@@ -377,7 +397,29 @@ Operations, Correctness Verification)*
 ### Non-Negotiable Constraints on the Improvement Itself
 *(Principles: all six — what bounds Phase 2's decision space)*
 
-- What is the hard budget ceiling for this improvement cycle?
+**Budget — apply the two-layer framing.** *(New in v1.3.)* Budget
+is two distinct constraints, not one:
+
+- What is the hard **commercial-services / SaaS-tier budget** for
+  the improvement cycle? (Dollars to external vendors, managed
+  services, paid tooling, certification bodies. Can legitimately
+  be $0 for OSS — and that $0 is honest as-stated.)
+- What is the hard **AI-usage budget** for the improvement cycle?
+  (Dollars for API tokens, model-provider subscriptions, AI-tool
+  usage. Structurally non-zero for any AI-Centric Software
+  Development cycle, unless the practitioner is explicitly running
+  a non-AI-Centric cycle. May be a hard ceiling, a monthly cap, a
+  general expectation, or "we'll figure out as we go" — but
+  capture it as an explicit number or range, not as silence.)
+- If the practitioner answers "$0 budget" or "zero budget" without
+  the disambiguating split, follow up: *"Which layer is $0 — the
+  commercial-services / SaaS layer, the AI-usage layer, or both?
+  In AI-Centric work the commercial layer often is genuinely $0,
+  but the AI-usage layer is rarely $0 — even small projects incur
+  API costs in the single-dollars-to-tens-of-dollars range."*
+
+**Other non-negotiable constraints:**
+
 - What is the hard deadline for delivery, and what drives it?
 - What team capacity is available? Who works on this, at what
   fraction of their time?
@@ -605,6 +647,15 @@ Capabilities, contracts, and behaviors the improvement must preserve.
 |----|-----------|----------------|--------------|-----------|
 | MK-20 | | | | Security |
 
+*Note (new in v1.3): If the project operates on a "no commercial-tier
+services" posture, capture it here as a Must-Keep with explicit
+two-layer framing. The Must-Keep is "no commercial-tier services"
+(commercial-services budget layer), not "zero total cost." AI-usage
+cost is structurally non-zero and is captured separately in the
+Non-Negotiable Constraints section as H-01b. Example MK row:*
+
+| MK-25 | No commercial-tier services in this cycle (the commercial-services budget layer) | OSS practice; HC-01a binding | Improvement cycle uses no paid SaaS, managed services, or certification bodies | Economics |
+
 ### [MK] Non-Obvious Must-Keeps
 
 [Behaviors users depend on that are not documented. Each is a
@@ -675,15 +726,26 @@ so they are not lost.
 
 Hard boundaries that bound every Phase 2 decision.
 
+**Budget is captured as two distinct layers per v1.3 discipline:
+commercial-services / SaaS-tier (H-01a) and AI-usage (H-01b). Other
+constraints continue with their v1.1 IDs. Step 04 (Risk, Constraint
+& Technical Debt Inventory) consolidates these constraints; any
+constraint captured here should be carried forward into Step 04's
+Hard Constraints Section 3 without duplication.**
+
 | ID | Constraint | Value / Boundary | Source | Consequence If Violated | Principles |
 |----|-----------|-----------------|--------|------------------------|-----------|
-| H-01 | Budget ceiling | | | | Economics |
+| H-01a | Commercial-services / SaaS-tier budget ceiling | [$N, or $0 for OSS] | | | Economics |
+| H-01b | AI-usage budget ceiling | [$N — structurally non-zero for AI-Centric work; or "$0, no AI assistance" if non-AI-Centric cycle] | | | Economics |
 | H-02 | Delivery deadline | | | | Economics, Operations |
 | H-03 | Team capacity | | | | Economics, Maintainability |
 | H-04 | Disruption tolerance | | | | Operations |
 | H-05 | Change-freeze windows | | | | Operations |
 | H-06 | Technology mandate / exclusion | | | | |
 | H-07 | Acceptable regression envelope | | | | |
+
+*(v1.3 splits the prior H-01 budget row into H-01a and H-01b to
+capture the two-layer framing.)*
 
 ---
 
@@ -797,9 +859,18 @@ Before this artifact is accepted as complete, verify all items:
       measurement anchor, must-changes reference it explicitly
 - [ ] Incidental current behaviors are explicitly listed so Phase 2
       knows what it is free to change
-- [ ] Non-negotiable constraints on the improvement itself
-      (budget, deadline, disruption tolerance, technology mandates)
-      are captured
+- [ ] **Non-negotiable constraints capture budget as two layers —
+      H-01a (commercial-services / SaaS-tier) and H-01b (AI-usage) —
+      with explicit values for each, not a single conflated row**
+      *(new in v1.3)*
+- [ ] **If the project operates on a "no commercial-tier services"
+      posture, this is captured as a Must-Keep with explicit
+      two-layer framing in the Compliance & Security Posture
+      Must-Keeps section — not as a single "zero budget" statement**
+      *(new in v1.3)*
+- [ ] **If practitioner stated "zero budget," the disambiguating
+      follow-up was asked and both layers have explicit values**
+      *(new in v1.3)*
 - [ ] Conflicts between must-keeps and must-changes are surfaced,
       not silently reconciled
 - [ ] All six Core Principles are addressed
@@ -812,7 +883,7 @@ Before this artifact is accepted as complete, verify all items:
 
 ---
 
-*Part of the Phase 1 (Existing Projects) Information Gathering Tool Set*
+*Part of the Phase 1 (Existing Projects) Information Gathering Tool Set — v1.3*
 *AI-Centric Software Development Playbook*
 *Companion file: `step-00-information-gathering.existing-project.instructions.md`*
 *Previous artifact: `step-02-operational-performance-baseline.prompt.md`*
@@ -825,4 +896,5 @@ Before this artifact is accepted as complete, verify all items:
 | Version | Date | Source | Summary of changes |
 |---------|------|--------|-------------------|
 | v1.0 | 2026-04-18 | Initial authoring | Initial Step 03 prompt. |
-| **v1.1** | **2026-04-20** | **Diamonds dogfooding run (obs 12, 14, 15, 16, 7)** | Added draft-and-react as the default interview mode for this step (Cluster K), with practitioner rejection treated as high-signal architectural input. Added Issue Tracker Consultation section at the top of the Interview Question Bank — mandatory classification of every open issue into MC / NTI / Incidental / Dropped, with explicit instruction not to trust practitioner-memory counts (Cluster I). Added Comprehensiveness Check section at the end of the question bank — direct question to the practitioner about possible blind spots, with "no, we captured it" as a valid answer (Cluster E). |
+| v1.1 | 2026-04-20 | Diamonds dogfooding run (obs 12, 14, 15, 16, 7) | Added draft-and-react as the default interview mode for this step (Cluster K), with practitioner rejection treated as high-signal architectural input. Added Issue Tracker Consultation section at the top of the Interview Question Bank — mandatory classification of every open issue into MC / NTI / Incidental / Dropped, with explicit instruction not to trust practitioner-memory counts (Cluster I). Added Comprehensiveness Check section at the end of the question bank — direct question to the practitioner about possible blind spots, with "no, we captured it" as a valid answer (Cluster E). |
+| **v1.3** | **2026-05-22** | **Phase 2 Diamonds dogfooding run (P2-Obs-03, Cluster B)** | Added two-layer budget framing across the prompt. New Behavioral Rule "For budget: apply the two-layer framing" directs AI to capture commercial-services / SaaS-tier budget and AI-usage budget as two distinct constraints in the Non-Negotiable Constraints section, and to accommodate the same two-layer distinction in MK Compliance & Security Posture entries for projects with a "no commercial-tier services" posture. Interview Question Bank Non-Negotiable Constraints subsection restructured: budget questions split into commercial-services and AI-usage with a disambiguating follow-up scripted for the "zero budget" answer. Must-Keep Capabilities & Contracts subsection gains a v1.3-specific guidance note for OSS-posture MK entries. Output Format Compliance & Security Posture Must-Keeps section gains a v1.3 note and example MK row (MK-25) showing the two-layer "no commercial-tier services" framing. Non-Negotiable Constraints output table splits prior H-01 row into H-01a (commercial-services) and H-01b (AI-usage). Evaluation Checklist gains three new v1.3-specific items. Closes the Phase 2 → Phase 1 feedback channel surfaced by Diamonds Phase 2 Step 01's Upstream Toolkit Gap register. (v1.2 was not authored as a distinct revision — v1.3 follows v1.1 directly.) |
