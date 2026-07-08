@@ -2,7 +2,7 @@
 # Phase 3: Design & Technical Analysis (Existing Projects)
 # AI-Centric Software Development Playbook
 
-**Toolset Version:** v1.0 (initial authoring 2026-05-25)
+**Toolset Version:** v1.1 (revised 2026-07-08 from Diamonds Phase 3 dogfooding run; initial authoring 2026-05-25)
 
 ---
 
@@ -51,6 +51,18 @@
 > arrives with verification descriptions, not verification
 > instruments — and has to do design work that should have happened
 > in Phase 3.
+
+> **Upstream shape makes Step 05 mechanical.** *(Added in v1.1 per
+> Diamonds Phase 3 dogfooding — P3-Obs-14, Cluster C8.)* Calibration
+> from the Diamonds run: when the Step 03 Verification brief specified
+> each instrument as **shape + 2–3 worked examples** (one real test
+> case, one real question, the prompt skeleton) rather than a bare
+> description, Step 05 became near-mechanical *enumeration* — fill out
+> the pattern the worked examples established, not invent structure.
+> Treat a thin, description-only F.2 as a signal to push shape back
+> upstream (or reconstruct it here) before enumerating; a
+> well-specified F.2 is the enabling condition for a fast, low-risk
+> Step 05.
 
 ---
 
@@ -557,7 +569,7 @@ Before this artifact is accepted as complete, verify all items:
 
 ---
 
-*Part of the Phase 3 (Existing Projects) Design & Technical Analysis Tool Set — v1.0*
+*Part of the Phase 3 (Existing Projects) Design & Technical Analysis Tool Set — v1.1*
 *AI-Centric Software Development Playbook*
 *Companion file: `design-technical-analysis.existing-project.instructions.md`*
 *Previous step: `step-04-inter-artifact-coordination.prompt.md`*
@@ -570,3 +582,4 @@ Before this artifact is accepted as complete, verify all items:
 | Version | Date | Source | Summary of changes |
 |---------|------|--------|-------------------|
 | **v1.0** | **2026-05-25** | **Initial authoring** | Initial Phase 3 Verification Strategy prompt. Seven clusters (coverage inventory from Step 04 §5; Phase 2 §6 per-MC verification method coverage; concrete instrument production per type with five sub-templates Test Suite / Proxy-Reader / Auditor-Persona / Conformance Harness / Other; in-scope vs. out-of-scope; Phase 2 Correctness Verification CONDITIONAL resolution; verification coverage gaps; Phase 6 execution estimates). Draft-and-react mode default. Central discipline: instruments, not descriptions. Concrete content per instrument (test cases enumerated, questions written, prompts authored, harness scoped). Addresses Phase 2 Correctness Verification CONDITIONAL where applicable. |
+| **v1.1** | **2026-07-08** | **Diamonds Phase 3 dogfooding run (Cluster C8)** | (P3-Obs-14) Added an "upstream shape makes Step 05 mechanical" calibration note: a Step 03 Verification brief specified as shape + 2–3 worked examples turns Step 05 into near-mechanical enumeration; a thin description-only F.2 is a signal to push shape upstream (or reconstruct) before enumerating. Positive-signal calibration; no behavior change. |

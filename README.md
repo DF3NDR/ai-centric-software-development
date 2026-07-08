@@ -4,7 +4,7 @@ A practitioner's guide to building software in the age of AI — designed for sm
 
 ## 📖 About This Repository
 
-This repository contains a comprehensive series of parts that establish a methodology for modern software development in which small teams (1–5 people) orchestrate AI tools to perform specialist-level work across every discipline. These are **living documents** — continuously refined and updated as the field evolves and new practices emerge.
+This repository contains a comprehensive series of articles, multiple AI skills collections and related docs that establish a methodology for modern software development in which small teams (1–5 people) orchestrate AI tools to perform specialist-level work across every discipline. These are **living documents** — continuously refined and updated as the field evolves and new practices emerge.
 
 **Timeline Thesis:** At some point near the end of 2026 to late 2027 teams on the leading edge will transition to something like this approach.
 

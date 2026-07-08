@@ -2,7 +2,7 @@
 # Phase 3: Design & Technical Analysis (Existing Projects)
 # AI-Centric Software Development Playbook
 
-**Toolset Version:** v1.0 (initial authoring 2026-05-25)
+**Toolset Version:** v1.1 (revised 2026-07-08 from Diamonds Phase 3 dogfooding run; initial authoring 2026-05-25)
 
 ---
 
@@ -112,6 +112,17 @@ document* throughout the phase whenever capabilities change.
   but might error out under specific conditions" or "available now
   but rate-limited," capture it in the document so when the issue
   arises later in the phase, the document already names it.
+- **Distinguish "tool present" from "tool consistently usable."**
+  *(Added in v1.1 per Diamonds Phase 3 dogfooding — P3-Obs-06 /
+  P3-Obs-08, Cluster C1.)* A tool appearing in the session (listed,
+  connected) is not the same as a tool that works reliably on
+  demand. Two failure modes recur: a tool that needs a load
+  round-trip before its first use, and a tool that works early then
+  returns an authorization/availability error mid-session. Record
+  each capability's **reliability posture** (usable-on-demand /
+  needs-warm-up / intermittent), not just its presence — and prefer
+  reading known-relevant files directly over full-repo search when a
+  search tool is flagged intermittent.
 - **Confirm code-access mode explicitly.** The instructions file
   identifies three code-access modes (Interview-only, Search-primary,
   Hybrid with explicit flags). Step 00 is where the mode is
@@ -162,6 +173,13 @@ adapt based on what's available in the session.
 
 - Is Context7, project knowledge with library docs, or equivalent
   library-documentation lookup available?
+- **These cover different gaps, not alternative substitutes**
+  *(clarified in v1.1 — P3-Obs-02, Cluster C2)*: "project knowledge
+  with reference docs" is a *curated, project-scoped* corpus the
+  practitioner assembled; "library documentation lookup" (Context7-class)
+  is *live, external* spec content. A session can have one, both, or
+  neither — record each separately; having the former does not cover
+  the latter's gap.
 - For design briefs referencing specific external libraries,
   formats, or specifications, this capability lets the AI pull
   current spec content directly into the design specification.
@@ -176,6 +194,16 @@ adapt based on what's available in the session.
 - For multi-repo projects, does this session have search across
   multiple repositories? (GitHub MCP code search,
   enterprise/codebase search tools, Sourcegraph, etc.)
+- **Record reliability, not just presence** *(v1.1 — C1)*: code-search
+  tools are a common "present but intermittent" case (needs a load
+  round-trip; may return an authorization error mid-session). If so,
+  note it here and in §8 Known Friction, and plan to prefer direct
+  known-file reads.
+- **Solo-practitioner note** *(v1.1 — P3-Obs-03, Cluster C2)*: the §3
+  output table's rows are **optional for single-repo / solo sessions**
+  — a solo maintainer on a single repo may legitimately leave the
+  cross-repo rows "None applicable" rather than filling cells that
+  don't apply.
 - Step 04 (Inter-Artifact Coordination) benefits substantially from
   cross-repo search when integration peers exist.
 
@@ -216,6 +244,12 @@ adapt based on what's available in the session.
   flaky, rate-limited, or expensive? (A connector that errors out
   on long content, an MCP server with periodic outages, a tool
   with API rate limits.)
+- **Include the "worked earlier, failed later" pattern** *(v1.1 —
+  P3-Obs-08, Cluster C1)*: a tool that succeeded on first use can
+  still return an authorization/availability error later in the same
+  session (observed with GitHub code search on the Diamonds run).
+  Flag any tool with this history so the mid-phase failure is
+  already named when it happens.
 - Naming these now lets the practitioner plan around them.
 
 ### Code-Access Mode Selection
@@ -275,11 +309,16 @@ Document using this structure.
 
 ## §3 — Cross-Repo Search and Code Cross-Reference
 
-| Capability | Available? | Use Case |
-|-----------|-----------|----------|
-| GitHub code search | [Yes/No] | |
-| Enterprise / codebase search | [Yes/No] | |
-| Cross-repo reference tracking | [Yes/No] | |
+*Rows are optional for single-repo / solo sessions — mark "None
+applicable" rather than filling inapplicable cells. Record a
+**Reliability** note (usable-on-demand / needs-warm-up / intermittent)
+for any tool listed as available.*
+
+| Capability | Available? | Reliability | Use Case |
+|-----------|-----------|-------------|----------|
+| GitHub code search | [Yes/No] | [on-demand/warm-up/intermittent] | |
+| Enterprise / codebase search | [Yes/No] | | |
+| Cross-repo reference tracking | [Yes/No] | | |
 
 ## §4 — Diagram and Visualization Rendering
 
@@ -363,7 +402,7 @@ Before this artifact is accepted as complete, verify:
 
 ---
 
-*Part of the Phase 3 (Existing Projects) Design & Technical Analysis Tool Set — v1.0*
+*Part of the Phase 3 (Existing Projects) Design & Technical Analysis Tool Set — v1.1*
 *AI-Centric Software Development Playbook*
 *Companion file: `design-technical-analysis.existing-project.instructions.md`*
 *Next step: `step-01-phase-2-input-validation.prompt.md`*
@@ -375,3 +414,4 @@ Before this artifact is accepted as complete, verify:
 | Version | Date | Source | Summary of changes |
 |---------|------|--------|-------------------|
 | **v1.0** | **2026-05-25** | **Initial authoring** | Initial Phase 3 Building Block Discovery prompt. Living-document discipline inherited from Phase 2 v1.1 (the Phase 2 dogfooding observation P2-Obs-06 that surfaced the discipline). Nine inventory sections covering direct code access, library/spec documentation lookup, cross-repo search, diagram rendering, Skills/Custom AIs/Specialized Agents, Phase 2 artifact access, mid-phase amendments (§7 the living section), known friction points, code-access mode rationale. |
+| **v1.1** | **2026-07-08** | **Diamonds Phase 3 dogfooding run (Clusters C1, C2)** | Tool-reliability precision: (C1, P3-Obs-06/08) new Behavioral Rule distinguishing "tool present" from "tool consistently usable" (needs-warm-up and worked-then-failed patterns); §3 and Known-Friction question-bank + a Reliability column in the §3 output table. (C2, P3-Obs-02) clarified that "project knowledge with reference docs" and "library documentation lookup" cover different gaps, not substitutes. (C2, P3-Obs-03) §3 output rows marked optional for single-repo/solo sessions. Skill discoverability (P3-Obs-01, Cluster C3) routed to the instructions file + README, not here (§5 already lists the Skill). |

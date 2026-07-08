@@ -2,7 +2,7 @@
 # Phase 2: Analysis & Improvement Planning (Existing Projects)
 # AI-Centric Software Development Playbook
 
-**Toolset Version:** v1.1 (revised 2026-05-22 from Diamonds Phase 2 dogfooding run)
+**Toolset Version:** v1.2 (revised 2026-07-08 from the Diamonds **Phase 3** dogfooding run — upstream Channel-1 routing; prior v1.1 2026-05-22 from Diamonds Phase 2)
 
 ---
 
@@ -130,6 +130,30 @@ mode** — the Phase 2 default.
   practitioner: "Given the mechanism choices as made, is there an
   MC whose mechanism we should revisit, or an inter-MC dependency
   we haven't surfaced?"
+- **Ensure §1.1↔§2 completeness.** *(Added in v1.2 per Diamonds
+  Phase 3 dogfooding — VG-P3-U-01 / P3-Obs-04, Cluster C5.)* Every
+  MC listed in Output §1.1 ("MCs requiring a mechanism decision")
+  must have a corresponding §2 detail block. A multi-mechanism MC
+  named in the triage but left without a §2 entry is a silent gap —
+  downstream Phase 3 has nothing to design against. The Phase D
+  check and the Evaluation Checklist both enforce this 1:1 mapping.
+- **Tag each NTI's cycle.** *(Added in v1.2 — VG-P3-U-02 /
+  P3-Obs-05, Cluster C5.)* When a Nice-to-Improve (NTI) item from
+  Phase 1 appears in an MC's constraint chain (as a driver, a
+  dependency, or a deferred sibling), state explicitly whether it is
+  **this-cycle** or **future-cycle** work. Unlabeled NTIs create
+  cycle-vs-future ambiguity that Phase 3 then has to resolve by
+  guessing. Record the tag in the MC's §2 detail.
+- **State the coordinated cohort canonically.** *(Added in v1.2 —
+  P3-Obs-09, Cluster C5.)* When mechanism choices create a
+  coordinated / breaking-change cohort (a set of MCs that must land
+  together, e.g. as one major release), state that cohort **once, in
+  one canonical location** (§3 Inter-MC Dependency Graph) with a
+  stable anchor and its **full** membership. Do not restate it
+  piecemeal — a cohort described in several places drifts (wrong
+  section citation, dropped member) by the time Phase 3 briefs cite
+  it. Phase C verifies membership completeness against this single
+  statement.
 
 ### Reference: How to Identify Multiple-Mechanism MCs
 
@@ -215,6 +239,10 @@ For each multi-mechanism MC (or small cluster), present:
 > **Inter-MC dependencies:** [list MCs whose mechanism choices
 > this constrains or is constrained by; or 'None']
 >
+> **NTI cycle tags:** [for each Nice-to-Improve item in this MC's
+> constraint chain, mark this-cycle or future-cycle; or 'No NTIs in
+> scope for this MC']
+>
 > Accept, amend, or reject?"
 
 ### Phase C — Inter-MC Dependency Sanity Check
@@ -228,11 +256,17 @@ After all multi-mechanism MCs are decided:
 >
 > Does this match your understanding, or are there dependencies I
 > missed or added incorrectly? This graph feeds Step 04 sequencing
-> directly."
+> directly.
+>
+> And, if the mechanism choices imply a **coordinated / breaking-change
+> cohort** (MCs that must land together): here is its single canonical
+> statement — [cohort name, stable §3 anchor, and full membership
+> list]. Is the membership complete and correct? This is the one
+> statement downstream Phase 3 briefs will cite."
 
 ### Phase D — Comprehensiveness Check
 
-> "Before locking the mechanism decisions, two questions:
+> "Before locking the mechanism decisions, three questions:
 >
 > 1. Is there an MC whose mechanism we should revisit on reflection
 >    — perhaps because choosing X for MC-A now feels wrong given
@@ -240,9 +274,17 @@ After all multi-mechanism MCs are decided:
 >
 > 2. Is there an inter-MC dependency we haven't surfaced — a
 >    mechanism choice for one MC that constrains another MC's
->    options in a way the artifact doesn't yet show?"
+>    options in a way the artifact doesn't yet show?
+>
+> 3. Completeness check: every MC in §1.1 (needs a mechanism
+>    decision) now has a §2 detail block, and every NTI in a
+>    constraint chain is cycle-tagged — correct? [The AI states the
+>    §1.1↔§2 reconciliation explicitly and flags any MC that was
+>    triaged as multi-mechanism but has no §2 entry.]"
 
-"No, mechanism decisions are right" is a valid answer.
+"No, mechanism decisions are right" is a valid answer to questions
+1 and 2; question 3 must resolve to a clean 1:1 §1.1↔§2 mapping
+before the artifact is accepted.
 
 ---
 
@@ -264,7 +306,10 @@ When mechanism decisions are complete, produce the artifact.
 ## 1. MC Triage
 
 ### 1.1 MCs requiring Phase 2 mechanism decision
-[List with brief description]
+[List with brief description. Every MC here MUST have a matching §2
+detail block — the §1.1 list and the §2 blocks are a 1:1 mapping
+(enforced by the Phase D completeness check and the Evaluation
+Checklist).]
 
 ### 1.2 MCs with single viable mechanism (forward as-is)
 [List with brief description and the implicit mechanism]
@@ -296,6 +341,10 @@ equivalent."]
 - Depends on: [list, or 'None']
 - Constrains: [list, or 'None']
 
+**NTI Cycle Tags:** [for each Nice-to-Improve item in this MC's
+constraint chain: `NTI-XX — this-cycle | future-cycle`; or 'No NTIs
+in scope for this MC']
+
 **Source:** Phase 1 [reference] + Step 02 weights
 
 ---
@@ -313,6 +362,19 @@ feeds Step 04 sequencing.]
 |----|-----------|------------|
 | MC-XX | MC-YY, MC-ZZ | MC-AA |
 | [...] | [...] | [...] |
+
+### 3.1 Coordinated / Breaking-Change Cohort (canonical statement)
+
+*(The single source of truth for any cohort that must land together —
+e.g. as one major release. Downstream Phase 3 briefs cite THIS anchor;
+do not restate the cohort elsewhere.)*
+
+- **Cohort name / release:** [e.g. "v2.0 coordinated breaking-change block"]
+- **Full membership:** [complete MC list — no member omitted]
+- **Why coordinated:** [the shared constraint forcing joint landing]
+- **Anchor:** `§3.1` (cite this section, not a section that merely mentions the cohort in passing)
+
+If no coordinated cohort exists, state "No coordinated cohort this cycle."
 
 ---
 
@@ -377,6 +439,14 @@ Before accepting the Mechanism Decisions artifact:
 - [ ] Batch sizing matched MC characteristics (4 default; 2-3 for
       cross-referenced clusters; 1 for independent cleanup MCs;
       never >6)
+- [ ] **§1.1↔§2 completeness:** every MC in §1.1 has a matching §2
+      detail block (1:1 mapping; no multi-mechanism MC left without
+      detail) *(v1.2)*
+- [ ] **NTI cycle tags:** every Nice-to-Improve item in an MC's
+      constraint chain is tagged this-cycle or future-cycle *(v1.2)*
+- [ ] **Canonical cohort:** any coordinated / breaking-change cohort
+      is stated once in §3.1 with a stable anchor and full
+      membership (no piecemeal restatement) *(v1.2)*
 
 ---
 
@@ -386,10 +456,11 @@ Before accepting the Mechanism Decisions artifact:
 |---------|------|--------|---------|
 | v1.0 | 2026-04-22 | Initial authoring | Initial Phase 2 Step 03 prompt. Draft-and-react mode with MC triage first (multi-mechanism vs. single-mechanism), then per-MC draft with chosen mechanism / alternatives / principle-weighted rationale / verification method / inter-MC dependencies. Inter-MC dependency graph feeds Step 04. Comprehensiveness check at end. |
 | **v1.1** | **2026-05-22** | **Diamonds Phase 2 dogfooding run (P2-Obs-07, Cluster F)** | Refined batch-sizing guidance in System Instructions: default 4 MCs per batch; reduce to 2-3 when MCs share cross-references; reduce to 1 for independent cleanup-type MCs; maximum 6 only when MCs are truly independent. Codifies the 4/3/1 batching pattern improvised during the Diamonds run. Evaluation Checklist updated to include batch-sizing item. |
+| **v1.2** | **2026-07-08** | **Diamonds Phase 3 dogfooding run (Cluster C5 — upstream Channel-1 routing; P3-Obs-04/VG-P3-U-01, P3-Obs-05/VG-P3-U-02, P3-Obs-09)** | Three completeness gates surfaced when Phase 3 consumed the Phase 2 plan. (1) **§1.1↔§2 completeness** — every multi-mechanism MC in the triage must have a §2 detail block (Phase 3 found MC-21 listed in §1.1 with no §2 entry); enforced in a new Behavioral Rule, Phase D question 3, §1.1 note, and Evaluation Checklist. (2) **NTI cycle-tagging** — each Nice-to-Improve item in an MC's constraint chain is tagged this-cycle/future-cycle (resolves the cycle-vs-future ambiguity Phase 3 otherwise guesses); added to Behavioral Rules, Phase B template, §2 template, checklist. (3) **Canonical cohort statement** — a coordinated/breaking-change cohort is stated once in new §3.1 with a stable anchor + full membership (Phase 3 found a cohort citation that drifted to the wrong section and dropped a member); added to Behavioral Rules, Phase C, §3.1, checklist. No mechanism-decision behavior changed; all three are validation gates. |
 
 ---
 
-*Part of the Phase 2 Analysis & Improvement Planning (Existing Projects) Tool Set — v1.1*
+*Part of the Phase 2 Analysis & Improvement Planning (Existing Projects) Tool Set — v1.2*
 *AI-Centric Software Development Playbook*
 *Companion file: `analysis-improvement-planning.existing-project.instructions.md`*
 *Previous step: `step-02-principle-weighting.prompt.md`*
