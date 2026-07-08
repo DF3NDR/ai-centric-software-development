@@ -1,7 +1,7 @@
 # Phase 3 — Design & Technical Analysis Tool Set (Existing Projects)
 # AI-Centric Software Development Playbook
 
-**Toolset Version:** v1.0 (initial authoring 2026-05-25)
+**Toolset Version:** v1.1 (revised 2026-07-08 from Diamonds Phase 3 dogfooding run; initial authoring 2026-05-25)
 
 ---
 
@@ -28,6 +28,13 @@ exists), and Phase 2 already chose specific mechanisms. Phase 3
 here produces design specifications at the level Phase 5 can
 implement against, while inheriting the Phase 2 scorecard frame and
 contributing per-artifact contributions into it.
+
+> **Companion Skill.** *(Noted in v1.1 per Diamonds Phase 3
+> dogfooding — P3-Obs-01, Cluster C3.)* This toolkit has a companion
+> **AI-Centric Playbook Skill** at `skills/ai-centric-playbook/`
+> (SKILL.md + reference files on the Six Core Principles, the SDD
+> cycle, and the building-blocks framework). Load it when a decision
+> benefits from that depth — the instructions file explains when.
 
 ---
 
@@ -465,9 +472,10 @@ cost of carrying the gap or invalidation into implementation.
 | Version | Date | Source | Summary |
 |---------|------|--------|---------|
 | **v1.0** | **2026-05-25** | **Initial authoring** | Initial Phase 3 existing-projects toolkit. Nine files (instructions file + 7 step prompts + README + dogfooding-observations.md template). Three shifts from Phase 2 (artifact specification vs design exploration; artifact-level vs dimension-level scoring; specification completeness vs simulation). Six artifact types in unified Step 03 (Contract / Refactor / IA / Schema / Observability / Verification + Other with declared shape). Principle scorecard inheritance from Phase 2 (weights and frame inherited; per-artifact contributions aggregated). Two Phase 3 → Phase 2 feedback channels (Channel 1: upstream toolkit gaps via Step 01 §11.2; Channel 2: run amendment via Step 06 §7). Three-quantity cost model inherited from Phase 2 v1.1. Multi-repo evidence scoping and code-access calibration inherited from Phase 1 v1.3 / Phase 2 v1.1. Dogfooding & calibration protocol inherited from Phase 2 v1.1. Target distribution check inherited from Phase 2 v1.1 scorecard rigor. |
+| **v1.1** | **2026-07-08** | **Diamonds Phase 3 dogfooding run (Clusters C1–C4, C6–C8; end-of-phase three-pass review)** | First Phase 3 dogfood revision. Seven clusters applied across step-00 (tool present-vs-usable reliability; project-knowledge-vs-library-lookup clarification; solo-optional §3 rows — C1/C2), the instructions file + this README (Playbook Skill reference — C3), step-01 + instructions (concurrent-release / dependency-shipped-early currency event + grounding-vs-amendment rule — C6), step-03 (A.4 purpose-before-mechanism; E.5 code-observable-vs-process watch-triggers; §9 single-source-of-truth for 3+-brief artifacts — C4/C7), step-04 (§3 mandatory single owner for 3+-brief artifacts — C7), and step-05 (upstream-shape-makes-Step-05-mechanical calibration — C8). Cluster C5 routed upstream to Phase 2 toolkit v1.2 (separate file). All changes are precision/completeness/discoverability refinements; no behavioral-rule reversals. Source observations P3-Obs-01..14. |
 
 ---
 
-*Part of the Phase 3 (Existing Projects) Design & Technical Analysis Tool Set — v1.0*
+*Part of the Phase 3 (Existing Projects) Design & Technical Analysis Tool Set — v1.1*
 *AI-Centric Software Development Playbook*
 *Companion file: `design-technical-analysis.existing-project.instructions.md`*

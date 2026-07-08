@@ -2,7 +2,7 @@
 # Phase 3: Design & Technical Analysis (Existing Projects)
 # AI-Centric Software Development Playbook
 
-**Toolset Version:** v1.0 (initial authoring 2026-05-25)
+**Toolset Version:** v1.1 (revised 2026-07-08 from Diamonds Phase 3 dogfooding run; initial authoring 2026-05-25)
 
 ---
 
@@ -185,6 +185,19 @@ explicit confirmation, a confidence level, and any gaps.
   and Phase 3 start? (Patch releases between Phases are common;
   the design briefs may need re-anchoring against the post-patch
   state.)
+- **Did a Phase-2-scheduled mechanism ship *early* via a parallel
+  track?** *(Added in v1.1 per Diamonds Phase 3 dogfooding —
+  P3-Obs-10/11, Cluster C6.)* Beyond plain patch releases, check
+  whether a separate release/productization effort shipped a
+  mechanism the Plan scheduled for a *future* release (e.g., a
+  publish workflow, a packaging change). If so, record it as a
+  **grounding update** and apply the decision rule in the
+  instructions file's currency behavioral rule: does it *invalidate*
+  a mechanism choice (→ Channel-2 amendment via Step 06) or merely
+  *de-risk/ground* it (→ grounding note, reference the now-real
+  artifact concretely, no amendment)? Two productization tracks on
+  one subject at different cadences is a recurring condition to name
+  here, not an anomaly.
 
 ### 2. Sharpened Objective & Defining Mechanism
 
@@ -543,7 +556,7 @@ Before this artifact is accepted as complete, verify all items:
 
 ---
 
-*Part of the Phase 3 (Existing Projects) Design & Technical Analysis Tool Set — v1.0*
+*Part of the Phase 3 (Existing Projects) Design & Technical Analysis Tool Set — v1.1*
 *AI-Centric Software Development Playbook*
 *Companion file: `design-technical-analysis.existing-project.instructions.md`*
 *Previous step: `step-00-building-block-discovery.prompt.md`*
@@ -556,3 +569,4 @@ Before this artifact is accepted as complete, verify all items:
 | Version | Date | Source | Summary of changes |
 |---------|------|--------|-------------------|
 | **v1.0** | **2026-05-25** | **Initial authoring** | Initial Phase 3 Phase 2 Input Validation prompt. Two-scope split for Validation Gap Register (Phase 3 local vs Upstream Phase 2 toolkit) inherited from Phase 2 v1.1's Step 01 pattern (which implemented the Phase 2 → Phase 1 feedback channel). 11 validation categories: subject identity & plan currency; sharpened objective & defining mechanism; principle weights; design brief inventory; mechanism choices; cost model continuation; capacity envelope; Phase 2 scorecard conditionals; worst-case common mechanism; forward handoffs; validation gap pre-check. Closes Phase 3 → Phase 2 Feedback Channel 1. |
+| **v1.1** | **2026-07-08** | **Diamonds Phase 3 dogfooding run (Cluster C6)** | (P3-Obs-10/11) Category 1 (Subject Identity & Plan Currency) extended: beyond plain patch releases, check whether a Phase-2-scheduled mechanism shipped *early* via a parallel release/productization track, and apply the grounding-update-vs-Channel-2-amendment decision rule (defined in the instructions currency rule). Names the two-tracks-on-one-subject condition as recurring, not anomalous. |

@@ -2,7 +2,7 @@
 # Phase 3: Design & Technical Analysis (Existing Projects)
 # AI-Centric Software Development Playbook
 
-**Toolset Version:** v1.0 (initial authoring 2026-05-25)
+**Toolset Version:** v1.1 (revised 2026-07-08 from Diamonds Phase 3 dogfooding run; initial authoring 2026-05-25)
 
 ---
 
@@ -403,6 +403,16 @@ using this structure.
 |----------|--------------------------|---------------------------|-----------------|----------------------------|
 | | | | [Brief ID, or "Designated in Step 04"] | |
 
+**Every 3+-brief artifact must have a single owner here.** *(Added
+in v1.1 per Diamonds Phase 3 dogfooding — P3-Obs-13, Cluster C7.)*
+Any artifact that Step 03 §9 flagged as referenced by three or more
+briefs is a mandatory row in this table with exactly one "Source of
+Truth" brief; the other briefs reference that owner rather than
+restating the artifact. This is the receiving end of the step-03 §9
+single-source rule — Step 04 confirms the owner and records it so
+downstream (Step 05, Step 06, Phase 5) cite one definition, not N
+drifting copies.
+
 ## §4 — Phase 5 Implementation Ordering Constraints
 
 | Brief Dependency | Constraint Type | Implication for Phase 5 Sequence | Differs From Step 02 Sequence? |
@@ -494,7 +504,7 @@ Before this artifact is accepted as complete, verify all items:
 
 ---
 
-*Part of the Phase 3 (Existing Projects) Design & Technical Analysis Tool Set — v1.0*
+*Part of the Phase 3 (Existing Projects) Design & Technical Analysis Tool Set — v1.1*
 *AI-Centric Software Development Playbook*
 *Companion file: `design-technical-analysis.existing-project.instructions.md`*
 *Previous step: `step-03-per-artifact-design-specification.prompt.md`*
@@ -507,3 +517,4 @@ Before this artifact is accepted as complete, verify all items:
 | Version | Date | Source | Summary of changes |
 |---------|------|--------|-------------------|
 | **v1.0** | **2026-05-25** | **Initial authoring** | Initial Phase 3 Inter-Artifact Coordination prompt. Seven clusters (Phase 2 invalidation pre-surface; cross-artifact references with bidirectional verification; latent cross-references not named in §9; shared design decisions with source-of-truth designation; Phase 5 implementation ordering constraints with coordinated-landing cohort identification; verification dependencies many-to-many mapping; inter-brief conflicts). Draft-and-react mode default. Consumes per-brief Step 03 §9 sections as primary input and surfaces latent relationships §9 missed. Aggregates Step 03 §6 invalidations for Step 06 amendment package input. Handoff notes for Step 05 (verification instrument production) and Step 06 (synthesis ordering and amendment package). |
+| **v1.1** | **2026-07-08** | **Diamonds Phase 3 dogfooding run (Cluster C7)** | (P3-Obs-13) §3 Shared Design Decisions now makes single-owner assignment **mandatory for any artifact referenced by 3+ briefs** — the receiving end of the step-03 §9 single-source-of-truth rule; Step 04 confirms and records the owner so downstream cites one definition, not N drifting copies. |
