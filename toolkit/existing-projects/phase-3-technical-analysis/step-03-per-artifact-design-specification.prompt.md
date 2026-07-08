@@ -2,7 +2,7 @@
 # Phase 3: Design & Technical Analysis (Existing Projects)
 # AI-Centric Software Development Playbook
 
-**Toolset Version:** v1.0 (initial authoring 2026-05-25)
+**Toolset Version:** v1.1 (revised 2026-07-08 from Diamonds Phase 3 dogfooding run; initial authoring 2026-05-25)
 
 ---
 
@@ -304,6 +304,17 @@ For each:
 
 #### A.4 — Conformance Scope
 
+- **What is the conformance suite's purpose / lifecycle role?**
+  *(Added in v1.1 per Diamonds Phase 3 dogfooding — P3-Obs-07,
+  Cluster C4.)* Ask this **before** scope or harness location — the
+  purpose framing shapes every downstream decision. A conformance
+  suite typically serves a tripartite role: **self-conformance**
+  (the base/reference implementations prove they satisfy their own
+  contract), **regression detection** (future changes that break the
+  contract fail CI), and **external conformance** (third-party
+  implementations can prove they conform). Name which of these apply
+  and their relative weight; the answer determines coverage breadth,
+  where the harness lives, and how it is published.
 - **What must a conforming implementation prove?** The conformance
   test suite's intended scope: which lifecycle paths are covered,
   which edge cases (partial state, multi-call atomicity, error
@@ -311,6 +322,14 @@ For each:
 - **What is out of conformance scope?** Phase 6 verification covers
   the in-scope; out-of-scope items rely on other verification
   mechanisms or accept-as-documented-limitation
+
+> **Pattern — ask "purpose before mechanism."** *(v1.1, C4.)* A.4's
+> purpose-first ordering generalizes: in each sub-template, elicit an
+> artifact's *purpose / lifecycle role* before its structural or
+> location details. Apply the same discipline to C (why this doc set
+> exists before its composition), E (what operational question a
+> touchpoint answers before its mode), and F (what an instrument
+> verifies and why before its execution mechanics).
 
 #### A.5 — Worked Reference Implementation
 
@@ -662,9 +681,20 @@ If Phase 2's worst-case plan-failure narrative named Phase 7
 watch-triggers (Diamonds Phase 2 had several), confirm which
 observability touchpoints support each watch-trigger.
 
-| Watch-Trigger | Observability Touchpoint That Supports It |
-|--------------|-----------------------------------------|
-| | |
+**Classify each watch-trigger as code-observable or process.**
+*(Added in v1.1 per Diamonds Phase 3 dogfooding — P3-Obs-12, Cluster
+C7.)* Not every watch-trigger is backable by a runtime touchpoint.
+Many Phase-2 watch-triggers are **process / methodology** triggers
+(e.g., "first external adopter ramp-up," "feature-branch staleness,"
+"multiplier calibration") with no code emission point — they are
+watched via repo metadata, process cadence, or human review. Mark
+each trigger's type; a **process** trigger legitimately maps to "no
+touchpoint (watched via process)" rather than being force-fit to an
+invented code touchpoint.
+
+| Watch-Trigger | Type (code-observable / process) | Supporting Touchpoint (or "none — watched via process") |
+|--------------|----------------------------------|---------------------------------------------------------|
+| | | |
 
 #### E.6 — Rejected Observability Approaches
 
@@ -1039,6 +1069,16 @@ section.]
 |--------------|--------------|-----------|
 | | [Depends on / Provides to / Cross-verifies] | |
 
+**Declare a single source of truth for shared artifacts.** *(Added
+in v1.1 per Diamonds Phase 3 dogfooding — P3-Obs-13, Cluster C7.)*
+When an artifact is referenced by **three or more briefs** (e.g., an
+auditor/verification flow described in a schema brief, an IA doc, and
+a verification instrument), name **one owning brief** as its canonical
+definition; the others reference that owner rather than restating it.
+Restated-in-N-places artifacts drift. List any such 3+-brief artifact
+here with its owner; Step 04 §3 (Shared Design Decisions) confirms
+the single-owner assignment.
+
 ## §10 — Confidence and Code-Access Notes
 
 | Field | Value |
@@ -1104,7 +1144,7 @@ Before this artifact is accepted as complete, verify all items:
 
 ---
 
-*Part of the Phase 3 (Existing Projects) Design & Technical Analysis Tool Set — v1.0*
+*Part of the Phase 3 (Existing Projects) Design & Technical Analysis Tool Set — v1.1*
 *AI-Centric Software Development Playbook*
 *Companion file: `design-technical-analysis.existing-project.instructions.md`*
 *Previous step: `step-02-design-brief-triage.prompt.md`*
@@ -1117,3 +1157,4 @@ Before this artifact is accepted as complete, verify all items:
 | Version | Date | Source | Summary of changes |
 |---------|------|--------|-------------------|
 | **v1.0** | **2026-05-25** | **Initial authoring** | Initial Phase 3 Per-Artifact Design Specification prompt. Unified action-prompt shell with six artifact-type sub-templates (Contract / Refactor / IA / Schema / Observability Touchpoints / Verification Artifacts) plus "Other" with declared shape. Common scaffolding: brief intake confirmation (§1), per-artifact principle scorecard contribution under inherited Phase 2 weights (§5), Phase 2 invalidation check with structured invalidation report (§6), Phase 5 implementability check (§7), forward handoff notes for Phases 4/5/6 (§8), cross-brief references for Step 04 consumption (§9). Phase 5 estimate refinement (§3) populated when Step 02 flagged the brief. Rejected alternatives at specification level (§4) — distinct from Phase 2's mechanism-level rejected alternatives. Per-brief iteration; default one brief per AI session. The three behavioral disciplines unique to Phase 3 (treat Phase 2 chosen mechanism as authoritative; specify at design level not implementation; preserve inherited principle weights) operationalized through the prompt structure. |
+| **v1.1** | **2026-07-08** | **Diamonds Phase 3 dogfooding run (Clusters C4, C7)** | (C4, P3-Obs-07) A.4 Conformance Scope now asks the suite's **purpose / lifecycle role** (self-conformance / regression / external conformance) *before* scope or harness location, with a generalized "purpose before mechanism" pattern note for the C/E/F sub-templates. (C7, P3-Obs-12) E.5 adds a **code-observable vs process** watch-trigger classification so process triggers map to "no touchpoint (watched via process)" instead of an invented one. (C7, P3-Obs-13) §9 adds a **single-source-of-truth** rule for artifacts referenced by 3+ briefs (one owning brief; others reference it), confirmed in Step 04 §3. |

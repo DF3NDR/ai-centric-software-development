@@ -1,7 +1,7 @@
 # Phase 3 — Design & Technical Analysis Instructions (Existing Projects)
 # AI-Centric Software Development Playbook
 
-**Toolset Version:** v1.0 (initial authoring 2026-05-25)
+**Toolset Version:** v1.1 (revised 2026-07-08 from Diamonds Phase 3 dogfooding run; initial authoring 2026-05-25)
 
 ---
 
@@ -36,6 +36,16 @@ Place this file at
 `.github/design-technical-analysis.existing-project.instructions.md` or
 attach it as project-level instructions in your AI environment (Claude
 Project Instructions, VS Code AI instructions, Cursor rules).
+
+> **The AI-Centric Playbook Skill is available.** *(Added in v1.1 per
+> Diamonds Phase 3 dogfooding — P3-Obs-01, Cluster C3.)* This toolkit
+> has a companion **Skill** at `skills/ai-centric-playbook/` (SKILL.md +
+> reference files on the Six Core Principles, the SDD cycle, and the
+> building-blocks framework). Load it when a decision benefits from
+> depth on a Core Principle, the SDD mechanics, or the building-blocks
+> model — a practitioner picking up this toolkit won't otherwise know it
+> exists. Follow the skill's own "load when the conversation requires the
+> depth" guidance rather than pre-loading all reference files.
 
 ---
 
@@ -532,6 +542,24 @@ removed, or amended since the last step?). One targeted check is
 sufficient. The cost is small; the value is avoiding drift when
 Phase 2 amendments land mid-Phase-3.
 
+> **Concurrent-release / dependency-shipped-early currency event.**
+> *(Added in v1.1 per Diamonds Phase 3 dogfooding — P3-Obs-10 /
+> P3-Obs-11, Cluster C6.)* A frequent real-world case: the subject
+> advanced (a new version shipped), or a mechanism the Phase 2 plan
+> *scheduled* for a future release shipped **early** via a parallel
+> track (a separate release/productization effort), between Phase 2
+> and the current Phase 3 step. When the currency check detects this,
+> **record it as a grounding update and apply this decision rule**:
+> does the shipped reality *invalidate* a Phase 2 mechanism choice
+> (→ fire a Channel-2 amendment) or merely *de-risk / ground* it
+> (→ a grounding note, no amendment)? A dependency arriving early
+> usually de-risks a dependent brief rather than invalidating it —
+> reference the now-real artifact concretely instead of treating it as
+> unbuilt, but do not silently rewrite the mechanism. Two productization
+> tracks sharing one subject at different cadences is a recurring
+> condition, not an anomaly; name it in the Step 00 document and
+> re-check at each step.
+
 **Handle MCP connector activation gracefully.**
 *Inherited from prior phases.* If an MCP tool is expected but not
 found when first attempted, attempt access once, report the
@@ -914,9 +942,10 @@ Phase 4. The inter-phase feedback loop continues.
 | Version | Date | Source | Summary of changes |
 |---------|------|--------|-------------------|
 | **v1.0** | **2026-05-25** | **Initial authoring** | Initial Phase 3 existing-projects instructions file. Three shifts (artifact specification vs design exploration; artifact-level vs dimension-level scoring; specification completeness vs simulation under stress). Seven-step toolkit structure (step-00 Building Block Discovery + step-01 Phase 2 Input Validation + step-02 Design Brief Triage + step-03 Per-Artifact Design Specification + step-04 Inter-Artifact Coordination + step-05 Verification Strategy + step-06 Design Specification Synthesis). Six artifact types accommodated by unified Step 03 prompt (Contract / Refactor / IA / Schema / Observability Touchpoints / Verification Artifacts + Other with declared shape). Principle Scorecard inherited from Phase 2 (weights, frame) rather than baselined fresh; Phase 3 contributes per-artifact scores. Two Phase 3 → Phase 2 feedback channels (Channel 1: upstream toolkit gaps via Step 01 two-scope split; Channel 2: run amendment via Step 06 amendment package). Three-quantity cost model inherited from Phase 2 v1.1 for estimate refinements. Multi-repo evidence scoping and code-access calibration inherited from Phase 1 v1.3 / Phase 2 v1.1. |
+| **v1.1** | **2026-07-08** | **Diamonds Phase 3 dogfooding run (Clusters C3, C6)** | (C3, P3-Obs-01) added an AI-Centric Playbook Skill reference to the Purpose section so practitioners know the companion Skill exists. (C6, P3-Obs-10/11) added a "concurrent-release / dependency-shipped-early currency event" to the currency re-verification behavioral rule — a decision rule for grounding-update-vs-Channel-2-amendment when the subject advanced or a Phase-2-scheduled dependency shipped early via a parallel track between Phase 2 and a Phase 3 step. |
 
 ---
 
-*Part of the Phase 3 (Existing Projects) Design & Technical Analysis Tool Set — v1.0*
+*Part of the Phase 3 (Existing Projects) Design & Technical Analysis Tool Set — v1.1*
 *AI-Centric Software Development Playbook*
 *Companion files: step-00 through step-06 prompts in this directory*
