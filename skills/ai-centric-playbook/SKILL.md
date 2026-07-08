@@ -137,7 +137,7 @@ When the practitioner needs phase-specific guidance (e.g., "how do I run a Phase
 ## Related Resources
 
 - **Playbook articles** — Articles 0 through 9 plus the series outline. These are the canonical source. If the practitioner's project knowledge contains them, reference them by number when depth is needed.
-- **Phase tool sets** — One per phase, in `toolkit/phase-NN-*/` directories. Currently available: Phase 1 Information Gathering (greenfield and existing-project variants).
+- **Phase tool sets** — One per phase per track, in `toolkit/new-projects/phase-NN-*/` (greenfield) and `toolkit/existing-projects/phase-N-*/` (brownfield) directories. Currently available: greenfield Phases 1–7 and existing-project Phases 1–7 — both tracks complete.
 - **Dogfooding observations** — Patterns captured during real-project applications of the framework, which inform toolset revisions.
 
 ---
